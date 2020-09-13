@@ -12,6 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { RouterModule } from '@angular/router';
 
+import { NgImageSliderModule } from 'ng-image-slider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,7 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatSidenavModule,
     NgbModule,
+    NgImageSliderModule,
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },

@@ -1,11 +1,20 @@
+
+
 <div class="card">
     <div class="card-header">
       Welcome!
     </div>
     <div class="card-body">
       <div class="container-fluid">
-        <div class="text-center">
-          <img src="./assets/images/me-and-vincent.jpg"
+        <ng-image-slider 
+            [images]="imageObject" 
+            [imageSize]="imageSize"
+        
+        #nav>
+    </ng-image-slider>
+
+        <div class="text-center" *ngIf='false'>
+          <img [src]="imgSrc"
                class="img-responsive center-block"
                style="max-height:300px;padding-bottom:50px" />
         </div>
