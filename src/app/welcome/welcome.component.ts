@@ -27,6 +27,16 @@ export class WelcomeComponent {
         thumbImage: 'assets/images/golden-gate-squat.jpg', 
         title: 'Golden Gate Gang', 
         alt: 'Golden Gate Gang' 
+    }, {
+        image: 'assets/images/mathcamp-canada-day-full.jpg', 
+        thumbImage: 'assets/images/mathcamp-canada-day.jpg', 
+        title: 'Canada Day at Mathcamp', 
+        alt: 'Canada Day at Mathcamp' 
+    }, {
+        image: 'assets/images/mexico-full.jpg', 
+        thumbImage: 'assets/images/mexico.jpg', 
+        title: 'Family Trip to Mexico', 
+        alt: 'Family Trip to Mexico' 
     }
 ];
 

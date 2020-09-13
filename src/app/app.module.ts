@@ -7,20 +7,24 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
+import { PageUnderConstructionComponent } from './error/page-under-construction/page-under-construction.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { RouterModule } from '@angular/router';
 
 import { NgImageSliderModule } from 'ng-image-slider';
-import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     ProjectsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PageUnderConstructionComponent
   ],
   imports: [
     BrowserModule,
