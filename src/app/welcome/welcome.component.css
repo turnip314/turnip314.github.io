@@ -1,2 +1,69 @@
 
+.horizontal-flex-container-light {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #5d4bc2;
+    border: solid;
+    border-width: large;
+    border-color: #5d4bc2;
+}
 
+.horizontal-flex-container-dark {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #5241b1;
+    border: solid;
+    border-width: large;
+    border-color: #5241b1;
+}
+
+.vertical-flex-container-light {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #5d4bc2;
+    border: solid;
+    border-width: large;
+    border-color: #5d4bc2;
+}
+
+.vertical-flex-container-dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color:#5241b1;
+    border: solid;
+    border-width: large;
+    border-color: #5241b1;
+}
+
+.medium-break {
+    height: 50px;
+}
+
+.small-break {
+    height: 20px;
+}
+
+.title-text {
+    font-size: 50px;
+    font-family:"Impact";
+    color: white;
+    height: fit-content;
+    line-height: 50px;
+}
+
+.intro-text {
+    font-size: 24px;
+    font-family: "Calibri";
+    color: white;
+    height: fit-content;
+    line-height: 24px;
+}
+
+/* Hyperlink shouldn't change colour */
+a { 
+    color: inherit; 
+} 

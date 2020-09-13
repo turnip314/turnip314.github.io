@@ -1,51 +1,49 @@
 
 
-<div class="card">
-    <div class="card-header">
-      Welcome!
-    </div>
-    <div class="card-body">
-      <div class="container-fluid">
-        <ng-image-slider 
-            [images]="imageObject" 
-            [imageSize]="imageSize"
-        
-        #nav>
-    </ng-image-slider>
+<div class='medium-break'></div>
 
-        <div class="text-center" *ngIf='false'>
-          <img [src]="imgSrc"
-               class="img-responsive center-block"
-               style="max-height:300px;padding-bottom:50px" />
-        </div>
-  
-        <div class="text-center">Andrew Luo</div>
-        <div class="text-center">
-          <h3>University of Waterloo</h3>
-        </div>
-  
-        <div class="text-center">Bachelor of Computer Science | Bachelor of Pure Math</div>
-        <div class="text-center">
-          <a href="https://www.linkedin.com/in/andrew314/">LinkedIn</a>
-        </div>
-      </div>
+<div class="vertical-flex-container-dark">
+  <!--Intro -->
+  <div class="container-fluid">
+    <div class='small-break'></div>
+    <div class="text-center">
+      <div class='title-text'>Hello! My name is Andrew Luo.</div>
     </div>
+    <div class='small-break'></div>
   </div>
 
+  <!--Image Slider -->
+  <div class="container-fluid">
+    <ng-image-slider 
+        [images]="imageObject" 
+        [imageSize]="imageSize"
+    
+    #nav>
+    </ng-image-slider>
 
-<div margin-left='10px'  text-align='center' *ngIf='false'>
-    <button class='btn btn-success'>
-        Hello2
-    </button>
+    <!--Intro Continued-->
+  <div class="container-fluid">
+    <div class='small-break'></div>
+    <div class='text-center'>
+      <p class='intro-text'>
+        I'm a Computer Science and Pure Mathematics student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
+      </p>
+      <p class='intro-text'>
+        In my spare time, I enjoy playing boardgames, playing video games, working out, or listening to music.
+      </p>
+    </div>
+    <div class='small-break'></div>
+  </div>
 </div>
 
-<div class='card'>
-    
-
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">Button</button>
-        <button type="button" class="btn btn-secondary">Button</button>
-        <button type="button" class="btn btn-secondary">Button</button>
-      </div>
-    
+<div class="vertical-flex-container-light">
+  <div class="small-break"></div>
+  <div class="horizontal-flex-container-light">
+    <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
+    <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
+    <input type="image" src="./assets/images/facebook.png" onclick="window.open('https://www.facebook.com/turnip314/')"/>
+  </div>
+  <div class="small-break"></div>
 </div>
+
+
