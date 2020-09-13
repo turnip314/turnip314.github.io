@@ -22,14 +22,25 @@
   padding-top: 10px;
 }
 
-.top-nav {
-  height: 100px;
-  background-color: green;
+.navbar {
+  background-color: rgb(36, 20, 92);
+}
+
+.navbar-brand {
+  color: aqua;
+}
+
+.nav-link {
+  color: aqua;
+}
+
+.outer-container {
+  background-color:rgb(107, 107, 240);
 }
 
 .page-container {
   margin-left: 5%;
   margin-right: 5%;
-  background-color: white;
+  background-color: transparent;
 }
 
