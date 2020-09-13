@@ -13,12 +13,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { RouterModule } from '@angular/router';
 
 import { NgImageSliderModule } from 'ng-image-slider';
+import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: '***', redirectTo: 'projects', pathMatch: 'full'}
+      { path: '**', component: PageNotFoundComponent }
     ])
   ],
   bootstrap: [AppComponent]
