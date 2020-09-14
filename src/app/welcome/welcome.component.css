@@ -3,40 +3,40 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: #5d4bc2;
+    background-color: rgb(255, 99, 170);
     border: solid;
     border-width: large;
-    border-color: #5d4bc2;
+    border-color: rgb(255, 99, 170);
 }
 
 .horizontal-flex-container-dark {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: #5241b1;
+    background-color: rgb(223, 36, 152);
     border: solid;
     border-width: large;
-    border-color: #5241b1;
+    border-color: rgb(223, 36, 152);
 }
 
 .vertical-flex-container-light {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: #5d4bc2;
+    background-color: rgb(255, 99, 170);
     border: solid;
     border-width: large;
-    border-color: #5d4bc2;
+    border-color: rgb(255, 99, 170);
 }
 
 .vertical-flex-container-dark {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color:#5241b1;
+    background-color:rgb(223, 36, 152);
     border: solid;
     border-width: large;
-    border-color: #5241b1;
+    border-color:rgb(223, 36, 152);
 }
 
 .medium-break {
