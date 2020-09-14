@@ -23,19 +23,19 @@
 }
 
 .navbar {
-  background-color: rgb(198, 0, 120);
+  background-color: rgb(36, 20, 92);
 }
 
 .navbar-brand {
-  color: purple;
+  color: aqua;
 }
 
 .nav-link {
-  color: purple;
+  color: aqua;
 }
 
 .outer-container {
-  background-color:rgb(255, 190, 239);
+  background-color:rgb(107, 107, 240);
 }
 
 .page-container {
