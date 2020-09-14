@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { RouterModule } from '@angular/router';
 
 import { NgImageSliderModule } from 'ng-image-slider';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     WelcomeComponent,
     ProjectsComponent,
     PageNotFoundComponent,
-    PageUnderConstructionComponent
+    PageUnderConstructionComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },
+      { path: 'contact', component: ContactComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }
     ])

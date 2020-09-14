@@ -1,6 +1,6 @@
 
 
-<div class='medium-break'></div>
+<div class='large-break'></div>
 
 <div class="vertical-flex-container-dark">
   <!--Intro -->
@@ -17,6 +17,8 @@
     <ng-image-slider 
         [images]="imageObject" 
         [imageSize]="imageSize"
+        [infinite]="infinite"
+        [autoSlide]="autoSlide"
     #nav>
     </ng-image-slider>
   </div>
@@ -36,16 +38,33 @@
   </div>
 </div>
 
-<!--Links to media-->
 <div class="vertical-flex-container-light">
+  <div class='small-break'></div>
+  <div class='text-region'>
+      <div class='title-text'>About Me</div>
+      <hr class='line-break-light'>
+      <p class='paragraph-text'>
+        I love math, logic, and problem solving! When I am not busy with school work or life, I will often be watching math videos
+        or working on programming projects for fun. This includes binge watching videos by 3 Blue 1 Brown (if you haven't heard of him,
+        you can find his channel <a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw'>by clicking here</a>).
+        I love learning new things whether it be through my courses, personal projects, or internship opportunities.
+        Feel free to check out some of my <a [routerLink]="['/projects']">projects</a> and <a [routerLink]="['/academics']">academic work</a>.
+        You can <a [routerLink]="['/contact']">contact</a> me if you have any questions or if you want to chat!
+      </p>
+      <div class="small-break"></div>
+  </div>
+  
+</div>
+
+<!--Links to media-->
+<div class="vertical-flex-container-dark">
   <div class="small-break"></div>
-  <div class="horizontal-flex-container-light">
+  <div class="horizontal-flex-container-dark">
     <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
     <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
-    <input type="image" src="./assets/images/facebook.png" onclick="window.open('https://www.facebook.com/turnip314/')"/>
+    <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
   </div>
   <div class="small-break"></div>
 </div>
-
 
 <div class='medium-break'></div>
