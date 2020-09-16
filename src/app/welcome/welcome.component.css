@@ -4,6 +4,9 @@
     justify-content: space-around;
     border: solid;
     border-width: large;
+}
+
+.p-h-5 {
     padding-left: 5%;
     padding-right: 5%;
 }
