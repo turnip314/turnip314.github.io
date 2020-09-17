@@ -1,8 +1,11 @@
 
 
+
+
 <div class='large-break'></div>
 
 <div class="flex-container vertical dark p-h-5">
+  <div class='medium-break'></div>
   <!--Intro -->
   <div class="container-fluid">
     <div class='small-break'></div>
@@ -12,16 +15,11 @@
     <div class='small-break'></div>
   </div>
 
-  <!--Image Slider -->
-  <div class="container-fluid p-h-5">
-    <ng-image-slider 
-        [images]="imageObject" 
-        [imageSize]="imageSize"
-        [infinite]="infinite"
-        [autoSlide]="autoSlide"
-    #nav>
-    </ng-image-slider>
+  <div class='small-break'></div>
+  <div class='text-center'>
+      <img class='circle-img' src="./assets/images/me.jpg" alt="Me">
   </div>
+  <div class='small-break'></div>
 
     <!--Intro Continued-->
   <div class="container-fluid">
@@ -30,15 +28,12 @@
       <p class='intro-text'>
         I'm a Computer Science and Pure Mathematics student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
       </p>
-      <p class='intro-text'>
-        In my spare time, I enjoy playing boardgames, playing video games, working out, or listening to music.
-      </p>
     </div>
-    <div class='small-break'></div>
+    <div class='medium-break'></div>
   </div>
 </div>
 
-<div class="flex-container vertical light p-h-5">
+<div class="flex-container vertical dark p-h-5">
   <div class='small-break'></div>
   <div class='text-region'>
       <div class='title-text'>About Me</div>
@@ -53,6 +48,17 @@
       </p>
       <div class="small-break"></div>
   </div>
+  <!--Image Slider -->
+  <div class="container-fluid p-h-5">
+    <ng-image-slider 
+        [images]="imageObject" 
+        [imageSize]="imageSize"
+        [infinite]="infinite"
+        [autoSlide]="autoSlide"
+    #nav>
+    </ng-image-slider>
+  </div>
+  <div class='medium-break'></div>
 </div>
 
 <!--Links to media-->

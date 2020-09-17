@@ -1,4 +1,11 @@
 
+.circle-img {
+    border-radius: 50%;
+    border-width: 2px;
+    border-color:white;
+    border-style: outset;
+}
+
 .flex-container {
     display: flex;
     justify-content: space-around;
@@ -25,13 +32,13 @@
 }
 
 .light {
-    background-color: #5d4bc2;
-    border-color: #5d4bc2;
+    background-color: rgb(102, 151, 216);
+    border-color: rgb(102, 151, 216);
 }
 
 .dark {
-    background-color:#5241b1;
-    border-color: #5241b1;
+    background-color:#4473cc;
+    border-color: #4473cc;
 }
 
 .large-break {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, HostListener } from '@angular/core'
 
 @Component({
     templateUrl: './welcome.component.html',
@@ -52,5 +52,38 @@ export class WelcomeComponent {
         stopOnHover: true
     }
 
+    ngOnInit() {
+        
+    }
+
+    getOpacityByRelativeWindowLocation(pageHeight, elementTop, elementBottom) {
+        // Element smaller than page
+        // Return what percentage of div is on screen
+        let elementMiddle = (elementBottom + elementTop)/2;
+        if (pageHeight/4 <= elementMiddle && elementMiddle <= 3 * pageHeight / 4) {
+            return "100%"
+        }
+        else if (elementMiddle < pageHeight/4){
+            return (100*Math.max(1-2*(pageHeight/4-elementMiddle)/pageHeight, 0)).toString() + "%";
+        }
+        else {
+            return (100*Math.max(1-2*(elementMiddle-3*pageHeight/4)/pageHeight, 0)).toString() + "%";
+        }
+    }
+
+    @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+        console.log("---");
+        // console.log(window.pageYOffset);
+        var darkElements = document.getElementsByClassName('dark');
+        for (var i = 0; i < darkElements.length; ++i) {
+            var el = <HTMLElement> darkElements[i];
+            el.style.opacity = this.getOpacityByRelativeWindowLocation(
+                window.innerHeight,
+                el.getBoundingClientRect().top,
+                el.getBoundingClientRect().bottom
+            );
+            
+        }
+    }
 }
 
