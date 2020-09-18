@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { LoadingComponent } from './shared/loading.component';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -18,6 +22,9 @@ import { RouterModule } from '@angular/router';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ContactComponent } from './contact/contact.component';
 
+import { OverlayModule } from '@angular/cdk/overlay';
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +33,8 @@ import { ContactComponent } from './contact/contact.component';
     ProjectsComponent,
     PageNotFoundComponent,
     PageUnderConstructionComponent,
-    ContactComponent
+    ContactComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +43,10 @@ import { ContactComponent } from './contact/contact.component';
     MatSidenavModule,
     NgbModule,
     NgImageSliderModule,
+    OverlayModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },

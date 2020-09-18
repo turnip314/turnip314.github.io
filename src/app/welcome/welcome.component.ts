@@ -56,6 +56,12 @@ export class WelcomeComponent {
         
     }
 
+    ngAfterViewInit() {
+        var startEl = document.getElementById("start");
+        startEl.scrollIntoView();
+        console.log("here");
+    }
+
     getOpacityByRelativeWindowLocation(pageHeight, elementTop, elementBottom) {
         // Element smaller than page
         // Return what percentage of div is on screen
@@ -82,7 +88,9 @@ export class WelcomeComponent {
                 el.getBoundingClientRect().top,
                 el.getBoundingClientRect().bottom
             );
-            
+            //console.log(el.offsetHeight);
+            // console.log(el.getBoundingClientRect().top);
+            //console.log(window.scrollY);
         }
     }
 }
