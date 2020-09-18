@@ -12,21 +12,7 @@ export class AppComponent {
   title = 'Turnip\'s Home Page';
   showSideNav: boolean = true;
 
-  constructor(private overlay: Overlay) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.showOverlay();
-  }
 
-  showOverlay() {
-    const overlayRef = this.overlay.create({
-      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-      hasBackdrop: true
-    });
-    overlayRef.attach(new ComponentPortal(LoadingComponent));
-
-    setTimeout(() => {
-      overlayRef.detach();
-    }, 500);
-  }
 }

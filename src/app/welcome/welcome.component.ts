@@ -1,4 +1,7 @@
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, HostListener } from '@angular/core'
+import { LoadingComponent } from '../shared/loading.component';
 
 @Component({
     templateUrl: './welcome.component.html',
@@ -52,9 +55,25 @@ export class WelcomeComponent {
         stopOnHover: true
     }
 
-    ngOnInit() {
+    constructor(private overlay: Overlay){
         
     }
+
+    ngOnInit() {
+        this.showOverlay();
+      }
+    
+      showOverlay() {
+        const overlayRef = this.overlay.create({
+          positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+          hasBackdrop: true
+        });
+        overlayRef.attach(new ComponentPortal(LoadingComponent));
+    
+        setTimeout(() => {
+          overlayRef.detach();
+        }, 500);
+      }
 
     ngAfterViewInit() {
         var startEl = document.getElementById("start");
@@ -88,9 +107,6 @@ export class WelcomeComponent {
                 el.getBoundingClientRect().top,
                 el.getBoundingClientRect().bottom
             );
-            //console.log(el.offsetHeight);
-            // console.log(el.getBoundingClientRect().top);
-            //console.log(window.scrollY);
         }
     }
 }
