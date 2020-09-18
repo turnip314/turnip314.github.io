@@ -99,7 +99,7 @@ export class WelcomeComponent {
     @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
         console.log("---");
         // console.log(window.pageYOffset);
-        var darkElements = document.getElementsByClassName('dark');
+        var darkElements = document.getElementsByClassName('fade-in');
         for (var i = 0; i < darkElements.length; ++i) {
             var el = <HTMLElement> darkElements[i];
             el.style.opacity = this.getOpacityByRelativeWindowLocation(
