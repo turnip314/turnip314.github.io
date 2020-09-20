@@ -68,6 +68,10 @@ export class WelcomeComponent {
             name: 'C#',
             status: 'Advanced'
         }, {
+            src: './assets/images/sql.png',
+            name: 'SQL',
+            status: 'Advanced'
+        }, {
             src: './assets/images/java.png',
             name: 'Java',
             status: 'Intermediate'
@@ -88,6 +92,10 @@ export class WelcomeComponent {
             name: 'CSS',
             status: 'Intermediate'
         }, {
+            src: './assets/images/racket.png',
+            name: 'Racket',
+            status: 'Intermediate'
+        }, {
             src: './assets/images/C.png',
             name: 'C',
             status: 'Beginner'
@@ -104,6 +112,8 @@ export class WelcomeComponent {
 
     ngOnInit() {
         this.showOverlay();
+        const element = document.getElementById('start');
+        element.scrollIntoView();
     }
     
     showOverlay() {
@@ -115,7 +125,7 @@ export class WelcomeComponent {
 
         setTimeout(() => {
             overlayRef.detach();
-        }, 1500);
+        }, 1000);
     }
 
     ngAfterViewInit() {
@@ -124,6 +134,9 @@ export class WelcomeComponent {
     }
 
     getOpacityByRelativeWindowLocation(pageHeight, elementTop, elementBottom) {
+        pageHeight -= 70;
+        elementTop -= 70;
+        elementBottom -= 70;
         // Element smaller than page
         // Return what percentage of div is on screen
         let elementMiddle = (elementBottom + elementTop)/2;
