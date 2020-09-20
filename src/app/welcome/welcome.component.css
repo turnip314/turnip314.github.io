@@ -1,4 +1,6 @@
 
+@import '../shared/styles.css';
+
 .circle-img {
     border-radius: 50%;
     border-width: 2px;
@@ -11,11 +13,6 @@
     justify-content: space-around;
     border: solid;
     border-width: large;
-}
-
-.p-h-5 {
-    padding-left: 5%;
-    padding-right: 5%;
 }
 
 .flex-container.horizontal {
@@ -41,25 +38,7 @@
     border-color: #4473cc;
 }
 
-.large-break {
-    height: 120px;
-}
 
-.medium-break {
-    height: 50px;
-}
-
-.small-break {
-    height: 20px;
-}
-
-.title-text {
-    font-size: 50px;
-    font-family:"Impact";
-    color: white;
-    height: fit-content;
-    line-height: 50px;
-}
 
 .intro-text {
     font-size: 24px;
@@ -84,7 +63,6 @@ hr.line-break-light {
     color: #5d4bc2;
 }
 
-/* Red border */
 hr.line-break-light {
     border-top: 1px solid white;
 }
@@ -95,8 +73,7 @@ a {
 } 
 
 .text-region {
-    margin-left: 5%;
-    margin-right: 5%
+
 }
 
 /*testing*/
@@ -144,10 +121,8 @@ a {
     grid-template-columns: repeat(auto-fill, 186px);
     justify-content: space-around;
 
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 
     grid-row-gap: 100px;
     

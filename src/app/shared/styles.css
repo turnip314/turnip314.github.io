@@ -1,0 +1,28 @@
+.large-break {
+    height: 120px;
+}
+
+.medium-break {
+    height: 50px;
+}
+
+.small-break {
+    height: 20px;
+}
+
+.p-h-5 {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.p-h-10 {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.title-text {
+    font-size: 50px;
+    font-family:"Impact";
+    color: white;
+    height: fit-content;
+    line-height: 50px;
+}

@@ -1,0 +1,25 @@
+@import '../shared/styles.css';
+
+::ng-deep .mat-expansion-panel{
+    background-color: transparent;
+    background-color: rgba(245, 245, 245, 0.301);
+    padding: 0px;
+}
+
+
+::ng-deep .mat-expansion-panel-body{
+    background-color: transparent;
+}
+
+table {
+    width: 100%;
+    background-color: transparent;
+}
+  
+.mat-column-courseInstructor {
+    width: 20%;
+}
+
+.mat-column-courseCode {
+    width: 20%;
+}

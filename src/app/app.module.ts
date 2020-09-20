@@ -6,6 +6,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 import { LoadingComponent } from './shared/loading.component';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { ContactComponent } from './contact/contact.component';
 
 import { OverlayModule } from '@angular/cdk/overlay';
+import { AcademicsComponent } from './academics/academics.component';
 
 
 
@@ -34,7 +37,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     PageNotFoundComponent,
     PageUnderConstructionComponent,
     ContactComponent,
-    LoadingComponent
+    LoadingComponent,
+    AcademicsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +51,12 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatCardModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatTableModule,
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },
+      { path: 'academics', component: AcademicsComponent },
       { path: 'contact', component: ContactComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }

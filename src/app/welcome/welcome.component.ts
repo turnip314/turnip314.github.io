@@ -53,7 +53,50 @@ export class WelcomeComponent {
     autoSlide = {
         interval: 4,
         stopOnHover: true
-    }
+    };
+
+    languages = [{
+            src: './assets/images/python.png',
+            name: 'Python',
+            status: 'Advanced'
+        }, {
+            src: './assets/images/cpp.png',
+            name: 'C++',
+            status: 'Advanced'
+        }, {
+            src: './assets/images/csharp.png',
+            name: 'C#',
+            status: 'Advanced'
+        }, {
+            src: './assets/images/java.png',
+            name: 'Java',
+            status: 'Intermediate'
+        }, {
+            src: './assets/images/js.png',
+            name: 'JavaScript',
+            status: 'Intermediate'
+        }, {
+            src: './assets/images/php.png',
+            name: 'PHP',
+            status: 'Intermediate'
+        }, {
+            src: './assets/images/html.png',
+            name: 'HTML',
+            status: 'Intermediate'
+        }, {
+            src: './assets/images/css.png',
+            name: 'CSS',
+            status: 'Intermediate'
+        }, {
+            src: './assets/images/C.png',
+            name: 'C',
+            status: 'Beginner'
+        }, {
+            src: './assets/images/scala.png',
+            name: 'Scala',
+            status: 'Beginner'
+        },
+    ];
 
     constructor(private overlay: Overlay){
         
@@ -61,24 +104,23 @@ export class WelcomeComponent {
 
     ngOnInit() {
         this.showOverlay();
-      }
+    }
     
-      showOverlay() {
+    showOverlay() {
         const overlayRef = this.overlay.create({
-          positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-          hasBackdrop: true
+            positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+            hasBackdrop: true
         });
         overlayRef.attach(new ComponentPortal(LoadingComponent));
-    
+
         setTimeout(() => {
-          overlayRef.detach();
-        }, 500);
-      }
+            overlayRef.detach();
+        }, 1500);
+    }
 
     ngAfterViewInit() {
         var startEl = document.getElementById("start");
         startEl.scrollIntoView();
-        console.log("here");
     }
 
     getOpacityByRelativeWindowLocation(pageHeight, elementTop, elementBottom) {
