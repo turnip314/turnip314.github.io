@@ -3,8 +3,10 @@
 .outer-container {
     display: flex;
     flex-direction: row;
-    padding-top: 10px;
+    padding-top: 15px;
     padding-bottom: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .description {
@@ -21,8 +23,8 @@ hr.line-break-light {
 
 .gallery {
     width: 50%;
-    padding-top: 100%;
     height: auto;
+    padding-top: 100%;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -38,7 +40,8 @@ hr.line-break-light {
 }
 
 /* Adjust the iframe so it's rendered in the outer-width and outer-height of it's parent */
-.aspect-ratio iframe {
+.aspect-ratio iframe,
+.aspect-ratio img {
     position: absolute;
     width: 100%;
     height: 100%;
