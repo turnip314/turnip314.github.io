@@ -8,6 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon'
 
 import { LoadingComponent } from './shared/loading.component';
 import { AppComponent } from './app.component';
@@ -53,6 +54,7 @@ import { AcademicsComponent } from './academics/academics.component';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatTableModule,
+    MatIconModule,
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },

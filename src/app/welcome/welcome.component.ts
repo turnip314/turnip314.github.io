@@ -125,7 +125,7 @@ export class WelcomeComponent {
 
         setTimeout(() => {
             overlayRef.detach();
-        }, 1000);
+        }, 0);
     }
 
     ngAfterViewInit() {

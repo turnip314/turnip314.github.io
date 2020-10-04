@@ -26,3 +26,38 @@
     height: fit-content;
     line-height: 50px;
 }
+
+
+.light {
+    background-color: rgb(102, 151, 216);
+    border-color: rgb(102, 151, 216);
+}
+
+.dark {
+    background-color:#4473cc;
+    border-color: #4473cc;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    border-width: large;
+}
+
+.flex-container.horizontal {
+    flex-direction: row;
+}
+
+.flex-container.vertical {
+    flex-direction: column;
+}
+
+.paragraph-text {
+    font-size: 24px;
+    font-family: "Calibri";
+    color: white;
+    height: fit-content;
+    line-height: 32px;
+    text-align: justify;
+    text-justify: inter-word;
+}

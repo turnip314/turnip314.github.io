@@ -8,37 +8,10 @@
     border-style: outset;
 }
 
-.flex-container {
-    display: flex;
-    justify-content: space-around;
-    border: solid;
-    border-width: large;
-}
-
-.flex-container.horizontal {
-    flex-direction: row;
-}
-
-.flex-container.vertical {
-    flex-direction: column;
-}
-
 .no-padding {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
-
-.light {
-    background-color: rgb(102, 151, 216);
-    border-color: rgb(102, 151, 216);
-}
-
-.dark {
-    background-color:#4473cc;
-    border-color: #4473cc;
-}
-
-
 
 .intro-text {
     font-size: 24px;
@@ -48,22 +21,9 @@
     line-height: 24px;
 }
 
-.paragraph-text {
-    font-size: 24px;
-    font-family: "Calibri";
-    color: white;
-    height: fit-content;
-    line-height: 32px;
-    text-align: justify;
-    text-justify: inter-word;
-}
 
 hr.line-break-light {
-    border-top: 10px;
     color: #5d4bc2;
-}
-
-hr.line-break-light {
     border-top: 1px solid white;
 }
 

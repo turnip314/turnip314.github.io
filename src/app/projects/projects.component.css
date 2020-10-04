@@ -1,2 +1,84 @@
+@import '../shared/styles.css';
+
+.outer-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.description {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+hr.line-break-light {
+    color: #5d4bc2;
+    border-top: 1px solid white;
+}
+
+.gallery {
+    width: 50%;
+    padding-top: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    min-height: max-content;
+}
+
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 52.125%; /* The height of the item will now be 52.25% of the width. */
+    margin-bottom: 0.75%;
+}
+
+/* Adjust the iframe so it's rendered in the outer-width and outer-height of it's parent */
+.aspect-ratio iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.project-video,
+.project-img {
+    width: 100%;
+}
 
 
+@media(max-width:960px){
+    .outer-container {
+        flex-direction: column;
+    }
+    .description,
+    .gallery {
+        width: 100%;
+    }
+}
+
+.left-right-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.right-button,
+.left-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+}
+.right-button {
+    align-items: flex-end;
+}
+.right-button:hover,
+.left-button:hover {
+    background-color: rgba(245, 245, 245, 0.308);
+    cursor: pointer;
+}

@@ -1,3 +1,5 @@
+@import './shared/styles.css';
+
 .nav-link {
   font-size: large;
 }
@@ -43,4 +45,3 @@
   margin-right: 5%;
   background-color: transparent;
 }
-

@@ -1,4 +1,40 @@
+
+
 <page-under-construction></page-under-construction>
+<div class="large-break"></div>
+
+<div *ngFor="let project of projects">
+    <div class="flex-container dark fade-in outer-container">
+        <div class="gallery">
+            <div class="aspect-ratio">
+                <img *ngIf="project.demos[project.view].type == 'image'"
+                    class='project-img' [src]="project.demos[project.view].src">
+                <iframe *ngIf="project.demos[project.view].type == 'video'" class="project-video"
+                    [src]="project.demos[project.view].src" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="left-right-buttons">
+                <div class="left-button" (click)="viewPrev(project)">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </div>
+                <div class="right-button" (click)="viewNext(project)">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <div>
+                <div class="title-text">{{project.title}}</div>
+                <hr class='line-break-light'/>
+                <p class="paragraph-text">
+                    Third person shooter game written in C++ and SFML with 4 difficulties, 30 levels, 4 freeplay levels, 8
+                    characters, and 12 upgrades per character. Credits to Kayla Estacio for the art, including the turnips
+                    and background images.
+                </p>
+            </div> 
+        </div>
+    </div>
+    <div class="medium-break"></div>
+</div>
 
 <!--
 <div margin-left='10px'>
