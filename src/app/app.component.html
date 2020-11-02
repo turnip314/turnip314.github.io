@@ -1,25 +1,44 @@
-<!--The content below is only a placeholder and can be replaced.-->
-  <nav class='navbar fixed-top'>
-    <a class='navbar-brand'><img src='./assets/images/turnip-icon.png' width="48px" [routerLink]="['/home']"></a>
-    <ul class='nav nav-pills'>
-      <li><a class='nav-link' [routerLink]="['/home']" >Home</a></li>
-      <li><a class='nav-link' [routerLink]="['/projects']">Projects</a></li>
-      <li><a class='nav-link' [routerLink]="['/academics']">Academics</a></li>
-      <li><a class='nav-link' [routerLink]="['/contact']">Contact</a></li>
-    </ul>
-  </nav>
-<div class='outer-container'>
-  <div class='page-container'>
-    <router-outlet></router-outlet>
+
+
+
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <div class="sidenav-buttons">
+      <button class='button sidenav-button sidenav-back-button' (click)="drawer.close()">Back</button>
+      <button class='button sidenav-button' [routerLink]="['/home']" >Home</button>
+      <button class='button sidenav-button' [routerLink]="['/projects']">Projects</button>
+      <button class='button sidenav-button' [routerLink]="['/academics']">Academics</button>
+      <button class='button sidenav-button' [routerLink]="['/contact']">Contact</button>
+    </div>
+  </mat-drawer>
+
+  <div class="sidenav-content" (click)="onEmptyClick($event, drawer)">
+    <nav class='navbar fixed-top'>
+      <a class='navbar-brand'><img class="turnip-img" name="turnip-button" src='./assets/images/turnip-icon.png' width="48px" (click)="drawer.open();"></a>
+      <ul class='nav nav-pills'>
+        <li><button class='button topnav-button' [routerLink]="['/home']" >Home</button></li>
+        <li><button class='button topnav-button' [routerLink]="['/projects']">Projects</button></li>
+        <li><button class='button topnav-button' [routerLink]="['/academics']">Academics</button></li>
+        <li><button class='button topnav-button' [routerLink]="['/contact']">Contact</button></li>
+      </ul>
+    </nav>
+
+    <div class='outer-container'>
+      <div class='page-container'>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <!--Links to media-->
+    <div class="flex-container vertical light">
+      <div class="small-break"></div>
+      <div class="flex-container horizontal light">
+        <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
+        <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
+        <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
+      </div>
+      <div class="small-break"></div>
+    </div>
   </div>
-</div>
-<!--Links to media-->
-<div class="flex-container vertical light">
-  <div class="small-break"></div>
-  <div class="flex-container horizontal light">
-    <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
-    <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
-    <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
-  </div>
-  <div class="small-break"></div>
-</div>
+
+</mat-drawer-container>
+

@@ -10,9 +10,13 @@ import { LoadingComponent } from './shared/loading.component';
 })
 export class AppComponent {
   title = 'Turnip\'s Home Page';
-  showSideNav: boolean = true;
+  sidenavOpen = false;
 
   constructor() { }
+
+  onEmptyClick(e, drawer) {
+    if (e.target.name != "turnip-button") { drawer.close(); this.sidenavOpen = false;}
+  }
 
 
 }
