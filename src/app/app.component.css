@@ -31,7 +31,6 @@
 }
 
 .topnav-button:focus {
-  background-color: rgba(255, 255, 255, 0.329);
   border: none;
   outline: none;
 }

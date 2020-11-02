@@ -24,13 +24,20 @@ import { RouterModule } from '@angular/router';
 
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ContactComponent } from './contact/contact.component';
+import { ContactService } from './contact.service';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AcademicsComponent } from './academics/academics.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
+  providers: [
+    ContactService
+  ],
   declarations: [
     AppComponent,
     WelcomeComponent,
@@ -55,6 +62,8 @@ import { AcademicsComponent } from './academics/academics.component';
     MatExpansionModule,
     MatTableModule,
     MatIconModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },

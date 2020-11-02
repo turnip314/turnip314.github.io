@@ -1,1 +1,27 @@
-<page-under-construction></page-under-construction>
+
+<div class='large-break'></div>
+<div class='p-h-10'>
+    <div class='title-text'>Contact Me</div>
+    <hr class='line-break-light'>
+    <div class="container">
+        <div class="flex-container vertical">
+            <form [formGroup]="formData" (ngSubmit)="onSubmit(formData.value)">
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="Enter email"formControlName="Email">
+            </div>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" class="form-control" name="Fullname" placeholder="Full Name" formControlName="Fullname">
+            </div>
+            <div class="form-group">
+                <label for="comment">Message</label>
+                <textarea class="form-control message" formControlName="Comment" name="Comment">
+                </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!formData.valid">Submit</button>
+            </form>
+        </div>
+     </div>
+</div>
+<div class='large-break'></div>
