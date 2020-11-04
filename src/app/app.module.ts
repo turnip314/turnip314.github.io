@@ -31,12 +31,16 @@ import { AcademicsComponent } from './academics/academics.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { GalleryComponent } from './gallery/gallery.component';
+
+import { ImageService } from './shared/services/image.service'
 
 
 
 @NgModule({
   providers: [
-    ContactService
+    ContactService,
+    ImageService
   ],
   declarations: [
     AppComponent,
@@ -46,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     PageUnderConstructionComponent,
     ContactComponent,
     LoadingComponent,
-    AcademicsComponent
+    AcademicsComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,7 @@ import { HttpClientModule } from '@angular/common/http';
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: 'academics', component: AcademicsComponent },
+      { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }

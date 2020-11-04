@@ -29,7 +29,7 @@ hr.line-break-light {
 
 /* Hyperlink shouldn't change colour */
 a { 
-    color: inherit; 
+    color: inherit;
 } 
 
 .text-region {

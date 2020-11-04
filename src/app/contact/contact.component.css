@@ -3,3 +3,7 @@
 textarea.form-control {
     height: calc(80vh - 400px);
 }
+
+textarea {
+    resize: none;
+}

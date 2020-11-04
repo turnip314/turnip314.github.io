@@ -42,12 +42,20 @@
   position: fixed;
 }
 
+.mat-drawer-inner-container {
+  height: 20px;
+}
+
+.sidenav-container {
+  overflow: hidden !important;
+}
+
 .sidenav-button {
   margin-left: 2px;
   margin-right: 3px;
   margin-top: 5px;
   font-size: 24px;
-  width: 100%;
+  width: 98%;
   height: 36px;
   border: none;
   background-color: transparent;
