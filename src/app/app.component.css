@@ -75,7 +75,6 @@
 }
 
 .sidenav-button:focus {
-  background-color: rgb(102, 151, 216);
   border: none;
   outline: none;
 }
