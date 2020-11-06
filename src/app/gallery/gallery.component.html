@@ -9,7 +9,7 @@
     <div class='grid-container dark fade-in'>
         <div *ngFor='let image of images'>
         <div class="grid-item">
-            <img [src]='image.thumbImage' [alt]="image.title" style="width:100%;height:100%">
+            <img [src]='image.thumbImage' [alt]="image.title" (click) = "showOverlay(image)" style="width:100%;height:100%">
         </div>
         </div>
     </div>

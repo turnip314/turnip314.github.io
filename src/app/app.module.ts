@@ -33,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GalleryComponent } from './gallery/gallery.component';
 
-import { ImageService } from './shared/services/image.service'
+import { ImageService } from './shared/services/image.service';
+import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.component'
 
 
 
@@ -51,7 +52,8 @@ import { ImageService } from './shared/services/image.service'
     ContactComponent,
     LoadingComponent,
     AcademicsComponent,
-    GalleryComponent
+    GalleryComponent,
+    ImageOverlayComponent
   ],
   imports: [
     BrowserModule,
