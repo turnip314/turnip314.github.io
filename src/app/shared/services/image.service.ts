@@ -38,6 +38,48 @@ export class ImageService {
     }
 
     getGalleryImages() {
-        return [];
+        var images = [
+            {
+                image: 'earth.png',  
+                name: 'Earth', 
+            },
+            {
+                image: 'lemon.png',  
+                name: 'When life gives you lemons...', 
+            },
+            {
+                image: 'northern-lights.png',  
+                name: 'Northern Lights', 
+            },
+            {
+                image: 'marble.png',  
+                name: 'Marble', 
+            },
+            {
+                image: 'mountains.png',  
+                name: 'Mountains', 
+            },
+            {
+                image: 'potato.png',  
+                name: 'Am Potato', 
+            },
+            {
+                image: 'cheese.png',  
+                name: 'Feeling Cheesy', 
+            },
+            {
+                image: 'nebula.png',  
+                name: 'Universe\'s Lens', 
+            },
+        ];
+
+        return images.map(x => {
+            return {
+                image: 'assets/images/gallery/' + x.image,
+                thumbImage: 'assets/images/gallery/thumbnails/' + x.image,
+                title: x.name,
+                alt: x.name
+            }
+        });
     }
 }

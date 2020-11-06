@@ -1,11 +1,9 @@
 @import '../shared/styles.css';
 
 .grid-container {
-    display: grid;
-    grid-column-gap: 50px;
-    grid-template-columns: repeat(6, 1fr); 
-    justify-content: center !important;
-    align-items: center !important;
+    display: flex;
+    flex-wrap: wrap;
+    grid-column-gap: 8%;
 
 
     padding-top: 30px;
@@ -15,8 +13,13 @@
     
 }
 
-@media(max-width:1440px){
-    .grid-container {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+.grid-item {
+    background-color: white;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  
+    width: 256px;
+    height: 256px;
+    
+  }

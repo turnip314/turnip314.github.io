@@ -1,7 +1,7 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, HostListener } from '@angular/core'
-import { LoadingComponent } from '../shared/loading.component';
+import { LoadingComponent } from '../shared/loading/loading.component';
 import { ImageService } from '../shared/services/image.service';
 
 @Component({
@@ -132,7 +132,6 @@ export class WelcomeComponent {
                 return (100*Math.max(1-2*(elementMiddle-3*pageHeight/4)/pageHeight, 0)).toString() + "%";
             }
         }
-        
     }
 
     @HostListener('window:scroll', ['$event']) onScrollEvent($event) {

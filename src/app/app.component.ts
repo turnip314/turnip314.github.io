@@ -1,7 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component } from '@angular/core';
-import { LoadingComponent } from './shared/loading.component';
 
 @Component({
   selector: 'page-root',
