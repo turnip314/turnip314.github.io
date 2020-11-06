@@ -39,7 +39,11 @@
 .sidenav {
   background-color:#4473cc;
   width: max-content;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .mat-drawer-inner-container {

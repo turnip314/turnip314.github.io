@@ -1,10 +1,19 @@
 
+<nav class='navbar fixed-top'>
+  <a class='navbar-brand'><img class="turnip-img" name="turnip-button" src='./assets/images/turnip-icon.png' width="48px" (click)="drawer.toggle();"></a>
+  <ul class='nav nav-pills'>
+    <li><button class='button topnav-button' [routerLink]="['/home']" >Home</button></li>
+    <li><button class='button topnav-button' [routerLink]="['/projects']">Projects</button></li>
+    <li><button class='button topnav-button' [routerLink]="['/academics']">Academics</button></li>
+    <li><button class='button topnav-button' [routerLink]="['/gallery']">Gallery</button></li>
+    <li><button class='button topnav-button' [routerLink]="['/contact']">Contact</button></li>
+  </ul>
+</nav>
 
-
-<mat-drawer-container class="sidenav-container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
+<mat-drawer-container class="sidenav-container">
+  <mat-drawer #drawer class="sidenav" mode="over">
     <div class="sidenav-buttons">
-      <button class='button sidenav-button sidenav-back-button' (click)="drawer.close()">Back</button>
+      <div style="height: 80px;"></div>
       <button class='button sidenav-button' [routerLink]="['/home']" >Home</button>
       <button class='button sidenav-button' [routerLink]="['/projects']">Projects</button>
       <button class='button sidenav-button' [routerLink]="['/academics']">Academics</button>
@@ -14,17 +23,6 @@
   </mat-drawer>
 
   <div class="sidenav-content" (click)="onEmptyClick($event, drawer)">
-    <nav class='navbar fixed-top'>
-      <a class='navbar-brand'><img class="turnip-img" name="turnip-button" src='./assets/images/turnip-icon.png' width="48px" (click)="drawer.open();"></a>
-      <ul class='nav nav-pills'>
-        <li><button class='button topnav-button' [routerLink]="['/home']" >Home</button></li>
-        <li><button class='button topnav-button' [routerLink]="['/projects']">Projects</button></li>
-        <li><button class='button topnav-button' [routerLink]="['/academics']">Academics</button></li>
-        <li><button class='button topnav-button' [routerLink]="['/gallery']">Gallery</button></li>
-        <li><button class='button topnav-button' [routerLink]="['/contact']">Contact</button></li>
-      </ul>
-    </nav>
-
     <div class='outer-container'>
       <div class='page-container'>
         <router-outlet></router-outlet>
