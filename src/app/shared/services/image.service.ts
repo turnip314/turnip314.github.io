@@ -76,6 +76,7 @@ export class ImageService {
         return images.map(x => {
             return {
                 image: 'assets/images/gallery/' + x.image,
+                compressImage: 'assets/images/gallery/compress/' + x.image.slice(0, -4) + "-min" + ".png",
                 thumbImage: 'assets/images/gallery/thumbnails/' + x.image,
                 title: x.name,
                 alt: x.name
