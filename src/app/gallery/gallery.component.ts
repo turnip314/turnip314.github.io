@@ -26,7 +26,6 @@ export class GalleryComponent implements OnInit {
     });
     const overlay = overlayRef.attach(new ComponentPortal(ImageOverlayComponent));
     overlay.instance.src = img.compressImage;
-    console.log(img);
     overlay.instance.title = img.title;
     overlayRef.backdropClick().subscribe(x => {
       overlayRef.detach();
