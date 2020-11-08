@@ -48,6 +48,10 @@ export class ImageService {
                 name: 'When life gives you lemons...', 
             },
             {
+                image: 'warden.png',  
+                name: 'Minecraft Warden', 
+            },
+            {
                 image: 'northern-lights.png',  
                 name: 'Northern Lights', 
             },
@@ -66,6 +70,26 @@ export class ImageService {
             {
                 image: 'cheese.png',  
                 name: 'Feeling Cheesy', 
+            },
+            {
+                image: 'pikachu.png',  
+                name: 'Surprised Pikachu', 
+            },
+            {
+                image: 'lightbulb.png',  
+                name: 'Lightbulb', 
+            },
+            {
+                image: 'sunset.png',  
+                name: 'Sunset', 
+            },
+            {
+                image: 'night-scene.png',  
+                name: 'Bleeding Night', 
+            },
+            {
+                image: 'bubbles.png',  
+                name: 'Bubbles', 
             },
             {
                 image: 'nebula.png',  
