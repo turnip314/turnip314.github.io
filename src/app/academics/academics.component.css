@@ -22,4 +22,5 @@ table {
 
 .mat-column-courseCode {
     width: 20%;
+    padding-right: 12px;
 }

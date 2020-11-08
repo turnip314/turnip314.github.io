@@ -1,3 +1,4 @@
+import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./academics.component.css']
 })
 export class AcademicsComponent implements OnInit {
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (event.target.innerWidth <= 720) {
+      this.courseColumnsToDisplay = ['courseCode', 'courseName']
+    }
+    else {
+      this.courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor']
+    }
+  }
 
   constructor() { }
 
@@ -69,9 +80,15 @@ export class AcademicsComponent implements OnInit {
     'COOP 3': 'Fall 2020'
   }
 
-  courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor']
+  courseColumnsToDisplay;
 
   ngOnInit(): void {
+    if (window.innerWidth <= 720) {
+      this.courseColumnsToDisplay = ['courseCode', 'courseName'];
+    }
+    else {
+      this.courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor'];
+    }
   }
 
 }

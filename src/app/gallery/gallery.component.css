@@ -13,7 +13,7 @@
 
     grid-row-gap: 100px;
     
-  }
+}
 
 @media(max-width:1560px){
   .grid-container {
