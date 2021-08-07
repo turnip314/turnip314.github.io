@@ -66,9 +66,23 @@ export class AcademicsComponent implements OnInit {
       { code: 'ENGL 119', name: 'Communications in Mathematics & Computer Science', instructor: 'Diana Lobb'},
       { code: 'WKRPT', name: 'Work Term Report', instructor: 'N/A'},
     ],
+    'Term 3A': [
+      { code: 'PMATH 348', name: 'Fields and Galois Theory', instructor: 'Yu-Ru Liu'},
+      { code: 'PMATH 352', name: 'Complex Analysis', instructor: 'Ruxandra Moraru'},
+      { code: 'PMATH 365', name: 'Differential Geometry', instructor: 'Stephen New'},
+      { code: 'CS 341', name: 'Algorithms', instructor: 'Online'},
+      { code: 'CS 350', name: 'Operating Systems', instructor: 'Lesley Istead'},
+      { code: 'CO 487', name: 'Applied Cryptography', instructor: 'Alfred Menezes'},
+    ],
+    'COOP 4': [
+      { code: 'COOP 4', name: 'University of Waterloo - Mathematics Research Assistant', instructor: 'Yu-Ru Liu'},
+      { code: 'PMTATH 351', name: 'Real Analysis', instructor: 'Stephen New'},
+      { code: 'PD 8', name: 'Intercultural Communications', instructor: 'N/A'},
+      { code: 'WKRPT', name: 'Work Term Report', instructor: 'N/A'},
+    ],
   };
 
-  terms = ['Term 1A', 'Term 1B', 'COOP 1', 'Term 2A', 'COOP 2', 'Term 2B', 'COOP 3'];
+  terms = ['Term 1A', 'Term 1B', 'COOP 1', 'Term 2A', 'COOP 2', 'Term 2B', 'COOP 3', 'Term 3A', 'COOP 4'];
 
   timeByTerm = {
     'Term 1A': 'Fall 2018',
@@ -77,7 +91,9 @@ export class AcademicsComponent implements OnInit {
     'Term 2A': 'Fall 2019',
     'COOP 2': 'Winter 2020',
     'Term 2B': 'Spring 2020',
-    'COOP 3': 'Fall 2020'
+    'COOP 3': 'Fall 2020',
+    'Term 3A': 'Winter 2021',
+    'COOP 4': 'Spring 2021'
   }
 
   courseColumnsToDisplay;
