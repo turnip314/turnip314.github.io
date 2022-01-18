@@ -29,7 +29,9 @@ import { ContactService } from './contact.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AcademicsComponent } from './academics/academics.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { TwentyFourComponent } from './twentyfour/twentyfour.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GalleryComponent } from './gallery/gallery.component';
 
@@ -53,7 +55,8 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
     LoadingComponent,
     AcademicsComponent,
     GalleryComponent,
-    ImageOverlayComponent
+    ImageOverlayComponent,
+    TwentyFourComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,12 +74,14 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
     MatIconModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'home', component: WelcomeComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: 'academics', component: AcademicsComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
+      { path: '24', component : TwentyFourComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }
     ])
