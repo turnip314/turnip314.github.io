@@ -16,7 +16,7 @@
     <div class="flex-container vertical">
         <div class="center">
             <form #answer = "ngForm" (ngSubmit)="onSubmit(answer.value.value)">
-                <input type="text" class="equationbox" name="value" placeholder="value" ngModel>
+                <input type="text" class="equationbox" name="value" placeholder="answer" ngModel>
                 <button mat-raised-button class="checkbutton" type="submit">Check</button>
             </form>
         </div>
