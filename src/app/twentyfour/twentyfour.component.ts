@@ -37,7 +37,7 @@ export class TwentyFourComponent implements OnInit {
             this.message = "Correct!";
         }
         else {
-            this.message = "This evaluates to " + this.evaluate(tree).toString() + ".";
+            this.message = "This evaluates to " + Math.round(this.evaluate(tree).toString() * 100)/100 + ".";
         }
     }
     catch (error) {
