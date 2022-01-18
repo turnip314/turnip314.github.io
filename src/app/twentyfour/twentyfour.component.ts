@@ -65,7 +65,7 @@ export class TwentyFourComponent implements OnInit {
         throw new Error("Invalid Expression.");
     }
     let parantheses = 0;
-    for (let i = 0; i < expr.length; ++i) {
+    for (let i = expr.length - 1; i >= 0; --i) {
       if (expr[i] == "(") {
         ++parantheses;
       }
@@ -76,7 +76,7 @@ export class TwentyFourComponent implements OnInit {
         return [expr[i], this.recur(expr.substring(0, i)), this.recur(expr.substring(i+1, expr.length))]
       }
     }
-    for (let i = 0; i < expr.length; ++i) {
+    for (let i = expr.length - 1; i >= 0; --i) {
       if (expr[i] == "(") {
         ++parantheses;
       }
