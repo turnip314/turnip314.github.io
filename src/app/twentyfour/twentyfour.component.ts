@@ -1,6 +1,8 @@
 import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
+const epsilon = 0.01
+
 @Component({
   selector: 'pm-twentyfour',
   templateUrl: './twentyfour.component.html',
@@ -129,7 +131,7 @@ export class TwentyFourComponent implements OnInit {
   }
 
   isCorrect(tree) {
-      return this.evaluate(tree) == 24;
+      return Math.abs(this.evaluate(tree)-24) < epsilon;
   }
 
   evaluate(tree) {
@@ -156,9 +158,6 @@ export class TwentyFourComponent implements OnInit {
 
   
 }
-
-
-const epsilon = 0.01
 
 class Type {
     static Operation = 1;
