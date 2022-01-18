@@ -302,7 +302,7 @@ class MyNode {
             return this.exprs.reduce((x,y) => x * y.eval(), 1);
             
         else if (this.operation == Operation.DIV)
-            return this.exprs[0].eval() / this.exprs.reduce((x,y) => x * y.eval(), 1);
+            return this.exprs[0].eval() / this.exprs.slice(1).reduce((x,y) => x * y.eval(), 1);
      }
         
         
