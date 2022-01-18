@@ -25,18 +25,21 @@ export class TwentyFourComponent implements OnInit {
   }
 
   onSubmit(answer) {
-    let tree = this.parsePM(answer)
-    if (tree == null) {
-        this.message = "Sorry, we couldn't parse your expression. Please use only +, -, *, /, and ()."
+    let tree = null;
+    try {
+        tree = this.parsePM(answer);
+        if (!this.isValid(tree)) {
+            this.message = "You must use each number exactly once.";
+        }
+        else if (this.isCorrect(tree)) {
+            this.message = "Correct!";
+        }
+        else {
+            this.message = "This evaluates to " + this.evaluate(tree).toString() + ".";
+        }
     }
-    else if (!this.isValid(tree)) {
-        this.message = "You must use each number exactly once."
-    }
-    else if (this.isCorrect(tree)) {
-        this.message = "Correct!"
-    }
-    else {
-        this.message = "This evaluates to " + this.evaluate(tree).toString() + ".";
+    catch (error) {
+        this.message = error;
     }
   }
 
@@ -56,6 +59,9 @@ export class TwentyFourComponent implements OnInit {
   }
 
   recur(expr) {
+    if (expr == '') {
+        throw new Error("Invalid Expression.");
+    }
     let parantheses = 0;
     for (let i = 0; i < expr.length; ++i) {
       if (expr[i] == "(") {
@@ -85,6 +91,8 @@ export class TwentyFourComponent implements OnInit {
     if (expr[0] == "(" && expr[expr.length-1] == ")") {
       return this.recur(expr.substring(1, expr.length-1));
     }
+
+    throw new Error("Invalid Expression.");
   }
 
   parsePM(expr) {
