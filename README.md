@@ -1,6 +1,6 @@
 # About
 
-This is my personal website built using Angular. Please visit https://turnip314.tech/home.
+This is my personal website built using Angular. Please visit https://turnip314.come/home.
 
 # Angular
 
