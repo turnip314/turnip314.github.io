@@ -107,4 +107,33 @@ export class ImageService {
             }
         });
     }
+
+    getAnniversary1MonthImages() {
+        var images = [
+            {
+                image: 'you.png',
+                name: 'You'
+            },
+            {
+                image: 'me.png',
+                name: 'Me'
+            },
+            
+        ];
+
+        return images.map(x => {
+            return {
+                image: 'assets/images/anniversary1month/' + x.image,
+                title: x.name,
+                alt: x.name
+            }
+        });
+    }
+
+    getLoveImage() {
+        return {
+            image: 'assets/images/anniversary1month/love.png',  
+            name: 'Love', 
+        }
+    }
 }
