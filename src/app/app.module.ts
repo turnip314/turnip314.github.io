@@ -85,7 +85,7 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
       { path: 'academics', component: AcademicsComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'nicole', component: Nicole2Component },
+      { path: 'nicole', component: PageUnderConstructionComponent },
       { path: '24', component : TwentyFourComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }
