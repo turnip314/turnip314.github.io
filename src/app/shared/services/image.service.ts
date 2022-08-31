@@ -130,6 +130,23 @@ export class ImageService {
         });
     }
 
+    getAnniversary2MonthImages() {
+        var images = [
+            {
+                image: 'us.jpg',
+                name: 'Us'
+            },
+        ];
+
+        return images.map(x => {
+            return {
+                image: 'assets/images/anniversary2month/' + x.image,
+                title: x.name,
+                alt: x.name
+            }
+        });
+    }
+
     getLoveImage() {
         return {
             image: 'assets/images/anniversary1month/love.png',  
