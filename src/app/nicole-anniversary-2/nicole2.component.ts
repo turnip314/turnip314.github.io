@@ -5,9 +5,9 @@ import { ImageOverlayComponent } from '../shared/image-overlay/image-overlay.com
 import { ImageService } from '../shared/services/image.service';
 
 @Component({
-  selector: 'pm-gallery',
+  selector: 'nicole2',
   templateUrl: './nicole2.component.html',
-  styleUrls: ['./nicole2.component.css']
+  styleUrls: ['./nicole2.component.css'],
 })
 export class Nicole2Component implements OnInit {
 

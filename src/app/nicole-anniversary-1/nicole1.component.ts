@@ -5,7 +5,7 @@ import { ImageOverlayComponent } from '../shared/image-overlay/image-overlay.com
 import { ImageService } from '../shared/services/image.service';
 
 @Component({
-  selector: 'pm-gallery',
+  selector: 'nicole1',
   templateUrl: './nicole1.component.html',
   styleUrls: ['./nicole1.component.css']
 })
