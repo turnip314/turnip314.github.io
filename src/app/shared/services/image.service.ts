@@ -153,4 +153,21 @@ export class ImageService {
             name: 'Love', 
         }
     }
+
+    getAnniversary3MonthImages() {
+        var images = [
+            {
+                image: 'nicole3.jpg',
+                name: 'Valentine\'s Day'
+            },
+        ];
+
+        return images.map(x => {
+            return {
+                image: 'assets/images/anniversary3month/' + x.image,
+                title: x.name,
+                alt: x.name
+            }
+        });
+    }
 }

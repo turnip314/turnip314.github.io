@@ -11,10 +11,12 @@ import { ImageService } from '../shared/services/image.service';
 })
 export class Nicole3Component implements OnInit {
 
+  images: any;
+
   constructor(private overlay: Overlay, private _imageService: ImageService) { }
 
   ngOnInit(): void {
-
+    this.images = this._imageService.getAnniversary3MonthImages();
   }
 
 
