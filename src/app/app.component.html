@@ -1,44 +1,50 @@
 
-<nav class='navbar fixed-top'>
-  <a class='navbar-brand'><img class="turnip-img" name="turnip-button" src='./assets/images/turnip-icon.png' width="48px" (click)="drawer.toggle();"></a>
-  <ul class='nav nav-pills'>
-    <li><button class='button topnav-button' [routerLink]="['/home']" >Home</button></li>
-    <li><button class='button topnav-button' [routerLink]="['/projects']">Projects</button></li>
-    <li><button class='button topnav-button' [routerLink]="['/academics']">Academics</button></li>
-    <li><button class='button topnav-button' [routerLink]="['/gallery']">Gallery</button></li>
-    <li><button class='button topnav-button' [routerLink]="['/contact']">Contact</button></li>
-  </ul>
-</nav>
+<div [@dropDown]="dropDownState" class="flex-container vertical top-nav">
+  <nav class='navbar fixed-top'>
+    <a class='navbar-brand'><img class="turnip-img" name="turnip-button" src='./assets/images/turnip-icon.png' width="48px" (click)="drawer.toggle();"></a>
+    <ul class='nav nav-pills'>
+      <li><button class='button topnav-button' [routerLink]="['/home']" >Home</button></li>
+      <li><button class='button topnav-button' [routerLink]="['/projects']">Projects</button></li>
+      <li><button class='button topnav-button' [routerLink]="['/academics']">Academics</button></li>
+      <li><button class='button topnav-button' [routerLink]="['/gallery']">Gallery</button></li>
+      <li><button class='button topnav-button' [routerLink]="['/contact']">Contact</button></li>
+    </ul>
+  </nav>
+  <img class="dropdown-img" name="dropdown-nav-button" [src]='dropDownImage' width="48px" (click)="showTopNav();">
+</div>
 
-<mat-drawer-container class="sidenav-container">
-  <mat-drawer #drawer class="sidenav" mode="over">
-    <div class="sidenav-buttons">
-      <div style="height: 80px;"></div>
-      <button class='button sidenav-button' [routerLink]="['/home']" >Home</button>
-      <button class='button sidenav-button' [routerLink]="['/projects']">Projects</button>
-      <button class='button sidenav-button' [routerLink]="['/academics']">Academics</button>
-      <button class='button sidenav-button' [routerLink]="['/gallery']">Gallery</button>
-      <button class='button sidenav-button' [routerLink]="['/contact']">Contact</button>
-    </div>
-  </mat-drawer>
-
-  <div class="sidenav-content" (click)="onEmptyClick($event, drawer)">
-    <div class='outer-container'>
-      <div class='page-container'>
-        <router-outlet></router-outlet>
+<div [@pageDown]="dropDownState" class="outer-page-container">
+  <mat-drawer-container class="sidenav-container">
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <div class="sidenav-buttons">
+        <div style="height: 80px;"></div>
+        <button class='button sidenav-button' [routerLink]="['/home']" >Home</button>
+        <button class='button sidenav-button' [routerLink]="['/projects']">Projects</button>
+        <button class='button sidenav-button' [routerLink]="['/academics']">Academics</button>
+        <button class='button sidenav-button' [routerLink]="['/gallery']">Gallery</button>
+        <button class='button sidenav-button' [routerLink]="['/contact']">Contact</button>
+      </div>
+    </mat-drawer>
+  
+    <div class="sidenav-content" (click)="onEmptyClick($event, drawer)">
+      <div class='outer-container'>
+        <div class='page-container'>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <!--Links to media-->
+      <div *ngIf="false" class="flex-container vertical light">
+        <div class="small-break"></div>
+        <div class="flex-container horizontal light">
+          <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
+          <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
+          <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
+        </div>
+        <div class="small-break"></div>
       </div>
     </div>
-    <!--Links to media-->
-    <div class="flex-container vertical light">
-      <div class="small-break"></div>
-      <div class="flex-container horizontal light">
-        <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
-        <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
-        <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
-      </div>
-      <div class="small-break"></div>
-    </div>
-  </div>
+  
+  </mat-drawer-container>
+</div>
 
-</mat-drawer-container>
 

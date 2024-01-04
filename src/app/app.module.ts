@@ -41,8 +41,6 @@ import { Nicole3Component } from './nicole-anniversary-3/nicole3.component'
 import { ImageService } from './shared/services/image.service';
 import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.component'
 
-
-
 @NgModule({
   providers: [
     ContactService,

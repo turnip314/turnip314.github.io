@@ -6,6 +6,19 @@
     border-width: 2px;
     border-color:white;
     border-style: outset;
+    width: 100%;
+}
+
+.circle-container {
+  width: 40%;
+  max-width: 300px;
+  position: fixed;
+}
+
+.circle-expanded {
+    text-align: left;
+    margin-left: 50%;
+    width: 100%;
 }
 
 .no-padding {
@@ -19,6 +32,10 @@
     color: white;
     height: fit-content;
     line-height: 24px;
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -33,7 +50,26 @@ a {
 } 
 
 .text-region {
+  margin-left: 10%;
+  margin-right: 10%;
+}
 
+.about-me {
+  position: fixed;
+  left: 450px;
+  height: 100%;
+}
+
+@media(max-width:720px){
+  .about-me {
+    left: 0px;
+    top: 90%;
+    transform: translateY(-60%);
+  }
+}
+
+.media-container {
+  margin-top: auto;
 }
 
 /*testing*/
@@ -119,5 +155,5 @@ a {
   padding: 16px;
   width: 128px;
   height: 128px;
-  
 }
+

@@ -39,8 +39,8 @@
 }
 
 .dark {
-    background-color:#4473cc;
-    border-color: #4473cc;
+    background-color:#4663ac;
+    border-color: #4663ac;
 }
 
 .flex-container {
@@ -77,4 +77,9 @@
         font-size: 32px;
         line-height: 32px;
     }
+  }
+
+  .ignore-others {
+    z-index: 999;
+    position: fixed;
   }
