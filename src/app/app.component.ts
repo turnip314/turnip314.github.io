@@ -10,21 +10,12 @@ import { filter } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
-    trigger('dropDown', [
+    trigger('mediaUp', [
       state('initial', style({
-        transform: 'translate(0, -5px)',
+        transform: 'translateY(-90px)',
       })),
       state('final', style({
-        transform: 'translate(0, 65px)',
-      })),
-      transition('initial => final, final => initial', animate('300ms ease-in')),
-    ]),
-    trigger('pageDown', [
-      state('initial', style({
-        transform: 'translate(0, 0)',
-      })),
-      state('final', style({
-        transform: 'translate(0, 70px)',
+        transform: 'translateY(-173px)',
       })),
       transition('initial => final, final => initial', animate('300ms ease-in')),
     ]),
@@ -33,7 +24,7 @@ import { filter } from 'rxjs';
 export class AppComponent {
   title = 'Turnip\'s Home Page';
   sidenavOpen = false;
-  dropDownState = "initial";
+  mediaState = "initial";
   dropDownImage = "./assets/images/down-arrow.png";
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -42,11 +33,6 @@ export class AppComponent {
     if (e.target.name != "turnip-button") { drawer.close(); this.sidenavOpen = false;}
   }
 
-  showTopNav()
-  {
-    this.dropDownState = this.dropDownState == "initial" ? "final" : "initial";
-    this.dropDownImage = this.dropDownState == "initial" ? "./assets/images/down-arrow.png" : "./assets/images/up-arrow.png";
-  }
 
   ngOnInit() {
     // Subscribe to router events to detect navigation changes

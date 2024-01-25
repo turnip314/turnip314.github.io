@@ -3,6 +3,64 @@
 
 <div class='small-break' id="start"></div>
 
+<div *ngIf="expandedState == 'initial'" [@fadeIn] class="flex-container vertical about-me" style="opacity: 0;">
+  <div class='small-break'></div>
+    
+  <div class='medium-break'></div>
+    <!--Intro -->
+    <div [@fadeOutAndMoveUp] *ngIf="expandedState == 'initial'" class="title-text container-fluid">
+      <div class='small-break'></div>
+      <div class="text-center">
+        Hello! My name is Andrew Luo.
+      </div>
+      <div class='small-break'></div>
+    </div>
+
+    <div class='small-break'></div>
+    <div [@hoverExpand]="imageHoverState" class="circle-container" (mouseenter)="onHover()" (mouseleave)="onUnhover()">
+        <img class='circle-img' src="./assets/images/me.png" alt="Me" (click)="expand()">
+    </div>
+    <div class='small-break'></div>
+
+      <!--Intro Continued-->
+    <div [@fadeOutAndMoveDown] *ngIf="expandedState == 'initial'" class="intro-text container-fluid">
+      <div class='small-break'></div>
+      <div class='text-center'>
+          I'm a Computer Science and Pure Mathematics student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
+      </div>
+      <div class='medium-break'></div>
+    </div>
+
+
+    <div *ngIf="false" class='flex-container vertical dark p-h-10 fade-in'>
+      <div class='small-break'></div>
+      <div>
+        <div class='title-text'>Programming Languages</div>
+        <hr class='line-break-light'>
+      </div>
+      <div class='grid-container dark fade-in'>
+        <div *ngFor='let lang of languages'>
+          <div class="grid-item">
+            <div class="flip-box">
+              <div class="flip-box-inner">
+                <div class="flip-box-front">
+                  <img [src]='lang.src' [alt]="lang.name" style="width:100%;height:100%">
+                </div>
+                <div class="flip-box-back">
+                  <h2>{{lang.name}}</h2>
+                  <p>{{lang.status}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='small-break'></div>
+    </div>
+
+  <div class="small-break"></div>
+</div>
+
 <div *ngIf="expandedState == 'final'" [@fadeIn] class="flex-container vertical ignore-others about-me" style="opacity: 0;">
   <div class='small-break'></div>
   <div class='text-region'>
@@ -19,24 +77,20 @@
         You can <a [routerLink]="['/contact']">contact me</a> if you have any questions or want to chat!
       </p>
       <div class="small-break"></div>
-  </div>
 
-  <div *ngIf="expandedState == 'final'" class="flex-container horizontal media-container">
-    <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
-    <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
-    <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
+      <div class="container-fluid">
+        <ng-image-slider 
+            [images]="imageObject" 
+            [imageSize]="imageSize"
+            [infinite]="infinite"
+            [autoSlide]="autoSlide"
+            [imagePopup]="false"
+        #nav>
+        </ng-image-slider>
+      </div>
   </div>
   <!--Image Slider -->
-  <!--div class="container-fluid">
-    <ng-image-slider 
-        [images]="imageObject" 
-        [imageSize]="imageSize"
-        [infinite]="infinite"
-        [autoSlide]="autoSlide"
-        [imagePopup]="false"
-    #nav>
-    </ng-image-slider>
-  </div-->
+  
   <!--Youtube/TikTok-->
   <!--div class='medium-break'></div>
   <div class='text-region' style="opacity: 0; visibility: hidden;">
@@ -51,57 +105,7 @@
 
 
 
-<div class='medium-break'></div>
-<!--Intro -->
-<div [@fadeOutAndMoveUp] *ngIf="expandedState == 'initial'" class="title-text container-fluid">
-  <div class='small-break'></div>
-  <div class="text-center">
-    Hello! My name is Andrew Luo.
-  </div>
-  <div class='small-break'></div>
-</div>
 
-<div class='small-break'></div>
-<div [@hoverExpand]="imageHoverState" [@moveAndExpandPhoto]="isMobile ? 'initial' : expandedState" [@moveAndExpandPhotoMobile]="isMobile ? expandedState : 'initial'" class="circle-container" (mouseenter)="onHover()" (mouseleave)="onUnhover()">
-    <img class='circle-img' src="./assets/images/me.png" alt="Me" (click)="expand()">
-</div>
-<div class='small-break'></div>
-
-  <!--Intro Continued-->
-<div [@fadeOutAndMoveDown] *ngIf="expandedState == 'initial'" class="intro-text container-fluid">
-  <div class='small-break'></div>
-  <div class='text-center'>
-      I'm a Computer Science and Pure Mathematics student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
-  </div>
-  <div class='medium-break'></div>
-</div>
-
-
-<div *ngIf="false" class='flex-container vertical dark p-h-10 fade-in'>
-  <div class='small-break'></div>
-  <div>
-    <div class='title-text'>Programming Languages</div>
-    <hr class='line-break-light'>
-  </div>
-  <div class='grid-container dark fade-in'>
-    <div *ngFor='let lang of languages'>
-      <div class="grid-item">
-        <div class="flip-box">
-          <div class="flip-box-inner">
-            <div class="flip-box-front">
-              <img [src]='lang.src' [alt]="lang.name" style="width:100%;height:100%">
-            </div>
-            <div class="flip-box-back">
-              <h2>{{lang.name}}</h2>
-              <p>{{lang.status}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class='small-break'></div>
-</div>
 
 <div class='medium-break'></div>
 

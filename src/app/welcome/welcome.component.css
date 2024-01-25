@@ -3,16 +3,15 @@
 
 .circle-img {
     border-radius: 50%;
-    border-width: 2px;
+    border-width: 1px;
     border-color:white;
     border-style: outset;
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .circle-container {
-  width: 40%;
-  max-width: 300px;
-  position: fixed;
+  max-height: 40%;
 }
 
 .circle-expanded {
@@ -28,14 +27,12 @@
 
 .intro-text {
     font-size: 24px;
-    font-family: "Calibri";
-    color: white;
+    font-family: "math";
+    color: rgb(0, 0, 0);
     height: fit-content;
     line-height: 24px;
-    position: fixed;
     top: 80%;
     left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 
@@ -56,16 +53,9 @@ a {
 
 .about-me {
   position: fixed;
-  left: 450px;
   height: 100%;
-}
-
-@media(max-width:720px){
-  .about-me {
-    left: 0px;
-    top: 90%;
-    transform: translateY(-60%);
-  }
+  align-items: center;
+  width: 100%;
 }
 
 .media-container {

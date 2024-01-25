@@ -10,32 +10,6 @@ import { Platform } from '@angular/cdk/platform';
     templateUrl: './welcome.component.html',
     styleUrls: ['./welcome.component.css'],
     animations: [
-        trigger('moveAndExpandPhoto', [
-          state('initial', style({
-            transform: 'translate(-50%, -50%) scale(1)',
-            top: '50%',
-            left: '50%',
-          })),
-          state('final', style({
-            transform: 'translate(0, -50%) scale(2)',
-            top: '50%',
-            left: '0',
-          })),
-          transition('initial => final', animate('500ms ease-in')),
-        ]),
-        trigger('moveAndExpandPhotoMobile', [
-            state('initial', style({
-              transform: 'translate(-50%, -50%) scale(1)',
-              top: '50%',
-              left: '50%',
-            })),
-            state('final', style({
-              transform: 'translate(-50%, 10%) scale(1)',
-              top: 0,
-              left: '50%',
-            })),
-            transition('initial => final', animate('500ms ease-in')),
-          ]),
         trigger('fadeIn', [
             state('void', style({ opacity: 0 })),
             transition(':enter, :leave', [
@@ -55,8 +29,8 @@ import { Platform } from '@angular/cdk/platform';
             ]),
         ]),
         trigger('hoverExpand', [
-            state('normal', style({ transform: 'translate(-50%, -50%) scale(1)' })),
-            state('hovered', style({ transform: 'translate(-50%, -50%) scale(1.1)' })),
+            state('normal', style({ transform: 'scale(1)' })),
+            state('hovered', style({ transform: 'scale(1.1)' })),
             transition('normal => hovered', animate('200ms ease-in')),
             transition('hovered => normal', animate('200ms ease-out'))
           ]),
