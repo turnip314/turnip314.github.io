@@ -16,18 +16,6 @@ import { Platform } from '@angular/cdk/platform';
               animate(1000) // Adjust the duration as needed
             ]),
         ]),
-        trigger('fadeOutAndMoveUp', [
-            state('void', style({ opacity: 1, transform: 'translateY(0)' })),
-            transition(':leave', [
-              animate('500ms ease-out', style({ opacity: 0, transform: 'translateY(-100%)' }))
-            ]),
-        ]),
-        trigger('fadeOutAndMoveDown', [
-            state('void', style({ opacity: 1, transform: 'translate(-50%, 0)' })),
-            transition(':leave', [
-              animate('500ms ease-out', style({ opacity: 0, transform: 'translate(-50%, 100%)' }))
-            ]),
-        ]),
         trigger('hoverExpand', [
             state('normal', style({ transform: 'scale(1)' })),
             state('hovered', style({ transform: 'scale(1.1)' })),

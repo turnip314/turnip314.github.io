@@ -8,7 +8,7 @@
     
   <div class='medium-break'></div>
     <!--Intro -->
-    <div [@fadeOutAndMoveUp] *ngIf="expandedState == 'initial'" class="title-text container-fluid">
+    <div class="title-text container-fluid">
       <div class='small-break'></div>
       <div class="text-center">
         Hello! My name is Andrew Luo.
@@ -18,15 +18,15 @@
 
     <div class='small-break'></div>
     <div [@hoverExpand]="imageHoverState" class="circle-container" (mouseenter)="onHover()" (mouseleave)="onUnhover()">
-        <img class='circle-img' src="./assets/images/me.png" alt="Me" (click)="expand()">
+        <img class='circle-img' src="https://i.ibb.co/fqBsW6b/me.png" alt="Me" (click)="expand()">
     </div>
     <div class='small-break'></div>
 
       <!--Intro Continued-->
-    <div [@fadeOutAndMoveDown] *ngIf="expandedState == 'initial'" class="intro-text container-fluid">
+    <div class="intro-text container-fluid">
       <div class='small-break'></div>
       <div class='text-center'>
-          I'm a Computer Science and Pure Mathematics student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
+          I'm a Master of Computer Science student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
       </div>
       <div class='medium-break'></div>
     </div>
