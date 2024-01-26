@@ -82,15 +82,36 @@ export class AcademicsComponent implements OnInit {
     ],
     'Term 3B': [
       { code: 'PMATH 440', name: 'Analytic Number Theory', instructor: 'Wentang Kuo'},
-      { code: 'PMTATH 450', name: 'Lebesgue Integration and Fourier Analysis', instructor: 'Blake Madill'},
+      { code: 'PMATH 450', name: 'Lebesgue Integration and Fourier Analysis', instructor: 'Blake Madill'},
       { code: 'CS 360', name: 'Intro to the Theory of Computing', instructor: 'Jeffrey Shallit'},
       { code: 'CO 330', name: 'Combinatorial Enumeration', instructor: 'Stephen Melczer'},
       { code: 'CO 485', name: 'Mathematics of Public-Key Cryptography', instructor: 'Koray Karabina'},
       { code: 'PHYS 225', name: 'Modelling Life Physics', instructor: 'Bae-Yuen Ha'},
     ],
+    'COOP 5': [
+      { code: 'COOP 5', name: 'Noom', instructor: 'N/A'},
+      { code: 'PD 6', name: 'Problem Solving', instructor: 'N/A'},
+    ],
+    'COOP 6': [
+      { code: 'COOP 6', name: 'University of Waterloo - Mathematics Research Assistant', instructor: 'Stephen Melczer'},
+      { code: 'STAT 231', name: 'Statistics', instructor: 'Michael John Davis'},
+    ],
+    'Term 4A': [
+      { code: 'PMATH 433', name: 'Model Theory and Set Theory', instructor: 'Rahim Moosa'},
+      { code: 'PMATH 445', name: 'Representation of Finite Groups', instructor: 'Wentang Kuo'},
+      { code: 'CS 466', name: 'Algorithm Design and Analysis', instructor: 'Theresa Biedl'},
+      { code: 'CS 485', name: 'Foundations of Machine Learning', instructor: 'Shai Ben-David'},
+      { code: 'CO 485', name: 'Continuous Optimization', instructor: 'Levent Tuncel'},
+    ],
+    'Term 4B': [
+      { code: 'PMATH 441', name: 'Algebraic Number Theory', instructor: 'Blake Madill'},
+      { code: 'CO 430', name: 'Algebraic Enumeration', instructor: 'Oliver Pechenik'},
+      { code: 'CS 480', name: 'Introduction to Machine Learning', instructor: 'Pascal Poupart'},
+      { code: 'PHYS 124', name: 'Modern Physics', instructor: 'Robert Mann'},
+    ],
   };
 
-  terms = ['Term 1A', 'Term 1B', 'COOP 1', 'Term 2A', 'COOP 2', 'Term 2B', 'COOP 3', 'Term 3A', 'COOP 4', 'Term 3B'];
+  terms = ['Term 1A', 'Term 1B', 'COOP 1', 'Term 2A', 'COOP 2', 'Term 2B', 'COOP 3', 'Term 3A', 'COOP 4', 'Term 3B', 'COOP 5', 'COOP 6', 'Term 4A', 'Term 4B'];
 
   timeByTerm = {
     'Term 1A': 'Fall 2018',
@@ -102,7 +123,11 @@ export class AcademicsComponent implements OnInit {
     'COOP 3': 'Fall 2020',
     'Term 3A': 'Winter 2021',
     'COOP 4': 'Spring 2021',
-    'Term 3B': 'Fall 2021'
+    'Term 3B': 'Fall 2021',
+    'COOP 5': 'Winter 2022',
+    'COOP 6': 'Spring 2022',
+    'Term 4A': 'Fall 2022',
+    'Term 4B': 'Winter 2023',
   }
 
   courseColumnsToDisplay;
