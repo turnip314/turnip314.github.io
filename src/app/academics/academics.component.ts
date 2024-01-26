@@ -12,13 +12,50 @@ export class AcademicsComponent implements OnInit {
   onResize(event) {
     if (event.target.innerWidth <= 720) {
       this.courseColumnsToDisplay = ['courseCode', 'courseName']
+      this.scholarshipColumnsToDisplay = ['name', 'value', 'year']
+      this.gradCourseColumnsToDisplay = ['courseCode', 'courseName']
     }
     else {
       this.courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor']
+      this.scholarshipColumnsToDisplay = ['name', 'sponsor', 'value', 'year']
+      this.gradCourseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor', 'term'];
     }
   }
 
   constructor() { }
+
+  scholarships = [
+    {
+      name: "Graduate Excellence Award in Computer Science", 
+      sponsor: "University of Waterloo", 
+      value: "$4000", 
+      year: 2024
+    },
+    {
+      name: "Mike Vangoch Memorial Scholarship", 
+      sponsor: "University of Waterloo", 
+      value: "$1200", 
+      year: 2023
+    },
+    {
+      name: "Undergraduate Student Research Award", 
+      sponsor: "NSERC", 
+      value: "$6000", 
+      year: 2022
+    },
+    {
+      name: "Undergraduate Student Research Award", 
+      sponsor: "NSERC", 
+      value: "$6000", 
+      year: 2021
+    },
+    {
+      name: "Faculty of Mathematics Scholarship", 
+      sponsor: "University of Waterloo", 
+      value: "$5000", 
+      year: 2018
+    },
+  ]
 
   courses = {
     'Term 1A': [
@@ -109,9 +146,14 @@ export class AcademicsComponent implements OnInit {
       { code: 'CS 480', name: 'Introduction to Machine Learning', instructor: 'Pascal Poupart'},
       { code: 'PHYS 124', name: 'Modern Physics', instructor: 'Robert Mann'},
     ],
+    'Term 1': [
+      { code: 'PMATH 764', name: 'Algebraic Geometry', instructor: 'Changho Han'},
+      { code: 'CS 764', name: 'Computational Complexity', instructor: 'Eric Blais'},
+    ],
   };
 
   terms = ['Term 1A', 'Term 1B', 'COOP 1', 'Term 2A', 'COOP 2', 'Term 2B', 'COOP 3', 'Term 3A', 'COOP 4', 'Term 3B', 'COOP 5', 'COOP 6', 'Term 4A', 'Term 4B'];
+  gradTerms = ['Term 1']
 
   timeByTerm = {
     'Term 1A': 'Fall 2018',
@@ -128,16 +170,23 @@ export class AcademicsComponent implements OnInit {
     'COOP 6': 'Spring 2022',
     'Term 4A': 'Fall 2022',
     'Term 4B': 'Winter 2023',
+    'Term 1': 'Winter 2024',
   }
 
   courseColumnsToDisplay;
+  scholarshipColumnsToDisplay;
+  gradCourseColumnsToDisplay;
 
   ngOnInit(): void {
     if (window.innerWidth <= 720) {
       this.courseColumnsToDisplay = ['courseCode', 'courseName'];
+      this.scholarshipColumnsToDisplay = ['name', 'value', 'year']
+      this.gradCourseColumnsToDisplay = ['courseCode', 'courseName']
     }
     else {
       this.courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor'];
+      this.scholarshipColumnsToDisplay = ['name', 'sponsor', 'value', 'year']
+      this.gradCourseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor', 'term'];
     }
   }
 

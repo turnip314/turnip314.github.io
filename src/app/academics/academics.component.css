@@ -28,3 +28,14 @@ table {
 .mb-10 {
     margin-bottom: 10px;
 }
+
+.boxed-table {
+    box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+
+.mat-expansion-panel {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
