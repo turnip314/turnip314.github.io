@@ -1,8 +1,8 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, OnInit } from '@angular/core';
-import { ImageOverlayComponent } from '../shared/image-overlay/image-overlay.component';
-import { ImageService } from '../shared/services/image.service';
+import { ImageOverlayComponent } from '../../shared/image-overlay/image-overlay.component';
+import { ImageService } from '../../shared/services/image.service';
 
 @Component({
   selector: 'nicole2',

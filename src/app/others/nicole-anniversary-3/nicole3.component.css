@@ -1,4 +1,4 @@
-@import '../shared/styles.css';
+@import '../../shared/styles.css';
 
 .grid-container {
     display: inline-grid;

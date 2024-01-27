@@ -29,14 +29,14 @@ import { ContactService } from './contact.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AcademicsComponent } from './academics/academics.component';
 
-import { TwentyFourComponent } from './twentyfour/twentyfour.component';
+import { TwentyFourComponent } from './others/twentyfour/twentyfour.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GalleryComponent } from './gallery/gallery.component';
-import { Nicole1Component } from './nicole-anniversary-1/nicole1.component'
-import { Nicole2Component } from './nicole-anniversary-2/nicole2.component'
-import { Nicole3Component } from './nicole-anniversary-3/nicole3.component'
+import { Nicole1Component } from './others/nicole-anniversary-1/nicole1.component'
+import { Nicole2Component } from './others/nicole-anniversary-2/nicole2.component'
+import { Nicole3Component } from './others/nicole-anniversary-3/nicole3.component'
 
 import { ImageService } from './shared/services/image.service';
 import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.component'
