@@ -3,43 +3,80 @@
 
 <div class="medium-break"></div>
 
-<div class="flex-container light fade-in outer-container">
 
-</div>
-<!--div *ngFor="let project of projects">
-    <div class="flex-container dark fade-in outer-container">
-        <div class="gallery">
-            <div class="aspect-ratio">
-                <img *ngIf="project.demos[project.view].type == 'image'"
-                    class='project-img' [src]="project.demos[project.view].src">
-                <iframe *ngIf="project.demos[project.view].type == 'video'" class="project-video"
-                    [src]="project.demos[project.view].src" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="left-right-buttons">
-                <div class="left-button" (click)="viewPrev(project)">
-                    <mat-icon>keyboard_arrow_left</mat-icon>
-                </div>
-                <div class="right-button" (click)="viewNext(project)">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-                </div>
-            </div>
-        </div>
+<div class='flex-container vertical dark p-h-5 m-h-5'>
+    <div class='medium-break'></div>
+    <div class="title-text">Research Projects</div>
+    <hr class='line-break-light'/>
+    <div class="grid-item">
         <div class="description">
-            <div>
-                <div class="title-text">{{project.title}}</div>
-                <hr class='line-break-light'/>
-                <p class="paragraph-text">
-                    {{project.description}}
-                </p>
-            </div> 
+            <div class="title-text project">Sage ACSV</div>
+            <hr class='line-break-light'/>
+            <p class="paragraph-text project">
+                An open-source computer algebra package for computing asymptotic terms of rational generating functions. Built using SageMath.
+                This work was done as part of a co-authored research with Benjamin Hackl, Andrew Luo, Stephen Melczer, Jesse Selover, Elaine Wong.
+                My part sponsored by the NSERC undergraduate student research program in 2023.
+            </p>
+            <div class="small-break"></div>
+            <div class="flex-container horizontal even-spacing">
+                <a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/sage-acsv/">
+                    <div class="flex-container vertical paragraph-text project">
+                        <img src="./assets/images/pypi.png">
+                        Link to PyPi
+                    </div>
+                </a>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/ACSVMath/sage_acsv/">
+                    <div class="flex-container vertical paragraph-text project">
+                        <img src="./assets/images/github.png" style="width: 77.25px; height: 77.25px;">
+                        Link to GitHub
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
     <div class="medium-break"></div>
 </div>
 
+<div class="medium-break"></div>
+
+<div class='flex-container vertical dark p-h-5 m-h-5'>
+    <div class='medium-break'></div>
+    <div class="title-text">Programming Projects</div>
+    <hr class='line-break-light'/>
+
+    <div class='grid-container dark fade-in'>
+        <div *ngFor="let project of projects" style="height:90%">
+            <div class="grid-item">
+                <div class="description">
+                    <div>
+                        <div class="title-text project">{{project.title}}</div>
+                        <hr class='line-break-light'/>
+                        <p class="paragraph-text project">
+                            {{project.description}}
+                        </p>
+                    </div> 
+                </div>
+                <div class="aspect-ratio">
+                    <img *ngIf="project.demos[project.view].type == 'image'"
+                        class='project-img' [src]="project.demos[project.view].src">
+                    <iframe *ngIf="project.demos[project.view].type == 'video'" class="project-video"
+                        [src]="project.demos[project.view].src" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="medium-break"></div>
+        </div>
+    </div>
+<div class='small-break'></div>
+</div>
+
+<div class="flex-container grid">
+    
+</div>
+
+
 <div class="large-break"></div>
 
-<
+<!--
 <div margin-left='10px'>
     <button class='btn btn-success'>
         Hello2

@@ -19,6 +19,11 @@
     padding-right: 10%;
 }
 
+.m-h-5 {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 .m-b-10 {
     margin-bottom: 10px;
 }
@@ -31,6 +36,8 @@
     display: flex;
     justify-content: center;
 }
+
+
 
 .title-text {
     font-size: 300%;
@@ -75,6 +82,10 @@
 
 .flex-container.split {
     justify-content: space-between;
+}
+
+.flex-container.even-spacing {
+    justify-content: space-around;
 }
 
 .paragraph-text {
