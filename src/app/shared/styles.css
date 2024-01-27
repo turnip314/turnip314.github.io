@@ -105,16 +105,16 @@
 @media(max-width:720px){
     .paragraph-text {
         font-size: 100%;
-        line-height: 24px;
+        line-height: 20px;
     }
 
     .title-text {
-        font-size: 200%;
+        font-size: 180%;
         line-height: 32px;
     }
 
     .subtitle-text {
-        font-size: 150%;
+        font-size: 125%;
     }
 }
 

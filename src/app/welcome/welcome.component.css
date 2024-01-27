@@ -39,11 +39,6 @@
 }
 
 
-hr.line-break-light {
-    color: #5d4bc2;
-    border-top: 1px solid white;
-}
-
 /* Hyperlink shouldn't change colour */
 a { 
     color: inherit;
@@ -129,6 +124,14 @@ a {
   .grid-container {
       grid-template-columns: repeat(3, 1fr);
   }
+
+  .intro-text {
+    font-size: 20px;
+  }
+
+  hr.line-break-light {
+    margin: revert;
+}
 }
 
 @media(max-width:720px){

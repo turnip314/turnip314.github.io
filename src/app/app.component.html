@@ -38,9 +38,18 @@
   <div [@mediaUp]="mediaState" (mouseenter) = "mediaState='final'" (mouseleave) = "mediaState='initial'" class="flex-container vertical light media">
     <div class="small-break"></div>
     <div class="flex-container horizontal light media-icons">
-      <input type="image" src="./assets/images/linkedin.png" onclick="window.open('https\://www.linkedin.com/in/andrew314/')"/>
-      <input type="image" src="./assets/images/github.png" onclick="window.open('https\://github.com/turnip314')"/>
-      <input type="image" src="./assets/images/facebook.png" onclick="window.open('https\://www.facebook.com/turnip314/')"/>
+      <input type="image" src="./assets/images/linkedin.png" 
+        onclick="window.open('https\://www.linkedin.com/in/andrew314/')"
+        [@hoverExpand]="hoverStates.linkedin" class="circle-container" (mouseenter)="hoverStates.linkedin = 'hovered'" (mouseleave)="hoverStates.linkedin='normal'"
+      />
+      <input type="image" src="./assets/images/github.png" 
+        onclick="window.open('https\://github.com/turnip314')"
+        [@hoverExpand]="hoverStates.github" class="circle-container" (mouseenter)="hoverStates.github = 'hovered'" (mouseleave)="hoverStates.github='normal'"
+      />
+      <input type="image" src="./assets/images/facebook.png" 
+        onclick="window.open('https\://www.facebook.com/turnip314/')"
+        [@hoverExpand]="hoverStates.facebook" class="circle-container" (mouseenter)="hoverStates.facebook = 'hovered'" (mouseleave)="hoverStates.facebook='normal'"
+      />
     </div>
     <div class="small-break"></div>
   </div>

@@ -19,6 +19,12 @@ import { filter } from 'rxjs';
       })),
       transition('initial => final, final => initial', animate('300ms ease-in')),
     ]),
+    trigger('hoverExpand', [
+      state('normal', style({ transform: 'scale(1)' })),
+      state('hovered', style({ transform: 'scale(1.1)' })),
+      transition('normal => hovered', animate('200ms ease-in')),
+      transition('hovered => normal', animate('200ms ease-out'))
+    ]),
   ]
 })
 export class AppComponent {
@@ -26,6 +32,12 @@ export class AppComponent {
   sidenavOpen = false;
   mediaState = "initial";
   dropDownImage = "./assets/images/down-arrow.png";
+
+  hoverStates = {
+    linkedin: "normal",
+    github: "normal",
+    facebook: "normal"
+  }
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
