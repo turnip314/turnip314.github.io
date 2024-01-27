@@ -10,9 +10,8 @@
 }
 
 hr.line-break-light {
-    color: #5d4bc2;
-    border-top: 1px solid white;
 }
+
 
 .gallery {
     width: 50%;
@@ -89,8 +88,6 @@ hr.line-break-light {
     justify-content: center !important;
     align-items: center !important;
 
-
-    padding-top: 30px;
     padding-bottom: 30px;
 
     grid-row-gap: 100px;
@@ -116,7 +113,7 @@ hr.line-break-light {
 }
 
 .grid-item {
-  background-color: #d2ced7;
+  background-color: #ffffff;
   border-width: 4px;
   display: flex !important;
   flex-direction: column;
@@ -133,7 +130,7 @@ hr.line-break-light {
 }
 
 .title-text.project {
-    font-size: 200%;
+    font-size: 170%;
 }
 
 .paragraph-text.project {
@@ -141,4 +138,8 @@ hr.line-break-light {
     line-height: 120%;
     width: 100%;
     text-decoration: inherit;
+}
+
+.fit {
+    width: fit-content;
 }
