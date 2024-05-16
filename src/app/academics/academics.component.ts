@@ -146,14 +146,15 @@ export class AcademicsComponent implements OnInit {
       { code: 'CS 480', name: 'Introduction to Machine Learning', instructor: 'Pascal Poupart'},
       { code: 'PHYS 124', name: 'Modern Physics', instructor: 'Robert Mann'},
     ],
-    'Term 1': [
+    'Grad': [
       { code: 'PMATH 764', name: 'Algebraic Geometry', instructor: 'Changho Han'},
       { code: 'CS 764', name: 'Computational Complexity', instructor: 'Eric Blais'},
+      { code: 'CS 860', name: 'Algebraic Complexity', instructor: 'Rafael Oliveira'}
     ],
   };
 
   terms = ['Term 1A', 'Term 1B', 'COOP 1', 'Term 2A', 'COOP 2', 'Term 2B', 'COOP 3', 'Term 3A', 'COOP 4', 'Term 3B', 'COOP 5', 'COOP 6', 'Term 4A', 'Term 4B'];
-  gradTerms = ['Term 1']
+  gradTerms = ['Grad']
 
   timeByTerm = {
     'Term 1A': 'Fall 2018',
@@ -170,7 +171,7 @@ export class AcademicsComponent implements OnInit {
     'COOP 6': 'Spring 2022',
     'Term 4A': 'Fall 2022',
     'Term 4B': 'Winter 2023',
-    'Term 1': 'Winter 2024',
+    'Grad': '2024',
   }
 
   courseColumnsToDisplay;
@@ -189,6 +190,4 @@ export class AcademicsComponent implements OnInit {
       this.gradCourseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor', 'term'];
     }
   }
-
-  
 }
