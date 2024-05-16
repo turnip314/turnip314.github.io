@@ -12,10 +12,10 @@ import { filter } from 'rxjs';
   animations: [
     trigger('mediaUp', [
       state('initial', style({
-        transform: 'translateY(-90px)',
+        transform: 'translateY(-100px)',
       })),
       state('final', style({
-        transform: 'translateY(-173px)',
+        transform: 'translateY(-183px)',
       })),
       transition('initial => final, final => initial', animate('300ms ease-in')),
     ]),
@@ -43,6 +43,7 @@ export class AppComponent {
 
   onEmptyClick(e, drawer) {
     if (e.target.name != "turnip-button") { drawer.close(); this.sidenavOpen = false;}
+    this.mediaState = "initial";
   }
 
 

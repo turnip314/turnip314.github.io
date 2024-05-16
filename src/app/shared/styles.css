@@ -92,6 +92,10 @@
     justify-content: space-around;
 }
 
+.flex-container.center {
+    justify-content: center;
+}
+
 .paragraph-text {
     font-size: 150%;
     font-family: "math";

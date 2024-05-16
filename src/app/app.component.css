@@ -171,3 +171,9 @@
 .media-icons {
   justify-content: space-evenly;
 }
+
+.line {
+  width: 50%;
+  border-top: 3px solid;
+  border-radius: 1%;
+}

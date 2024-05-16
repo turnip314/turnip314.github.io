@@ -37,8 +37,10 @@
   </mat-drawer-container>
 
   <!--Links to media-->
-  <div [@mediaUp]="mediaState" (mouseenter) = "mediaState='final'" (mouseleave) = "mediaState='initial'" class="flex-container vertical light media">
-    <div class="small-break"></div>
+  <div [@mediaUp]="mediaState" (click) = "mediaState='final'" (mouseenter) = "mediaState='final'" (mouseleave) = "mediaState='initial'" class="flex-container vertical light media">
+    <div class="flex-container center horizontal">
+      <hr class="line">
+    </div>
     <div class="flex-container horizontal light media-icons">
       <input type="image" src="./assets/images/linkedin.png" 
         onclick="window.open('https\://www.linkedin.com/in/andrew314/')"
