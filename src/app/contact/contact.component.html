@@ -3,26 +3,27 @@
 <div class='p-h-10'>
     <div class='title-text'>Contact Me</div>
     <hr class='line-break-light'>
-    <div class="paragraph-text m-b-10">
-        This feature is currently under maintenance. Feel free to reach out to me at j92luo@uwaterloo.ca.
-    </div>
 
     <div class="container">
         <div class="flex-container vertical">
             <form [formGroup]="formData" (ngSubmit)="onSubmit(formData.value)">
             <div class="form-group">
-                <label for="Email">Email</label>
-                <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="Enter email"formControlName="Email">
+                <input type="hidden" name="access_key" formControlName="access_key" value="d78109c9-9464-42c4-81e2-ac493e1a0230">
             </div>
             <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" class="form-control" name="Fullname" placeholder="Full Name" formControlName="Fullname">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Full Name" formControlName="name">
             </div>
             <div class="form-group">
-                <label for="comment">Message</label>
-                <textarea class="form-control message" formControlName="Comment" name="Comment">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email"formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control message" formControlName="message" name="message">
                 </textarea>
             </div>
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
             <button type="submit" class="btn btn-primary" [disabled]="!formData.valid">Submit</button>
             </form>
         </div>

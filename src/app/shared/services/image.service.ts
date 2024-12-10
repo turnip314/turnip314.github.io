@@ -33,6 +33,21 @@ export class ImageService {
                 thumbImage: 'assets/images/mexico.jpg', 
                 title: 'Family Trip to Mexico', 
                 alt: 'Family Trip to Mexico' 
+            }, {
+                image: 'assets/images/convocation-full.png', 
+                thumbImage: 'assets/images/convocation.png', 
+                title: 'Convocation', 
+                alt: 'Convocation' 
+            }, {
+                image: 'assets/images/victoria-full.png', 
+                thumbImage: 'assets/images/victoria.png', 
+                title: 'Victoria', 
+                alt: 'Victoria' 
+            }, {
+                image: 'assets/images/niagara-full.png', 
+                thumbImage: 'assets/images/niagara.png', 
+                title: 'Niagara Falls', 
+                alt: 'Niagara Falls' 
             }
         ];
     }

@@ -15,16 +15,16 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.formData = this.builder.group({
-      Fullname: new FormControl('', [Validators.required]),
-      Email: new FormControl('', [Validators.compose([Validators.required, Validators.email])]),
-      Comment: new FormControl('', [Validators.required])
+      access_key: new FormControl('d78109c9-9464-42c4-81e2-ac493e1a0230', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.compose([Validators.required, Validators.email])]),
+      message: new FormControl('', [Validators.required])
     })
   }
 
   onSubmit(formData) {
     console.log(formData)
     this.contact.postMessage(formData).subscribe(response => {
-      location.href = 'https://mailthis.to/confirm';
       console.log(response);
     },
     error => {

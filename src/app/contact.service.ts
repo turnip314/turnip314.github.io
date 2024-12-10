@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ContactService {
-  private api = 'https://mailthis.to/turnip314';
+  private api = 'https://api.web3forms.com/submit';
 
   constructor(private http: HttpClient) { }
 
