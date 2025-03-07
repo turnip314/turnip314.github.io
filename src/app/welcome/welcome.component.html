@@ -4,9 +4,7 @@
 <div class='small-break' id="start"></div>
 
 <div *ngIf="curPage == 0"  [@fadeIn] class="flex-container vertical about-me">
-  <div class='small-break'></div>
-    
-  <div class='medium-break'></div>
+  <div *ngIf="!isMobile" class='small-break'></div>
     <!--Intro -->
     <div class="title-text container-fluid">
       <div class='small-break'></div>
@@ -18,7 +16,7 @@
 
     <div class='small-break'></div>
     <div class="circle-container">
-        <img class='circle-img' src="assets/images/me.png" alt="Me">
+        <img class='circle-img' src="https://i.ibb.co/fqBsW6b/me.png" alt="Me" loading="eager">
     </div>
     <div class='small-break'></div>
 

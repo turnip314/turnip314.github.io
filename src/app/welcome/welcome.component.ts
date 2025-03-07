@@ -13,7 +13,7 @@ import { Platform } from '@angular/cdk/platform';
         trigger('fadeIn', [
             state('void', style({ opacity: 0 })),
             transition(':enter, :leave', [
-              animate(1000) // Adjust the duration as needed
+              animate(1000)
             ]),
         ]),
       ],
@@ -80,7 +80,17 @@ export class WelcomeComponent {
         this.showOverlay();
         this.imageObject = this.imageService.getWelcomeImages();
         this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
-        this.curPage = 0
+        this.curPage = 0;
+
+        
+        if (this.isMobile) {
+            setTimeout(() => {
+                this.curPage = 1;
+                setTimeout(() => {
+                    this.curPage = 0;
+                }, 50);
+            }, 50);
+        }
     }
     
     showOverlay() {
