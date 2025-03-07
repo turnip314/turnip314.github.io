@@ -16,23 +16,43 @@ import { Platform } from '@angular/cdk/platform';
               animate(1000) // Adjust the duration as needed
             ]),
         ]),
-        trigger('hoverExpand', [
-            state('normal', style({ transform: 'scale(1)' })),
-            state('hovered', style({ transform: 'scale(1.1)' })),
-            transition('normal => hovered', animate('200ms ease-in')),
-            transition('hovered => normal', animate('200ms ease-out'))
-          ]),
       ],
 })
 export class WelcomeComponent {
-    imgSrc = "./assets/images/me-and-vincent.jpg";
+    private touchStartY = 0;
+    private touchEndY = 0;
+    @HostListener('wheel', ['$event'])
+    onMouseWheel(event: WheelEvent) {
+        if (event.deltaY > 10) this.onScroll('up');
+        else if (event.deltaY < -10) this.onScroll('down');
+    }
+    @HostListener('touchstart', ['$event'])
+    onTouchStart(event: TouchEvent) {
+        this.touchStartY = event.touches[0].clientY;
+    }
+
+    @HostListener('touchmove', ['$event'])
+    onTouchMove(event: TouchEvent) {
+        this.touchEndY = event.touches[0].clientY;
+    }
+
+    @HostListener('touchend', ['$event'])
+    onTouchEnd() {
+        this.detectSwipeDirection();
+    }
+
+    private detectSwipeDirection() {
+        const deltaY = this.touchEndY - this.touchStartY;
+        if (deltaY > 30) {
+            this.onScroll('down');
+        } else if (deltaY < -30) {
+            this.onScroll('up');
+        }
+    }
+
 
     imageObject: any;
-
     infinite = true;
-    expandedState="initial";
-    imageHoverState="normal";
-
     isMobile = false;
 
     imageSize = {
@@ -45,56 +65,7 @@ export class WelcomeComponent {
         stopOnHover: true
     };
 
-    languages = [{
-            src: './assets/images/python.png',
-            name: 'Python',
-            status: 'Advanced'
-        }, {
-            src: './assets/images/cpp.png',
-            name: 'C++',
-            status: 'Advanced'
-        }, {
-            src: './assets/images/csharp.png',
-            name: 'C#',
-            status: 'Advanced'
-        }, {
-            src: './assets/images/sql.png',
-            name: 'SQL',
-            status: 'Advanced'
-        }, {
-            src: './assets/images/java.png',
-            name: 'Java',
-            status: 'Intermediate'
-        }, {
-            src: './assets/images/js.png',
-            name: 'JavaScript',
-            status: 'Intermediate'
-        }, {
-            src: './assets/images/php.png',
-            name: 'PHP',
-            status: 'Intermediate'
-        }, {
-            src: './assets/images/html.png',
-            name: 'HTML',
-            status: 'Intermediate'
-        }, {
-            src: './assets/images/css.png',
-            name: 'CSS',
-            status: 'Intermediate'
-        }, {
-            src: './assets/images/racket.png',
-            name: 'Racket',
-            status: 'Intermediate'
-        }, {
-            src: './assets/images/C.png',
-            name: 'C',
-            status: 'Beginner'
-        }, {
-            src: './assets/images/scala.png',
-            name: 'Scala',
-            status: 'Beginner'
-        },
-    ];
+    expandedState = 'initial';
 
     constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform){
         
@@ -104,6 +75,7 @@ export class WelcomeComponent {
         this.showOverlay();
         this.imageObject = this.imageService.getWelcomeImages();
         this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
+        this.expandedState = 'initial'
     }
     
     showOverlay() {
@@ -118,26 +90,10 @@ export class WelcomeComponent {
         }, 0);
     }
 
-    expand()
-    {
-        this.expandedState = "final";
-    }
-
-    onHover()
-    {
-        if (this.expandedState == "initial")
-        {
-            this.imageHoverState = "hovered";
-        }
-        
-    }
-
-    onUnhover()
-    {
-        if (this.expandedState == "initial")
-        {
-            this.imageHoverState = "normal";
-        }
+    onScroll(direction) {
+        if (direction == 'up') this.expandedState = 'final';
+        else this.expandedState = 'initial';
+            
     }
 }
 

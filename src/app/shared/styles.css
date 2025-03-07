@@ -126,3 +126,45 @@
 z-index: 999;
 position: fixed;
 }
+
+
+/* Page container (full-screen sections) */
+.page-container {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-type: y mandatory;
+  }
+  
+  /* Each page (full-screen height) */
+  .page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    scroll-snap-align: start;
+  }
+  
+  /* Pagination Bubbles */
+  .pagination {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+  
+  .pagination span {
+    width: 12px;
+    height: 12px;
+    background: gray;
+    border-radius: 50%;
+    transition: background 0.3s;
+  }
+  
+  .pagination .active {
+    background: white;
+  }
