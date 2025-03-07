@@ -3,7 +3,7 @@
 
 <div class='small-break' id="start"></div>
 
-<div *ngIf="expandedState == 'initial'"  [@fadeIn] class="flex-container vertical about-me">
+<div *ngIf="curPage == 0"  [@fadeIn] class="flex-container vertical about-me">
   <div class='small-break'></div>
     
   <div class='medium-break'></div>
@@ -37,7 +37,7 @@
   <div class="small-break"></div>
 </div>
 
-<div *ngIf="expandedState == 'final'" [@fadeIn] class="flex-container vertical ignore-others about-me" style="opacity: 0;">
+<div *ngIf="curPage == 1" [@fadeIn] class="flex-container vertical ignore-others about-me" style="opacity: 0;">
   <div class='small-break'></div>
   <div class='text-region'>
       <div class='title-text'>About Me</div>
@@ -78,9 +78,11 @@
   <div class='medium-break'></div>
 </div>
 
-
-
-
+<div class="pagination">
+  <span *ngFor="let page of pages; let i = index" 
+        [class.active]="curPage === i">
+  </span>
+</div>
 
 <div class='medium-break'></div>
 

@@ -21,10 +21,11 @@ import { Platform } from '@angular/cdk/platform';
 export class WelcomeComponent {
     private touchStartY = 0;
     private touchEndY = 0;
+    private moved = false;
     @HostListener('wheel', ['$event'])
     onMouseWheel(event: WheelEvent) {
-        if (event.deltaY > 10) this.onScroll('up');
-        else if (event.deltaY < -10) this.onScroll('down');
+        if (event.deltaY > 30) this.onScroll('up');
+        else if (event.deltaY < -30) this.onScroll('down');
     }
     @HostListener('touchstart', ['$event'])
     onTouchStart(event: TouchEvent) {
@@ -34,20 +35,23 @@ export class WelcomeComponent {
     @HostListener('touchmove', ['$event'])
     onTouchMove(event: TouchEvent) {
         this.touchEndY = event.touches[0].clientY;
+        this.moved = true;
+        
     }
 
     @HostListener('touchend', ['$event'])
     onTouchEnd() {
-        this.detectSwipeDirection();
+        if (this.moved) this.detectSwipeDirection();
     }
 
     private detectSwipeDirection() {
         const deltaY = this.touchEndY - this.touchStartY;
-        if (deltaY > 30) {
+        if (deltaY > 50) {
             this.onScroll('down');
-        } else if (deltaY < -30) {
+        } else if (deltaY < -50) {
             this.onScroll('up');
         }
+        this.moved = false
     }
 
 
@@ -65,7 +69,8 @@ export class WelcomeComponent {
         stopOnHover: true
     };
 
-    expandedState = 'initial';
+    pages = [0, 1]
+    curPage = 0
 
     constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform){
         
@@ -75,7 +80,7 @@ export class WelcomeComponent {
         this.showOverlay();
         this.imageObject = this.imageService.getWelcomeImages();
         this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
-        this.expandedState = 'initial'
+        this.curPage = 0
     }
     
     showOverlay() {
@@ -91,8 +96,8 @@ export class WelcomeComponent {
     }
 
     onScroll(direction) {
-        if (direction == 'up') this.expandedState = 'final';
-        else this.expandedState = 'initial';
+        if (direction == 'up') this.curPage = 1;
+        else this.curPage = 0;
             
     }
 }

@@ -150,7 +150,7 @@ position: fixed;
   /* Pagination Bubbles */
   .pagination {
     position: fixed;
-    bottom: 20px;
+    bottom: 105px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -158,8 +158,8 @@ position: fixed;
   }
   
   .pagination span {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: gray;
     border-radius: 50%;
     transition: background 0.3s;
