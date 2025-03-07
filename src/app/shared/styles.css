@@ -131,7 +131,6 @@ position: fixed;
 /* Page container (full-screen sections) */
 .page-container {
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     scroll-snap-type: y mandatory;
