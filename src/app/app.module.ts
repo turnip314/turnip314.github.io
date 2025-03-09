@@ -34,9 +34,6 @@ import { TwentyFourComponent } from './others/twentyfour/twentyfour.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GalleryComponent } from './gallery/gallery.component';
-import { Nicole1Component } from './others/nicole-anniversary-1/nicole1.component'
-import { Nicole2Component } from './others/nicole-anniversary-2/nicole2.component'
-import { Nicole3Component } from './others/nicole-anniversary-3/nicole3.component'
 
 import { ImageService } from './shared/services/image.service';
 import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.component'
@@ -58,9 +55,6 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
     GalleryComponent,
     ImageOverlayComponent,
     TwentyFourComponent,
-    Nicole1Component,
-    Nicole2Component,
-    Nicole3Component,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +79,6 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
       { path: 'academics', component: AcademicsComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'nicole', component: Nicole3Component },
       { path: '24', component : TwentyFourComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }
