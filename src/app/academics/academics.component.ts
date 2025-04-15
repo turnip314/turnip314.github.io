@@ -26,6 +26,12 @@ export class AcademicsComponent implements OnInit {
 
   scholarships = [
     {
+      name: "Canada Graduate Scholarship - Master's", 
+      sponsor: "NSERC", 
+      value: "$27000", 
+      year: 2025
+    },
+    {
       name: "Queen Elizabeth II Scholarship in Science & Technology", 
       sponsor: "University of Waterloo", 
       value: "$15000", 
