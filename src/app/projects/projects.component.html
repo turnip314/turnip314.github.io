@@ -47,71 +47,23 @@
 <div class='flex-container vertical p-h-5 m-h-5'>
     <div class="title-text">Presentations</div>
     <hr class='line-break-light'/>
-    <div class="grid-item">
+    <div *ngFor="let presentation of presentations" class="grid-item">
         <div class="description m-t-10">
-            <div class="title-text project">A Brief Introduction to Computational Analytic Combinatorics</div>
+            <div class="title-text project">{{presentation.title}}</div>
             <hr class='line-break-light'/>
-            <p class="paragraph-text project">
-                University of Waterloo, Undergraduate Student Research Seminar. August, 2022.
-            </p>
-            <p class="paragraph-text project">
-                Université Laval, Canadian Undergraduate Math Conference. July, 2022.
+            <p *ngFor="let location of presentation.locations" class="paragraph-text project">
+                {{location}}
             </p>
             <ul class="flex-container vertical fit">
-                <li>
-                    <a target="_blank" rel="noopener noreferrer" href="/assets/pdfs/co-slides.pdf" class="paragraph-text project">
-                        Link to Slides
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" rel="noopener noreferrer" href="/assets/pdfs/co-demo.pdf" class="paragraph-text project">
-                        Link to Demo
+                <li *ngFor="let link of presentation.links">
+                    <a target="_blank" rel="noopener noreferrer" href="{{link.url}}" class="paragraph-text project">
+                        {{link.name}}
                     </a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="small-break"></div>
-
-    <div class="grid-item">
-        <div class="description m-t-10">
-            <div class="title-text project">Derangements, The Exponential Function, and The Principle of Inclusion Exclusion</div>
-            <hr class='line-break-light'/>
-            <p class="paragraph-text project">
-                Fleetwood Park Secondary Math Club. December, 2021.
-            </p>
-            <ul class="flex-container vertical fit">
-                <li>
-                    <a target="_blank" rel="noopener noreferrer" href="/assets/pdfs/pie-slides.pdf" class="paragraph-text project">
-                        Link to Slides
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="small-break"></div>
-
-    <div class="grid-item">
-        <div class="description m-t-10">
-            <div class="title-text project">An Introduction to Vinogradov's Mean Value Theorem</div>
-            <hr class='line-break-light'/>
-            <p class="paragraph-text project">
-                Western University, Canadian Undergraduate Mathematics Conference. July 2021.
-            </p>
-            <ul class="flex-container vertical fit">
-                <li>
-                    <a target="_blank" rel="noopener noreferrer" href="/assets/pdfs/vinogradov-mvt.pdf" class="paragraph-text project">
-                        Link to Slides
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1Vq5rpR1qHVkRQ4p4AGS7e3XTEEhzH7V5/view" class="paragraph-text project">
-                        Link to Recording
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 
 <div class="medium-break"></div>
@@ -151,21 +103,3 @@
 
 
 <div class="large-break"></div>
-
-<!--
-<div margin-left='10px'>
-    <button class='btn btn-success'>
-        Hello2
-    </button>
-</div>
-<div class='card'>
-    
-
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">1</button>
-        <button type="button" class="btn btn-secondary">2</button>
-        <button type="button" class="btn btn-secondary">3</button>
-      </div>
-    
-</div>
--->

@@ -9,6 +9,67 @@ export class ProjectsComponent {
     constructor(private _sanitizer: DomSanitizer) {
 
     }
+
+    presentations = [
+        {
+            title: "Automatically Computing Asymptotics of Sequences with Multivariate Rational Generating Functions",
+            locations: [
+                "Fields Institute, International Conference on Probabilistic, Combinatorial and Asymptotic Methods for the Analysis of Algorithms. May, 2025.",
+            ],
+            links: [
+                {
+                    name: "Slides",
+                    url: "/assets/pdfs/AofA2025.pdf"
+                }
+            ]
+        },
+        {
+            title: "A Brief Introduction to Computational Analytic Combinatorics",
+            locations: [
+                "University of Waterloo, Undergraduate Student Research Seminar. August, 2022.",
+                "Université Laval, Canadian Undergraduate Math Conference. July, 2022."
+            ],
+            links: [
+                {
+                    name: "Slides",
+                    url: "/assets/pdfs/co-slides.pdf"
+                },
+                {
+                    name: "Code Demo",
+                    url: "/assets/pdfs/co-demo.pdf"
+                }
+            ]
+        },
+        {
+            title: "Derangements, The Exponential Function, and The Principle of Inclusion Exclusion",
+            locations: [
+                "Fleetwood Park Secondary Math Club. December, 2021."
+            ],
+            links: [
+                {
+                    name: "Slides",
+                    url: "/assets/pdfs/pie-slides.pdf"
+                }
+            ]
+        },
+        {
+            title: "An Introduction to Vinogradov's Mean Value Theorem",
+            locations: [
+                "Western University, Canadian Undergraduate Mathematics Conference. July 2021."
+            ],
+            links: [
+                {
+                    name: "Slides",
+                    url: "/assets/pdfs/vinogradov-mvt.pdf"
+                },
+                {
+                    name: "Recording",
+                    url: "https://drive.google.com/file/d/1Vq5rpR1qHVkRQ4p4AGS7e3XTEEhzH7V5/view"
+                }
+            ]
+        }
+    ]
+
     projects = [
         {
             title: "Jumpy Turnip",
