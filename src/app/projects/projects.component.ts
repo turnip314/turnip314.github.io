@@ -20,6 +20,10 @@ export class ProjectsComponent {
                 {
                     name: "Slides",
                     url: "/assets/pdfs/AofA2025.pdf"
+                },
+                {
+                    name: "Recording",
+                    url: "https://youtu.be/3usWh_Neusw?si=i3TMUoPgudgYAsQd"
                 }
             ]
         },
@@ -76,9 +80,6 @@ export class ProjectsComponent {
             view: 1,
             demos: [
                 {
-                    type: "video",
-                    src: this._sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/V1KUx4B1k5k")
-                }, {
                     type: "image",
                     src: "./assets/images/jumpy-turnip-title.png"
                 }, {
