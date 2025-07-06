@@ -162,7 +162,10 @@ export class AcademicsComponent implements OnInit {
       { code: 'PMATH 764', name: 'Algebraic Geometry', instructor: 'Changho Han'},
       { code: 'CS 764', name: 'Computational Complexity', instructor: 'Eric Blais'},
       { code: 'CS 860', name: 'Algebraic Complexity', instructor: 'Rafael Oliveira'},
-      { code: 'CS 686', name: 'Artificial Intelligence', instructor: 'Jesse Hoey'}
+      { code: 'CS 686', name: 'Artificial Intelligence', instructor: 'Jesse Hoey'},
+      { code: 'CS 646', name: 'Software Architecture', instructor: 'Moni Haque'},
+      { code: 'CS 656', name: 'Computer Networks', instructor: 'Uzma Maroof'},
+      { code: 'CS 860', name: 'Commutative Algebra and Complexity', instructor: 'Rafael Oliveira'},
     ],
   };
 

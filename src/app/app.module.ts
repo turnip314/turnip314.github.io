@@ -29,7 +29,7 @@ import { ContactService } from './contact.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AcademicsComponent } from './academics/academics.component';
 
-import { TwentyFourComponent } from './others/twentyfour/twentyfour.component';
+import { TwentyFourComponent } from './miniapps/twentyfour/twentyfour.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -79,7 +79,8 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
       { path: 'academics', component: AcademicsComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
-      { path: '24', component : TwentyFourComponent },
+      { path: 'apps/24', component : TwentyFourComponent },
+      { path: 'apps/sagedeps', redirectTo: 'assets/sagedeps/index.html', pathMatch: 'full' },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }
     ])
