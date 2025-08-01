@@ -12,6 +12,30 @@ export class ProjectsComponent {
 
     presentations = [
         {
+            title: "A SageMath Package for Analytic Combinatorics in Several Variables",
+            locations: [
+                "Hakkaido University, SageDays Workshop, Aug, 2025.",
+            ],
+            links: [
+            ]
+        },
+        {
+            title: "A SageMath Package for Analytic Combinatorics in Several Variables: Beyond the Smooth Case",
+            locations: [
+                "Hakkaido University, Formal Power Series and Algebraic Combinatorics, July, 2025.",
+            ],
+            links: [
+                {
+                    name: "HTML",
+                    url: "/assets/jupyter/fpsac_run.html"
+                },
+                {
+                    name: "Notebook",
+                    url: "/assets/jupyter/fpsac_code.ipynb"
+                }
+            ]
+        },
+        {
             title: "Automatically Computing Asymptotics of Sequences with Multivariate Rational Generating Functions",
             locations: [
                 "Fields Institute, International Conference on Probabilistic, Combinatorial and Asymptotic Methods for the Analysis of Algorithms. May, 2025.",
@@ -111,7 +135,7 @@ export class ProjectsComponent {
             ],
             description: "A clone of Minesweeper written in Java using the Java Swing library."
         }, {
-            title: "TurnipTex",
+            title: "Chess Alts",
             view: 0,
             demos: [
                 {

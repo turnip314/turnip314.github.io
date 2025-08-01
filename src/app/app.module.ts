@@ -80,7 +80,7 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'apps/24', component : TwentyFourComponent },
-      { path: 'apps/sagedeps', redirectTo: 'assets/sagedeps/index.html', pathMatch: 'full' },
+      { path: 'apps/sagedeps', redirectTo: 'miniapps/sagedeps/index.html', pathMatch: 'full' },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent }
     ])
