@@ -1,6 +1,6 @@
 # About
 
-This is my personal website built using Angular. Please visit https://turnip314.com/home.
+This is my personal website built using Angular. Please visit https://andrewluo.ca/home.
 
 # Angular
 
