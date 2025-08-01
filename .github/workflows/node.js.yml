@@ -41,4 +41,4 @@ jobs:
         run: curl -I http://localhost:4200
 
       - name: Shut down server
-        run: pkill node
+        run: pkill node || true
