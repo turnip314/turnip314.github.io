@@ -23,6 +23,7 @@
               "src/turnip.png",
               "src/assets",
               "src/api",
+              "src/resources",
               "src/miniapps",
               {
                 "glob": "_redirects",
