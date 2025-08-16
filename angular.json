@@ -75,18 +75,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "andrewluo:build"
+            "buildTarget": "andrewluo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "andrewluo:build:production"
+              "buildTarget": "andrewluo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "andrewluo:build"
+            "buildTarget": "andrewluo:build"
           }
         },
         "test": {
