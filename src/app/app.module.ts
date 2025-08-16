@@ -32,59 +32,53 @@ import { AcademicsComponent } from './academics/academics.component';
 import { TwentyFourComponent } from './miniapps/twentyfour/twentyfour.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GalleryComponent } from './gallery/gallery.component';
 
 import { ImageService } from './shared/services/image.service';
 import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.component'
 
-@NgModule({
-  providers: [
-    ContactService,
-    ImageService
-  ],
-  declarations: [
-    AppComponent,
-    WelcomeComponent,
-    ProjectsComponent,
-    PageNotFoundComponent,
-    PageUnderConstructionComponent,
-    ContactComponent,
-    LoadingComponent,
-    AcademicsComponent,
-    GalleryComponent,
-    ImageOverlayComponent,
-    TwentyFourComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatSidenavModule,
-    NgbModule,
-    NgImageSliderModule,
-    OverlayModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: 'home', component: WelcomeComponent },
-      { path: 'projects', component: ProjectsComponent },
-      { path: 'academics', component: AcademicsComponent },
-      { path: 'gallery', component: GalleryComponent },
-      { path: 'contact', component: ContactComponent },
-      { path: 'apps/24', component : TwentyFourComponent },
-      { path: 'apps/sagedeps', redirectTo: 'miniapps/sagedeps/index.html', pathMatch: 'full' },
-      { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: '**', component: PageNotFoundComponent }
-    ])
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        WelcomeComponent,
+        ProjectsComponent,
+        PageNotFoundComponent,
+        PageUnderConstructionComponent,
+        ContactComponent,
+        LoadingComponent,
+        AcademicsComponent,
+        GalleryComponent,
+        ImageOverlayComponent,
+        TwentyFourComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatSidenavModule,
+        NgbModule,
+        NgImageSliderModule,
+        OverlayModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatTableModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule.forRoot([
+            { path: 'home', component: WelcomeComponent },
+            { path: 'projects', component: ProjectsComponent },
+            { path: 'academics', component: AcademicsComponent },
+            { path: 'gallery', component: GalleryComponent },
+            { path: 'contact', component: ContactComponent },
+            { path: 'apps/24', component: TwentyFourComponent },
+            { path: 'apps/sagedeps', redirectTo: 'miniapps/sagedeps/index.html', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '**', component: PageNotFoundComponent }
+        ])], providers: [
+        ContactService,
+        ImageService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
