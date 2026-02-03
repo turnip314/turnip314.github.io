@@ -141,12 +141,9 @@ export class ProjectsComponent {
                 {
                     type: "image",
                     src: "./assets/images/turnip-tex-code.png"
-                }, {
-                    type: "image",
-                    src: "./assets/images/turnip-tex-img.png"
                 },
             ],
-            description: "A math text compiler that can produce LaTeX-style math expressions. Work in Progress."
+            description: "Various ML experiments to learn piece and board evaluations for chess with modified rulesets."
         }
     ]
 
