@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AcademicsComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: { target: { innerWidth: number; }; }) {
     if (event.target.innerWidth <= 720) {
       this.courseColumnsToDisplay = ['courseCode', 'courseName']
       this.scholarshipColumnsToDisplay = ['name', 'value', 'year']
@@ -166,6 +166,7 @@ export class AcademicsComponent implements OnInit {
       { code: 'CS 646', name: 'Software Architecture', instructor: 'Moni Haque'},
       { code: 'CS 656', name: 'Computer Networks', instructor: 'Uzma Maroof'},
       { code: 'CS 860', name: 'Commutative Algebra and Complexity', instructor: 'Rafael Oliveira'},
+      { code: 'MATH 900', name: 'University Mathematics Teaching Techniques', instructor: 'Zack Cramer'},
     ],
   };
 
@@ -190,9 +191,9 @@ export class AcademicsComponent implements OnInit {
     'Grad': '2024',
   }
 
-  courseColumnsToDisplay;
-  scholarshipColumnsToDisplay;
-  gradCourseColumnsToDisplay;
+  courseColumnsToDisplay: string[] = [];
+  scholarshipColumnsToDisplay: string[] = [];
+  gradCourseColumnsToDisplay: string[] = [];
 
   ngOnInit(): void {
     if (window.innerWidth <= 720) {
