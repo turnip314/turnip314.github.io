@@ -17,6 +17,14 @@ export class ProjectsComponent {
                 "Hakkaido University, SageDays Workshop, Aug, 2025.",
             ],
             links: [
+                {
+                    name: "HTML",
+                    url: "/resources/SageDays/SageDays.html"
+                },
+                {
+                    name: "Notebook",
+                    url: "/resources/SageDays/SageDays.ipynb"
+                }
             ]
         },
         {
