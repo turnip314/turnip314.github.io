@@ -159,14 +159,14 @@ export class AcademicsComponent implements OnInit {
       { code: 'PHYS 124', name: 'Modern Physics', instructor: 'Robert Mann'},
     ],
     'Grad': [
-      { code: 'PMATH 764', name: 'Algebraic Geometry', instructor: 'Changho Han'},
-      { code: 'CS 764', name: 'Computational Complexity', instructor: 'Eric Blais'},
-      { code: 'CS 860', name: 'Algebraic Complexity', instructor: 'Rafael Oliveira'},
-      { code: 'CS 686', name: 'Artificial Intelligence', instructor: 'Jesse Hoey'},
-      { code: 'CS 646', name: 'Software Architecture', instructor: 'Moni Haque'},
-      { code: 'CS 656', name: 'Computer Networks', instructor: 'Uzma Maroof'},
-      { code: 'CS 860', name: 'Commutative Algebra and Complexity', instructor: 'Rafael Oliveira'},
-      { code: 'MATH 900', name: 'University Mathematics Teaching Techniques', instructor: 'Zack Cramer'},
+      { code: 'PMATH 764', name: 'Algebraic Geometry', instructor: 'Changho Han', year: 2024},
+      { code: 'CS 764', name: 'Computational Complexity', instructor: 'Eric Blais', year: 2024},
+      { code: 'CS 860', name: 'Algebraic Complexity', instructor: 'Rafael Oliveira', year: 2024},
+      { code: 'CS 686', name: 'Artificial Intelligence', instructor: 'Jesse Hoey', year: 2024},
+      { code: 'CS 646', name: 'Software Architecture', instructor: 'Moni Haque', year: 2025},
+      { code: 'CS 656', name: 'Computer Networks', instructor: 'Uzma Maroof', year: 2025},
+      { code: 'CS 860', name: 'Commutative Algebra and Complexity', instructor: 'Rafael Oliveira', year: 2025},
+      { code: 'MATH 900', name: 'University Mathematics Teaching Techniques', instructor: 'Zack Cramer', year: 2026},
     ],
   };
 
