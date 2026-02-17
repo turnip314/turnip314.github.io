@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ACSV</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.css">
+
+    <!-- Reveal core -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css">
+
+    <!-- Math plugin (MathJax) -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/math/math.js"></script>
+
+    <link rel="stylesheet" href="styles/reveal.css" />
+</head>
+
+<script>
+    window.addEventListener("beforeunload", () => {
+        navigator.sendBeacon("/closed");
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.shiftKey && e.key === "Enter") {
+            const cell = document.activeElement;
+            if (cell && cell.classList.contains("sage-cell")) {
+                e.preventDefault();
+                runSageCell(cell);
+            }
+        }
+    });
+
+    async function runSageCell(cell) {
+        const out = cell.nextElementSibling;
+
+        const returnLatex = cell.nodeName.toLowerCase() == "div";
+
+        out.textContent = "Running…";
+
+        try {
+            const resp = await fetch("http://localhost:8100/run", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Return-LaTeX": returnLatex },
+                body: cell.textContent
+            });
+
+            const data = await resp.json();
+            out.textContent = data.stdout || data.stderr;
+        }
+        catch(e) {
+            out.textContent = "An error occurred. Is the Sage server running?"
+        }
+        
+    }
+
+    const stacks = new Map();
+
+    function getStack(section) {
+        if (!stacks.has(section)) {
+            stacks.set(section, []);
+        }
+        return stacks.get(section);
+    }
+
+    Reveal.on("fragmentshown", e => {
+        const sec = e.fragment.closest("section");
+        const img = sec.querySelector("img");
+        const stack = getStack(sec);
+        if (stack.length == 0) stack.push(img.src);
+
+        const next = e.fragment.dataset.anim;
+        if (next) {
+            stack.push(next);
+            img.src = next;
+        }
+    });
+
+    Reveal.on("fragmenthidden", e => {
+        const sec = e.fragment.closest("section");
+        const img = sec.querySelector("img");
+        const stack = getStack(sec);
+
+        if (stack.length > 1) {
+            stack.pop();
+            img.src = stack[stack.length - 1];
+        }
+
+    });
+</script>
+
+<body>
+    <div class="reveal">
+        <div style="opacity: 0;">
+            \[
+            \newcommand{\zz}{\mathbf{z}}
+            \newcommand{\bi}{\mathbf{i}}
+            \newcommand{\bw}{\mathbf{w}}
+            \newcommand{\br}{\mathbf{r}}
+            \newcommand{\bp}{\mathbf{p}}
+            \newcommand{\A}{{\mathbb A}}
+            \newcommand{\K}{{\mathbb K}}
+            \newcommand{\T}{{\mathbb T}}
+            \newcommand{\Q}{{\mathbb Q}}
+            \newcommand{\Z}{{\mathbb Z}}
+            \newcommand{\C}{{\mathbb C}}
+            \newcommand{\R}{{\mathbb R}}
+            \newcommand{\N}{{\mathbb N}}
+            \newcommand{\F}{{\mathbb F}}
+            \newcommand{\P}{{\mathbb P}}
+            \]
+        </div>
+        <div class="slides">
+            <!--Title-->
+            <section>
+                <h2>Applications of Computer Algebra in Analytic Combinatorics</h2>
+                <p>
+                    Andrew Luo
+                </p>
+                <p>
+                    University of Waterloo
+                </p>
+            </section>
+
+            <!--Motivation-->
+            <section>
+                <section>
+                    <h3>Generating Functions</h3>
+                    <div class="definition">
+                        <b>Definition.</b><br>
+                        The <b>generating function</b> for $(f_i)_{i\ge0}$ is
+                        \[
+                        F(x) = f_0 + f_1x + f_2x^2 + \cdots + f_kx^k + \cdots
+                        \]
+                    </div>
+                    <div style="height:7mm"></div>
+
+                    <div class="example fragment">
+                        <b>Example.</b><br>
+                        The Fibonacci sequence $0,1,1,2,\dots$ has generating function
+                        \[
+                        F(x) = x + x^2 + 2x^3 + \cdots
+                        = \frac{x}{1-x-x^2}.
+                        \]
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Extraction of Coefficients</h3>
+                    <div class="theorem">
+                        <b>Theorem (Cauchy Integral Formula for Coefficients).</b><br>
+                        Let $\mathcal{C}$ be a suitable closed curve about the origin. Then
+                        \[
+                        f_n = [z^n]F(z)
+                        = \frac{1}{2\pi i}
+                        \int_{\mathcal{C}} F(z)\frac{dz}{z^{n+1}}.
+                        \]
+                    </div>
+
+                    <div style="height:3mm"></div>
+
+                    <div class="example fragment">
+                        <b>Example.</b><br>
+                        The Fibonacci generating function
+                        $F(x) = \frac{x}{1-x-x^2}$
+                        has poles at $\phi^{-1}$ and $-\phi$. We have
+                        \[
+                        f_n
+                        = \frac{1}{2\pi i}
+                        \int_{|x|=\varepsilon}
+                        \frac{F(x)}{x^{n+1}}\,dx
+                        \]
+                        for $\varepsilon \lt \phi^{-1}$.
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Extraction of Coefficients</h3>
+                    <div class="slide-flex">
+                        We can deform the curve of integration...
+                        <img id="anim" class="animation" src="../assets/deformation/int1.png" style="max-height:60vh">
+
+                        <span class="fragment animation" data-anim="../assets/deformation/int2.png"></span>
+                        <span class="fragment animation" data-anim="../assets/deformation/int3.png"></span>
+                        <span class="fragment animation" data-anim="../assets/deformation/int4.png"></span>
+                        <span class="fragment animation" data-anim="../assets/deformation/int5.png"></span>
+                    </div>
+                </section>
+
+                <section class="overlay-slide">
+                    <h3>Extraction of Coefficients</h3>
+
+                    <!-- Floating image (TikZ overlay equivalent) -->
+                    <img src="../assets/deformation/int5.png" class="corner-img">
+
+                    <p>
+                        Taking $\color{violet} \mathcal{C}_0$ arbitrarily far from the origin,
+                    </p>
+
+                    <p>
+                        \[
+                        {\color{violet}
+                        \int_{\mathcal{C}_0}\frac{F(x)}{x^{n+1}}\,dx} \to 0.
+                        \]
+                    </p>
+
+                    <div style="height:2mm"></div>
+
+                    <p>
+                        Hence,
+                        \[
+                        f_n =
+                        -{\color{OliveGreen}\operatorname{Res}_{z=-\phi}\frac{F(z)}{z^{n+1}}}
+                        -{\color{Bittersweet}\operatorname{Res}_{z=\phi^{-1}}\frac{F(z)}{z^{n+1}}}
+                        = \frac{1}{\sqrt{5}}\bigl(-\phi^{-n}+\phi^n\bigr).
+                        \]
+                    </p>
+                </section>
+            </section>
+
+            <!--Multivariate-->
+            <section>
+                <section>
+                    <h3>The Multivariate Case</h3>
+                    <p>
+                        Assume \[F(\zz) = \frac{G(\zz)}{H(\zz)} = \sum_{\bi \in \N^d}f_\bi \zz^\bi =
+                        \sum_{i_1,\dots,i_d\ge0} f_{i_1,\dots,i_d}z_1^{i_1}\cdots z_d^{i_d}\] is a rational function in
+                        $d$
+                        variables.
+                    </p>
+
+                    <div style="height:5mm"></div>
+
+                    We consider the $\br$-diagonal \[[\zz^{n\br}]F(\zz) = f_{nr_1,\dots,nr_d}.\]
+                </section>
+
+                <section>
+                    <h3>The Multivariate Case</h3>
+                    <div class="example">
+                        We can consider the $(1,1)$-diagonal of $$F(x,y) = {\color{red} f_{0,0}} + f_{1,0}x + f_{0,1}y +
+                        {\color{red} f_{1,1}}xy + \cdots$$
+
+                    </div>
+
+                    \[
+                    \begin{matrix}
+                    f_{0, 5} & f_{1, 5} & f_{2,5} & f_{3,5} & f_{4,5} & {\color{red} f_{5,5}} \\
+                    f_{0, 4} & f_{1, 4} & f_{2,4} & f_{3,4} & {\color{red} f_{4,4}} & f_{5,4} \\
+                    f_{0, 3} & f_{1, 3} & f_{2,3} & {\color{red} f_{3,3}} & f_{4,3} & f_{5,3} \\
+                    f_{0, 2} & f_{1, 2} & {\color{red} f_{2,2}} & f_{3,2} & f_{4,2} & f_{5,2} \\
+                    f_{0, 1} & {\color{red} f_{1, 1}} & f_{2,1} & f_{3,1} & f_{4,1} & f_{5,1} \\
+                    {\color{red} f_{0, 0}} & f_{1, 0} & f_{2,0} & f_{3,0} & f_{4,0} & f_{5,0} \\
+                    \end{matrix}
+                    \]
+
+                </section>
+
+                <section>
+                    <h3>Multivariate Generating Functions</h3>
+                    <div class="slide-flex">
+                        Why use more variables?
+
+                        <ul>
+                            <li class="fragment">
+                                Tracking parameters.
+                            </li>
+
+                            <div style="height:3mm"></div>
+                            <div class="fragment">
+                                The number of <i>horizontally convex polyominoes</i> with $n$ cells and $k$ rows is
+                                $[x^ny^k]F(x,y)$
+                                where $$F(x,y)=\frac{xy(1-x)^3}{(1-x)^4-xy(1-x-x^2+x^3+x^2y)}.$$
+                            </div>
+
+                            <div style="height:5mm"></div>
+                            <li class="fragment">
+                                Capturing a wider range of possible sequences.
+                            </li>
+                        </ul>
+
+                        <div style="height:3mm"></div>
+
+                    </div>
+                </section>
+
+                <section>
+                    <h3>A Lattice Path Example</h3>
+                    <div class="slide-flex">
+                        <p>
+                            Let $s_n$ be the number of lattice paths starting from the origin and taking $n$ steps in
+                            $\{(-1,-1), (1,-1), (0,1)\}$ without ever leaving the non-negative quadrant.
+                        </p>
+                        <img src="../assets/lattice_paths.gif" style="max-height: 70%;" alt="">
+                    </div>
+                </section>
+
+                <section>
+                    <h3>A Lattice Path Example</h3>
+                    In (Bostan and Kauers, 2009), it was shown that the generating function $$S(t) =
+                    \sum_{n\ge0}s_nt^n$$
+                    satisfies a linear ODE of order 43. We can approximate that $$ s_n = {\color{cyan} C} \cdot 3^n
+                    n^\alpha
+                    \log^\beta(n) \sum_{k \geq 0} C_kn^{-k} + O((2\sqrt{2})^n)$$
+                    where $\color{cyan}C = 0.000\dots$. Whether $\color{cyan}C = 0$ remained open for the next 7 years.
+                </section>
+
+                <section>
+                    <h3>A Lattice Path Example</h3>
+                    As it turns out, the univariate ODE is derived from computing the $(1,1,1)$-diagonal of the
+                    coefficients
+                    of
+
+                    $$ F(x,y,z) = \frac{(1 + x)(1-2zy^2(1+x^2))}{(1 - y)(1-z(x^2y^2 + y^2 + x))(1-zy^2(1+x^2))}. $$
+
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+from sage_acsv import diagonal_asymptotics_combinatorial as diagonal
+var('x,y,z')
+F = (1 + x)*(2*z*x^2*y^2 + 2*z*y^2 - 1)/((-1 + y)*(z*x^2*y^2 + z*y^2 + z*x - 1)*(z*x^2*y^2 + z*y^2 - 1))
+diagonal(F)
+                </code></pre>
+                    <pre class="sage-output"></pre>
+
+                    <div class="fragment">
+                        Now we've verified that
+                        $$ s_n \sim (12\sqrt{2} - 16)\frac{(-2 \sqrt{2})^n}{\pi n^2}
+                        + (12\sqrt{2} + 16)\frac{(2 \sqrt{2})^n}{\pi n^2}. $$
+                    </div>
+
+                </section>
+            </section>
+
+            <!--Critical Points-->
+            <section>
+                <section>
+                    <h3>The Theory of ACSV</h3>
+                    Our analysis begins with a familiar result...
+                    <div class="theorem">
+                        <b>Multivariate</b> Cauchy Integral Formula <br>
+
+                        Given a suitable product of circles $\mathcal{C} \subset \C^d$ about the origin,
+                        $$f_\bi=\frac{1}{(2\pi i)^d}\int_{\mathcal{C}}F(\zz)\frac{d\zz}{\zz^{\bi+\mathbf{1}}}.$$
+                    </div>
+
+                </section>
+
+                <section>
+                    <h3>The Theory of ACSV</h3>
+                    The integrand of $$f_{n\br}=\frac{1}{(2\pi
+                    i)^d}\int_{\mathcal{C}}F(\zz)\frac{d\zz}{\zz^{n\br+\mathbf{1}}}$$ has the maximum modulus when
+                    $|\zz^{\br}|$ is minimized.
+                    <div style="height:5mm"></div>
+                    <div class="definition fragment">
+                        The <b>height function</b> in the direction $\br$ is $$h_\br(\zz)=-\sum_{j=1}^dr_j\log|z_j|.$$
+                    </div>
+
+                </section>
+
+                <section>
+                    <h3>The Theory of ACSV</h3>
+                    Candidates for minimizing the height come from <b>critical points</b> of $h$.
+
+                    When $V(H)$ is smooth, these can be obtained by solving
+                    $$
+                    \begin{aligned}
+                    z_iH_{z_i}(\zz)r_d - \lambda r_i =& 0 \quad (1\le i\le d), \\ H(\zz)=&0.
+                    \end{aligned}
+                    $$
+                </section>
+
+                <section>
+                    <h3>Minimality</h3>
+                    Not all critical points are minimizers of the height function.
+
+                    <div class="definition fragment">
+                        <b>Definition.</b><br>
+                        Given $V \subset \C^d$, we say $\bw \in V$ is <i>minimal</i> if there does not exist $\zz \in
+                        V$
+                        such that $|z_i| \lt |v_i|$ for all $i$.
+                    </div>
+
+                    <div class="fragment" style="color: red;">
+                        Testing minimality is hard.
+                    </div>
+                </section>
+
+                <section>
+                    <div class="slide-flex">
+                        <p>
+                            We say $F(\zz)$ is <b>combinatorial</b> if only finitely many coefficients are negative.
+                        </p>
+
+                        <p>
+                            Combinatorial functions have an <i>easy</i> test for minimality.
+                        </p>
+
+                        <img src="../assets/minimality.jpeg" style="max-height: 60%;" alt="">
+
+                    </div>
+                </section>
+
+                <section>
+                    We test the line segment from a positive real critical point to the origin
+                    $$
+                    \begin{aligned}
+                    z_iH_{z_i}(\zz)r_d - \lambda r_i =& 0 \quad (1\le i\le d), \\
+                    H(\zz)=&0, \\
+                    H(t\zz)=&0.
+                    \end{aligned}
+                    $$
+
+                    Then, all other critical points can be verified by checking coordinate-wise modulus.
+                </section>
+            </section>
+
+            <!--Computational-->
+            <section>
+                <section>
+                    <h3>Computational ACSV</h3>
+                    Our complexity bounds come from a particular univariate rational representation called the
+                    <i>Kronecker
+                        representation.</i>
+
+                    <div class="definition">
+                        <b>Definition.</b><br>
+                        Let $\mathbf{f} = (f_1,\ldots,f_s) \subset \C[z_1,\ldots,z_d]$ be a zero-dimensional system. A
+                        <i>Kronecker representation</i> of $\mathbf{f}$ consists of a separating linear form $$u =
+                        \lambda_1
+                        f_1 + \cdots + \lambda_s f_s$$ and polynomials $$P, Q_1, \ldots, Q_d \in \C[u]$$ such that there
+                        is
+                        a
+                        1-to-1 correspondence of solutions $(w_1,\ldots,w_d)$ to $\mathbf{f}$ and roots $u$ of $P$ where
+                        $$w_i = \frac{Q_i(u)}{P'(u)}$$ for $1 \le i \le d$.
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Computational ACSV</h3>
+                    Under generic assumptions on $H$, we obtain the following complexity bound.
+
+                    <div class="theorem">
+                        <b>Melczer, Salvy 2020.</b><br>
+                        Let $H$ be a polynomial of degree $\delta$ and height $h$ that can be computed with a straight
+                        line program of length $L$, and define $D = \delta^d$. A kronecker representation for the
+                        critical point system
+                        $$
+                        \begin{aligned}
+                        z_iH_{z_i}(\zz)r_d - \lambda r_i =& 0 \quad (1\le i\le d), \\
+                        H(\zz)=&0, \\
+                        H(t\zz)=&0.
+                        \end{aligned}
+                        $$
+                        can be computed with a probabilistic algorithm in
+                        $\tilde{O}(D^3d^2(d+h))$ bit operations, with polynomials of degree and height at most $ndD$ and
+                        $\tilde{O}(Dd(d+h))$, respectively.
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Computational ACSV</h3>
+                    Our package comes with an interface for computing a Kronecker Representation.
+
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+from sage_acsv import kronecker_representation
+var('x,y,z')
+sys = [x+y+z, x*y+y*z+x*z, x*y*z - 1]
+kronecker_representation(sys, [x,y,z])
+                </code></pre>
+                    <pre class="sage-output"></pre>
+
+                    <div class="fragment">
+                        We also offer an msolve backend.
+                    </div>
+
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+from sage_acsv import diagonal_asymptotics_combinatorial as diagonal, ACSVSettings as AS
+AS.set_default_kroneker_backend(AS.kronecker.MSOLVE)
+var('x,y,z')
+sys = [x+y+z, x*y+y*z+x*z, x*y*z - 1]
+kronecker_representation(sys, [x,y,z])
+                    </code></pre>
+                    <pre class="sage-output"></pre>
+
+                </section>
+            </section>
+
+            <!-- NON-SMOOTH STUFF -->
+            <!--Whitney-->
+            <section>
+                <section>
+                    <h3>Non-Smooth Case</h3>
+                    <div class="slide-flex">
+                        <p>
+                            When $V(H)$ is non-smooth, we want to decompose it into smooth manifolds.
+                        </p>
+
+                        <img src="../assets/strat.jpeg">
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Whitney Stratifications</h3>
+                    <div class="slide-flex">
+                        <div class="definition">
+                            <b>Definition.</b><br>
+                            A <b>Whitney Stratification</b> of the variety $X$ is a decomposition $$X = X_d \supset
+                            X_{d-1}
+                            \supset \dots \supset X_1 \supset X_0$$ such that each $X_k \setminus X_{k-1}$ is a manifold
+                            of
+                            dimension $k$ with the additional property that limits of secant lines lie in the limit of
+                            tangent spaces of any stratum.
+                        </div>
+
+                        <img src="../assets/strat-labelled.jpeg" class="fragment" style="max-height: 50%;">
+                    </div>
+                </section>
+
+                <section>
+                    <div class="example">
+                        <b>Example.</b><br>
+                        The Whitney cusp is defined by the equation $y^2+z^3-x^2z^2=0$.
+
+                        <div class="fragment">
+                            <img src="../assets/cusp.jpeg">
+                            Non-smooth along the $x$-axis, but behaves differently at the origin.
+                        </div>
+
+                    </div>
+
+
+                    <div class="definition fragment">
+                        <b>Definition.</b><br>
+                        Let $X \subset \C^d$ be a variety and $Y \subset X_{sing}$ a subset of its singular locus. We
+                        say $Y$ satisfies <i>Whitney's Condition B</i> if whenever the sequences $\{x_i\in X\}$ and
+                        $\{y_i\in Y\}$ both converge to some $y \in Y$, their secant lines $\ell_i = [x_i,y_i]$ converge
+                        to some line $\ell \subset \C^d$, and the tangent spaces $T_{x_i}X$ converge to some linear
+                        subspace $T \subset \C^d$, then $\ell \subseteq T$.
+                    </div>
+                </section>
+
+                <section>
+                    The key result of Whitney Stratification computations, by Helmer and Nanda, come from
+                    the following result:
+
+                    <div class="theorem fragment">
+                        <b>Helmer, Nanda 2022</b><br>
+                        Let $X\subset \P^n$ be a pure-dimensional projective variety and $Y \subseteq X_{\text{sing}}$ a
+                        subset of the singular locus of $X$. Define $\textbf{Con}(X) \subseteq X \times \P^n$ to be the
+                        <i>conormal space of</i> $X$ with projection map $\kappa: X\times \P^n \to X$. Let
+                        $\{Y_i\}_{1\le i\le s}$ be the irreducible components of $\kappa^{-1}(Y)$ of dimension at most
+                        $\dim{Y}$. Finally, let $$A := \left[\bigcup_i \kappa(Y_i)\right]\cup Y_\text{sing}.$$ Then
+                        $Y-A$ satisfies Whitney's Condition B with respect to $X$.
+                    </div>
+                </section>
+
+                <section>
+                    Our package comes with an interface for computing Whitney Stratifications.
+
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                        from sage_acsv import whitney_stratification
+                        R = PolynomialRing(QQ, ['x','y','z'])
+                        x,y,z = R.gens()
+                        IX = Ideal(y^2 + z^3 - x^2*z^2)
+                        whitney_stratification(IX, R)
+                    </code></pre>
+                    <pre class="sage-output"></pre>
+
+                </section>
+            </section>
+
+            <!--Non-smooth critical-->
+            <section>
+                <section>
+                    <h3>Non-Smooth Case</h3>
+                    Critical points on $V(p_1,\dots,p_s)$ come from the maximal minors of
+
+                    $$
+                    \begin{align*}
+                    N = N_{\bw}(p_1,...,p_s) = \begin{pmatrix}
+                    \nabla_{\log} p_1(\bw) \\
+                    \dots \\
+                    \nabla_{\log} p_s(\bw) \\
+                    \br
+                    \end{pmatrix},
+                    \end{align*}
+                    $$
+
+                    where $\nabla_{\log} f = (z_1f_{z_1},\dots,z_df_{z_d})$.
+
+                    If $V(p_1,...,p_s)$ is non-smooth, additional algebraic techniques are used to clear extraneous
+                    solutions. One option is to <span style="color: red;"> take an ideal saturation</span>.
+                </section>
+
+                <section>
+                    <h3>Transverse Case</h3>
+                    <div class="theorem">
+                        Let $F(\zz)$ admit a square-free transverse factorization. If $\bw$ is the unique contributing
+                        point
+                        of $F(\zz)$. Then, under verifiable assumptions, $$f_{n\br} = \bw^{-n\br}(2\pi
+                        n)^{(s-d)/2}\sum_{k\ge0}C_kn^k$$ for computable constants $C_k$.
+                    </div>
+
+
+                </section>
+
+                <section>
+                    <h3>Transverse Case</h3>
+                    For higher order terms, we must compute an implicitly defined function. This can be achieved via
+                    Newton Iteration.
+
+                    Consider the function $T(x)$ implicitly defined by $$xT^2-T-x = 0$$ in a neighbourhood of the origin.
+
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                        from sage_acsv.helpers import compute_newton_series
+                        R = PolynomialRing(QQ, ['x','T'])
+                        x, T = R.gens()
+                        compute_newton_series(x*T^2 - T-x, [x, T], 7)
+                    </code></pre>
+                    <pre class="sage-output"></pre>
+                </section>
+
+                <section>
+                    <h3>Complexity of Transverse Case</h3>
+
+                    What is the complexity of solving the transverse critical point system?
+                    <div style="height: 5mm;"></div>
+                    <div class="fragment">
+                        Work in progress!
+                    </div>
+
+                    <div style="height: 5mm;"></div>
+
+                    <div class="fragment">
+                        Recall that we are taking maximal minors of
+                        $$
+                        \begin{align*}
+                        N = N_{\bw}(p_1,...,p_s) = \begin{pmatrix}
+                        \nabla_{\log} p_1(\bw) \\
+                        \dots \\
+                        \nabla_{\log} p_s(\bw) \\
+                        \br
+                        \end{pmatrix},
+                        \end{align*}
+                        $$
+
+                        where $\nabla_{\log} f = (z_1f_{z_1},\dots,z_df_{z_d})$.
+                    </div>
+
+                    <div style="height: 5mm;"></div>
+
+                    <div class="fragment">
+                        We can obtain bounds using a similar technique as that for the smooth case. However,
+                        the multihomogeneous nature of the matrix (and that we are taking determinants) may yield more
+                        effective bounds.
+                    </div>
+                </section>
+
+
+            </section>
+
+            <!--Examples-->
+            <section>
+                <section>
+                    Let's look at some examples!
+                </section>
+
+                <section>
+                    <h2>Example 1. Central Binomial Coefficients</h2>
+                    $$F(x,y)=\frac{1}{1-x-y}=\sum_{i,j\ge0}{i+j\choose j}x^iy^j$$
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                        var('x y')
+                        F = 1/(1 - x - y)
+                        diagonal(F)
+                    </code></pre>
+                    <pre class="sage-output"></pre>
+                </section>
+            </section>
+
+            <section>
+                <h2>Example 2. Apéry's Numbers</h2>
+                The irrationality of $\zeta(3)$ involved proving the convergence of a particular sequence involving the
+                <i>Apéry Numbers</i> given by the main diagonal of $$\frac{1}{1 - w(1 + x)(1 + y)(1 + z)(xyz + yz + y + z +
+                1)}.$$ This can be done easily given its asymptotics.
+                <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                        var('w x y z')
+                        F = 1/(1 - w*(1 + x)*(1 + y)*(1 + z)*(x*y*z + y*z + y + z + 1))
+                        diagonal(F)
+                    </code></pre>
+                <pre class="sage-output"></pre>
+            </section>
+
+            <section>
+                <h2>Example 3. Winning Choices in a Single Player Game</h2>
+                $$F(x,y)=\frac{1}{(1-x/3-2y/3)(1-2x/3-y/3)}$$
+                <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                    var('x y')
+                    F = 1/(1 - x/3 - 2*y/3)/(1 -2*x/3 - y/3)
+                    diagonal(F)
+                </code></pre>
+                <pre class="sage-output"></pre>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Example 4. Horizontally Convex Polyominoes</h2>
+                    <div class="slide-flex">
+                        $$F(x,y)=\frac{xy(1-x)^3}{(1-x)^4-xy(1-x-x^2+x^3+x^2y)}$$
+
+                        <img class="fragment" src="../assets/boxes.gif" style="max-height: 60%;">
+                    </div>
+                </section>
+
+                <section>
+                    $$F(x,y)=\frac{xy(1-x)^3}{(1-x)^4-xy(1-x-x^2+x^3+x^2y)}$$
+
+                    <div style="height: 5mm;"></div>
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                        var('x y')
+                        F = x*y*(1 - x)^3/((1 - x)^4 - x*y*(1 - x - x^2 + x^3 + x^2*y))
+                        diagonal(F, r=[2,1])
+                    </code></pre>
+                    <pre class="sage-output"></pre>
+                </section>
+            </section>
+
+            <section>
+                <h3>What's Next?</h3>
+                <div style="height: 5mm;"></div>
+
+                <ul>
+                    <li class="fragment">
+                        Complexity analysis of Non-Smooth ACSV.
+                    </li>
+                    <div style="height: 5mm;"></div>
+                    <li class="fragment">
+                        Computing asymptotics of locally transverse self-intersections.
+                    </li>
+                    <div style="height: 5mm;"></div>
+                    <li class="fragment">
+                        Computing asymptotics of a <i>general direction</i>.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Documentation and Further Reading</h3>
+
+                <div style="height: 7mm;"></div>
+
+                <b>Code Documentation.</b> We have extensive documentation thanks to Benjamin Hackl.
+
+                <a href="https://acsvmath.github.io/sage_acsv">acsvmath.github.io/sage_acsv</a>
+
+                <div style="height: 7mm;"></div>
+
+                <b>More on ACSV.</b> There are many resources to learn the theory behind ACSV. Textbook, publications,
+                and other software can be found on:
+
+                <a href="https://acsvproject.com/">acsvproject.com</a>
+
+            </section>
+        </div>
+    </div>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            plugins: [RevealMath.MathJax3, RevealHighlight],
+        });
+
+        document.querySelectorAll("pre code").forEach(block => {
+            let lines = block.textContent
+                .replace(/\t/g, "  ")
+                .split("\n");
+
+            // Remove leading/trailing blank lines
+            while (lines.length && lines[0].trim() === "") lines.shift();
+            while (lines.length && lines[lines.length - 1].trim() === "") lines.pop();
+
+            // Find minimum indentation
+            const indent = Math.min(
+                ...lines.filter(l => l.trim())
+                    .map(l => l.match(/^ */)[0].length)
+            );
+
+            // Dedent + trim trailing whitespace
+            lines = lines.map(l => l.slice(indent).replace(/\s+$/, ""));
+
+            block.textContent = lines.join("\n");
+        });
+    </script>
+</body>
+
+</html>
