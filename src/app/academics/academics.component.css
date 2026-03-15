@@ -2,14 +2,29 @@
 
 table {
     width: 100%;
-    background-color: #00000007;
+    background-color: #184a7e;
 }
 
 .mat-expansion-panel {
     width: 100%;
-    background-color: #00000007;
+    background-color: #184a7e;
     table {
         background-color: transparent;
+    }
+}
+
+.alt {
+    table {
+    width: 100%;
+    background-color: #143C67;
+}
+
+    .mat-expansion-panel {
+        width: 100%;
+        background-color: #143C67;
+        table {
+            background-color: transparent;
+        }
     }
 }
 

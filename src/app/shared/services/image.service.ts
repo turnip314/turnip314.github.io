@@ -137,12 +137,12 @@ export class ImageService {
             },
             {
                 image: 'canyon-waterfall.JPEG',  
-                name: 'Canyon Waterfall',
+                name: 'Daguxia',
                 description: 'At the base of the great canyon of Zhangjiajie'
             },
             {
                 image: 'capilano-night.JPEG',  
-                name: 'Canyon Lights',
+                name: 'Capilano Canyon Lights',
                 description: 'At the Capilano Suspension Bridge Park'
             },
             {
@@ -157,7 +157,7 @@ export class ImageService {
             },
             {
                 image: 'chang-jiang.JPEG',  
-                name: 'Yangtze River Bridge',
+                name: 'Changjiang (Yangtze River) Bridge',
                 description: 'Built over the Yangtze River (Chang Jiang) in Wuhan'
             },
             {
@@ -242,7 +242,7 @@ export class ImageService {
             },
             {
                 image: 'mountains.JPEG',  
-                name: 'Mountains',
+                name: 'Vancouver Mountains',
                 description: 'View of mountains in Vancouver from flight window'
             },
             {
@@ -317,17 +317,17 @@ export class ImageService {
             },
             {
                 image: 'toronto-day.JPEG',  
-                name: 'City View',
+                name: 'Downtown Toronto',
                 description: 'Toronto'
             },
             {
                 image: 'toronto-night.JPEG',  
-                name: 'Night View',
+                name: 'Toronto Night View',
                 description: 'Toronto'
             },
             {
                 image: 'vancouver.JPEG',  
-                name: 'City View',
+                name: 'Downtown Vancouver',
                 description: 'Vancouver'
             },
             {
@@ -392,7 +392,7 @@ export class ImageService {
             },
             {
                 image: 'shore-mexico.JPEG',  
-                name: 'Shoreline',
+                name: 'Mazatlan',
                 description: 'Mazatlan, Mexico'
             },
             {

@@ -1,7 +1,8 @@
 <section class="flex-container vertical about-me style1">
-  <div *ngIf="!isMobile" class='medium-break'></div>
-    <div class='text-region'>
-      <!--Intro -->
+  <div *ngIf="!isMobile"
+       class='medium-break'></div>
+  <div class='text-region'>
+    <!--Intro -->
     <div class="title-text container-fluid">
       <div class='small-break'></div>
       <h1>
@@ -12,56 +13,78 @@
 
     <div class='small-break'></div>
     <div class="circle-container">
-        <img class='circle-img' src="https://i.ibb.co/fqBsW6b/me.png" alt="Me" loading="eager">
+      <img class='circle-img'
+           src="https://i.ibb.co/fqBsW6b/me.png"
+           alt="Me"
+           loading="eager">
     </div>
     <div class='small-break'></div>
 
-      <!--Intro Continued-->
+    <!--Intro Continued-->
     <div class="container-fluid">
       <div class='small-break'></div>
       <p class='text-center'>
-          I'm a PhD in Computer Science student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
+        I'm a PhD in Computer Science student at the <a target="_blank"
+           rel="noopener noreferrer"
+           href='https://uwaterloo.ca/'>University of Waterloo</a>.
       </p>
       <div class='small-break'></div>
       <p class='text-center'>
-          I completed my Bachelor of Mathematics at the University of Waterloo with triple majors in Computer Science, Pure Mathematics, and Combinatorics & Optimization.
+        I completed my Bachelor of Mathematics at the University of Waterloo with triple majors in Computer Science,
+        Pure Mathematics, and Combinatorics & Optimization.
       </p>
       <div class='medium-break'></div>
     </div>
-    </div>
+  </div>
   <div class="small-break"></div>
-  </section>
+</section>
 
 <section class="flex-container vertical about-me style3">
   <div class='medium-break'></div>
   <div class='text-region'>
-      <h2>About Me</h2>
-      <hr class='line-break-light'>
-      <p>
-        I love math, logic, and problem solving! When I am not busy with school work or life, I will often be watching math videos. My favourite YouTube channels are 
-        <a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/@3blue1brown'>3Blue1Brown</a>, 
-        <a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/@veritasium'>Veritasium</a>, and 
-        <a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/@pbsspacetime'>PBS Space Time</a>. I also enjoy rock climbing and exploring nature.
-        I have a passion for learning new things whether it be through my courses, personal projects, research opportunities, or work opportunities.
-        Feel free to check out some of my <a [routerLink]="['/projects']">projects</a> and <a [routerLink]="['/academics']">academic work</a>.
-        You can <a [routerLink]="['/contact']">contact me</a> if you have any questions or want to chat!
-      </p>
-      <div class="small-break"></div>
+    <h2>About Me</h2>
+    <hr class='line-break-light'>
+    <p>
+      I love math, logic, and problem solving! When I am not busy with school work or life, I will often be watching
+      math videos. My favourite YouTube channels are
+      <a target="_blank"
+         rel="noopener noreferrer"
+         href='https://www.youtube.com/@3blue1brown'>3Blue1Brown</a>,
+      <a target="_blank"
+         rel="noopener noreferrer"
+         href='https://www.youtube.com/@veritasium'>Veritasium</a>, and
+      <a target="_blank"
+         rel="noopener noreferrer"
+         href='https://www.youtube.com/@pbsspacetime'>PBS Space Time</a>. I also enjoy rock climbing and exploring
+      nature.
+      I have a passion for learning new things whether it be through my courses, personal projects, research
+      opportunities, or work opportunities.
+      Feel free to check out some of my <a [routerLink]="['/projects']">projects</a> and <a
+         [routerLink]="['/academics']">academic work</a>.
+      You can <a [routerLink]="['/contact']">contact me</a> if you have any questions or want to chat!
+    </p>
+    <div class="small-break"></div>
 
-      <div class="container-fluid">
-        <ng-image-slider 
-            [images]="imageObject" 
-            [imageSize]="imageSize"
-            [infinite]="infinite"
-            [autoSlide]="autoSlide"
-            [imagePopup]="false"
-        #nav>
-        </ng-image-slider>
+    <div class="container-fluid">
+      <div class="slider">
+        <label class="slider_control left" >
+          <input type="radio" name="slider" (click)="panImage(true)"/>
+        </label>
+        <figure *ngFor='let image of displayImages' class="slider_content"
+                (click)="showOverlay(image)">
+          <img [src]='image.thumbImage'
+               [alt]="image.title">
+        </figure>
+        <label class="slider_control right" >
+          <input type="radio" name="slider" (click)="panImage(false)"/>
+        </label>
       </div>
-      <div class='medium-break'></div>
+
+    </div>
+    <div class='medium-break'></div>
   </div>
   <!--Image Slider -->
-  
+
   <!--Youtube/TikTok-->
   <!--div class='medium-break'></div>
   <div class='text-region' style="opacity: 0; visibility: hidden;">
@@ -81,6 +104,3 @@
 </div-->
 
 <div class='medium-break'></div>
-
-
-

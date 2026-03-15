@@ -24,8 +24,8 @@ export class WelcomeComponent {
     private moved = false;
     @HostListener('wheel', ['$event'])
     onMouseWheel(event: WheelEvent) {
-        if (event.deltaY > 30) this.onScroll('up');
-        else if (event.deltaY < -30) this.onScroll('down');
+        if (event.deltaY > 30) 1;
+        else if (event.deltaY < -30) 1;
     }
     @HostListener('touchstart', ['$event'])
     onTouchStart(event: TouchEvent) {
@@ -47,50 +47,29 @@ export class WelcomeComponent {
     private detectSwipeDirection() {
         const deltaY = this.touchEndY - this.touchStartY;
         if (deltaY > 50) {
-            this.onScroll('down');
+
         } else if (deltaY < -50) {
-            this.onScroll('up');
+
         }
         this.moved = false
     }
 
 
     imageObject: any;
+    displayImages: any;
     infinite = true;
     isMobile = false;
+    start_index = 0;
+    range = 3;
 
-    imageSize = {
-        width:'250px',
-        height:'325px'
-    };
 
-    autoSlide = {
-        interval: 4,
-        stopOnHover: true
-    };
-
-    pages = [0, 1]
-    curPage = 0
-
-    constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform){
-        
-    }
+    constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform){}
 
     ngOnInit() {
         this.showOverlay();
         this.imageObject = this.imageService.getWelcomeImages();
+        this.displayImages = this.imageObject.slice(this.start_index,this.range);
         this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
-        this.curPage = 0;
-
-        
-        if (this.isMobile) {
-            setTimeout(() => {
-                this.curPage = 1;
-                setTimeout(() => {
-                    this.curPage = 0;
-                }, 50);
-            }, 50);
-        }
     }
     
     showOverlay() {
@@ -105,10 +84,26 @@ export class WelcomeComponent {
         }, 0);
     }
 
-    onScroll(direction) {
-        if (direction == 'up') this.curPage = 1;
-        else this.curPage = 0;
+    onScroll() {
             
+    }
+
+    panImage(left: boolean) {
+        if (left) {
+            this.start_index--;
+        } else {
+            this.start_index++;
+        }
+        
+        if (this.start_index < 0) {
+            this.start_index = this.imageObject.length-1;
+        } else if (this.start_index >= this.imageObject.length) {
+            this.start_index = 0;
+        }
+        this.displayImages = []
+        for (let i = 0; i < this.range; i++) {
+            this.displayImages.push(this.imageObject[(this.start_index+i)%(this.imageObject.length)]);
+        }
     }
 }
 
