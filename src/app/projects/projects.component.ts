@@ -12,6 +12,18 @@ export class ProjectsComponent {
 
     presentations = [
         {
+            title: "Applications of Computer Algebra in Analytic Combinatorics",
+            locations: [
+                "University of Waterloo, Symbolic Computation Group Seminar, Feb. 2026.",
+            ],
+            links: [
+                {
+                    name: "HTML",
+                    url: "/resources/seminar/slides.html"
+                },
+            ]
+        },
+        {
             title: "A SageMath Package for Analytic Combinatorics in Several Variables",
             locations: [
                 "Hakkaido University, SageDays Workshop, Aug, 2025.",
@@ -155,14 +167,14 @@ export class ProjectsComponent {
         }
     ]
 
-    viewPrev(project) {
+    viewPrev(project: { view: number; demos: string | any[]; }) {
         project.view--;
         if (project.view < 0) {
             project.view += project.demos.length;
         }
     }
 
-    viewNext(project) {
+    viewNext(project: { view: number; demos: string | any[]; }) {
         project.view++;
         if (project.view >= project.demos.length) {
             project.view = 0;
