@@ -1,18 +1,12 @@
-
-
-
-<div class="medium-break"></div>
-
-
-<div class='flex-container vertical p-h-5 m-h-5'>
+<section class='style3 p-h-10'>
     <div class='medium-break'></div>
-    <div class="title-text">Research Projects</div>
+    <h2>Research Projects</h2>
     <hr class='line-break-light'/>
     <div class="grid-item">
-        <div class="description m-t-10">
-            <div class="title-text project">Sage ACSV</div>
+        <div class="m-t-10">
+            <h3>Sage ACSV</h3>
             <hr class='line-break-light'/>
-            <p class="paragraph-text project">
+            <p>
                 An open-source computer algebra package for computing asymptotic terms of rational generating functions. Built using SageMath.
                 This work was done as part of a co-authored research project by Benjamin Hackl, Andrew Luo (myself), Stephen Melczer, Jesse Selover, and Elaine Wong.
                 My part was sponsored by the NSERC undergraduate student research program in 2022.
@@ -20,26 +14,26 @@
             <div class="small-break"></div>
             <div class="flex-container horizontal even-spacing">
                 <a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/sage-acsv/">
-                    <div class="flex-container vertical paragraph-text project">
-                        <img src="./assets/images/pypi.png">
-                        Link to PyPi
+                    <div class="flex-container vertical">
+                        <img src="./assets/images/pypi.png" style="width: 80px; height: 77.25px; align-self: center;">
+                        <p>Link to PyPi</p>
                     </div>
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/ACSVMath/sage_acsv/">
-                    <div class="flex-container vertical paragraph-text project">
+                    <div class="flex-container vertical">
                         <img src="./assets/images/github.png" style="width: 77.25px; height: 77.25px; align-self: center;">
-                        Link to GitHub
+                        <p>Link to Github</p>
                     </div>
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="https://acsvmath.github.io/sage_acsv/">
-                    <div class="flex-container vertical paragraph-text project">
+                    <div class="flex-container vertical">
                         <img src="https://acsvmath.github.io/sage_acsv/_static/acsv-logo.svg" style="width: 77.25px; height: 77.25px; align-self: center;">
-                        Link to Documentation
+                        <p>Link to Documentation</p>
                     </div>
                 </a>
             </div>
             <div class="small-break"></div>
-            <p class="paragraph-text project">
+            <p>
                 Since its initial release, I have contributed to further improvements of the package, including adding support
                 for a wider range of rational generating functions whose singular variety is not necessarily smooth. This is part of
                 a joint work with Benjamin Hackl, Andrew Luo (myself), Stephen Melczer, Eric Schost. My work is partially funded by the 
@@ -47,9 +41,9 @@
             </p>
         </div>
         <div class="description m-t-10">
-            <div class="title-text project">Sage Deps</div>
+            <h3>Sage Deps</h3>
             <hr class='line-break-light'/>
-            <p class="paragraph-text project">
+            <p >
                 A dependency analysis tool for SageMath. Built using Python. Performs import and usage dependency analysis of classes defined in SageMath
                 across its different Python and Cython interfaces.
             </p>
@@ -57,49 +51,51 @@
             <div class="flex-container horizontal even-spacing">
                 <a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/sage-deps/">
                     <div class="flex-container vertical paragraph-text project">
-                        <img src="./assets/images/pypi.png">
-                        Link to PyPi
+                        <img src="./assets/images/pypi.png" style="width: 80px; height: 77.25px; align-self: center;">
+                        <p>Link to PyPi</p>
                     </div>
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/turnip314/sage-deps">
                     <div class="flex-container vertical paragraph-text project">
                         <img src="./assets/images/github.png" style="width: 77.25px; height: 77.25px; align-self: center;">
-                        Link to GitHub
+                        <p>Link to GitHub</p>
                     </div>
                 </a>
             </div>
         </div>
     </div>
-</div>
+    <div class="medium-break"></div>
+</section>
 
-<div class="medium-break"></div>
-
-<div class='flex-container vertical p-h-5 m-h-5'>
-    <div class="title-text">Presentations</div>
+<section class='style3 alt p-h-10'>
+    <div class="medium-break"></div>
+    <h2>Presentations</h2>
     <hr class='line-break-light'/>
-    <div *ngFor="let presentation of presentations" class="grid-item">
+    <div *ngFor="let presentation of presentations">
         <div class="description m-t-10">
-            <div class="title-text project">{{presentation.title}}</div>
+            <h3>{{presentation.title}}</h3>
             <hr class='line-break-light'/>
-            <p *ngFor="let location of presentation.locations" class="paragraph-text project">
+            <p *ngFor="let location of presentation.locations">
                 {{location}}
             </p>
             <ul class="flex-container vertical fit">
-                <li *ngFor="let link of presentation.links">
-                    <a target="_blank" rel="noopener noreferrer" href="{{link.url}}" class="paragraph-text project">
-                        {{link.name}}
-                    </a>
-                </li>
+                <p>
+                    <li *ngFor="let link of presentation.links">
+                        <a target="_blank" rel="noopener noreferrer" href="{{link.url}}">
+                            {{link.name}}
+                        </a>
+                    </li>
+                </p>
+                
             </ul>
         </div>
     </div>
-    <div class="small-break"></div>
-</div>
+    <div class="medium-break"></div>
+</section>
 
-<div class="medium-break"></div>
-
-<div class='flex-container vertical p-h-5 m-h-5'>
-    <div class="title-text">Programming Projects</div>
+<section class='style3 p-h-10'>
+    <div class="medium-break"></div>
+    <h2>Programming Projects</h2>
     <hr class='line-break-light'/>
 
     <div class='grid-container fade-in'>
@@ -107,9 +103,9 @@
             <div class="grid-item">
                 <div class="description">
                     <div>
-                        <div class="title-text project">{{project.title}}</div>
+                        <h3>{{project.title}}</h3>
                         <hr class='line-break-light'/>
-                        <p class="paragraph-text project">
+                        <p>
                             {{project.description}}
                         </p>
                     </div> 
@@ -124,12 +120,12 @@
             <div class="medium-break"></div>
         </div>
     </div>
-<div class='small-break'></div>
-</div>
+    <div class="medium-break"></div>
+</section>
 
 <div class="flex-container grid">
     
 </div>
 
 
-<div class="large-break"></div>
+<div class="medium-break"></div>

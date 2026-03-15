@@ -1,16 +1,12 @@
-
-
-
-<div class='small-break' id="start"></div>
-
-<div *ngIf="curPage == 0"  [@fadeIn] class="flex-container vertical about-me">
-  <div *ngIf="!isMobile" class='small-break'></div>
-    <!--Intro -->
+<section class="flex-container vertical about-me style1">
+  <div *ngIf="!isMobile" class='medium-break'></div>
+    <div class='text-region'>
+      <!--Intro -->
     <div class="title-text container-fluid">
       <div class='small-break'></div>
-      <div class="text-center">
+      <h1>
         Hello! My name is Andrew Luo.
-      </div>
+      </h1>
       <div class='small-break'></div>
     </div>
 
@@ -21,26 +17,27 @@
     <div class='small-break'></div>
 
       <!--Intro Continued-->
-    <div class="intro-text container-fluid">
+    <div class="container-fluid">
       <div class='small-break'></div>
-      <div class='text-center'>
+      <p class='text-center'>
           I'm a PhD in Computer Science student at the <a target="_blank" rel="noopener noreferrer" href='https://uwaterloo.ca/'>University of Waterloo</a>.
-      </div>
+      </p>
       <div class='small-break'></div>
-      <div class='text-center'>
+      <p class='text-center'>
           I completed my Bachelor of Mathematics at the University of Waterloo with triple majors in Computer Science, Pure Mathematics, and Combinatorics & Optimization.
-      </div>
+      </p>
       <div class='medium-break'></div>
     </div>
+    </div>
   <div class="small-break"></div>
-</div>
+  </section>
 
-<div *ngIf="curPage == 1" [@fadeIn] class="flex-container vertical ignore-others about-me" style="opacity: 0;">
-  <div class='small-break'></div>
+<section class="flex-container vertical about-me style3">
+  <div class='medium-break'></div>
   <div class='text-region'>
-      <div class='title-text'>About Me</div>
+      <h2>About Me</h2>
       <hr class='line-break-light'>
-      <p class='paragraph-text'>
+      <p>
         I love math, logic, and problem solving! When I am not busy with school work or life, I will often be watching math videos. My favourite YouTube channels are 
         <a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/@3blue1brown'>3Blue1Brown</a>, 
         <a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/@veritasium'>Veritasium</a>, and 
@@ -61,6 +58,7 @@
         #nav>
         </ng-image-slider>
       </div>
+      <div class='medium-break'></div>
   </div>
   <!--Image Slider -->
   
@@ -74,13 +72,13 @@
       https://www.youtube.com/channel/UCl_kh7K0eGbhvpgRDTE0qIg
   </div-->
   <div class='medium-break'></div>
-</div>
+</section>
 
-<div class="pagination">
+<!--div class="pagination">
   <span *ngFor="let page of pages; let i = index" 
         [class.active]="curPage === i">
   </span>
-</div>
+</div-->
 
 <div class='medium-break'></div>
 

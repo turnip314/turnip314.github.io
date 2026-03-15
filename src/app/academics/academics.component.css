@@ -1,19 +1,23 @@
 @import '../shared/styles.css';
 
-::ng-deep .mat-expansion-panel{
-    background-color: transparent;
-    background-color: rgba(245, 245, 245, 0.301);
-    padding: 0px;
-}
-
-
-::ng-deep .mat-expansion-panel-body{
-    background-color: transparent;
-}
-
 table {
     width: 100%;
-    background-color: transparent;
+    background-color: #00000007;
+}
+
+.mat-expansion-panel {
+    width: 100%;
+    background-color: #00000007;
+    table {
+        background-color: transparent;
+    }
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell,
+.mat-expansion-panel-header-title, 
+.mat-expansion-panel-header-description {
+    color: #ffffffe8;
 }
   
 .mat-column-courseInstructor {
@@ -37,5 +41,27 @@ table {
 }
 
 .link-button {
-    margin-right: 10px;
+    width: 100px;
+    height: 40px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.349);
+    background-color: rgba(12, 12, 12, 0.014);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+
+    .text {
+        height: 100%;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        z-index: 1;
+        transition-duration: 0.3s;
+        font-size: 1.04em;
+    }
 }
