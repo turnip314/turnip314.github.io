@@ -50,10 +50,10 @@
             const data = await resp.json();
             out.textContent = data.stdout || data.stderr;
         }
-        catch(e) {
+        catch (e) {
             out.textContent = "An error occurred. Is the Sage server running?"
         }
-        
+
     }
 
     const stacks = new Map();
@@ -142,8 +142,12 @@
                         The Fibonacci sequence $0,1,1,2,\dots$ has generating function
                         \[
                         F(x) = x + x^2 + 2x^3 + \cdots
-                        = \frac{x}{1-x-x^2}.
                         \]
+                        <div class="fragment">
+                            We can easily verify that $F(x) = x + xF(x)+x^2F(x)$, so
+                            $$F(x) = \frac{x}{1-x-x^2}.$$
+                        </div>
+
                     </div>
                 </section>
 
@@ -264,7 +268,7 @@
 
                         <ul>
                             <li class="fragment">
-                                Tracking parameters.
+                                <b>Tracking parameters.</b>
                             </li>
 
                             <div style="height:3mm"></div>
@@ -276,7 +280,7 @@
 
                             <div style="height:5mm"></div>
                             <li class="fragment">
-                                Capturing a wider range of possible sequences.
+                                <b>Capturing a wider range of sequences.</b>
                             </li>
                         </ul>
 
@@ -337,7 +341,7 @@ diagonal(F)
                     <h3>The Theory of ACSV</h3>
                     Our analysis begins with a familiar result...
                     <div class="theorem">
-                        <b>Multivariate</b> Cauchy Integral Formula <br>
+                        <b><i>Multivariate</i> Cauchy Integral Formula</b> <br>
 
                         Given a suitable product of circles $\mathcal{C} \subset \C^d$ about the origin,
                         $$f_\bi=\frac{1}{(2\pi i)^d}\int_{\mathcal{C}}F(\zz)\frac{d\zz}{\zz^{\bi+\mathbf{1}}}.$$
@@ -347,9 +351,9 @@ diagonal(F)
 
                 <section>
                     <h3>The Theory of ACSV</h3>
-                    The integrand of $$f_{n\br}=\frac{1}{(2\pi
-                    i)^d}\int_{\mathcal{C}}F(\zz)\frac{d\zz}{\zz^{n\br+\mathbf{1}}}$$ has the maximum modulus when
-                    $|\zz^{\br}|$ is minimized.
+                    Our sequence can be represented by $$f_{n\br}=\frac{1}{(2\pi
+                    i)^d}\int_{\mathcal{C}}F(\zz)\frac{d\zz}{\zz^{n\br+\mathbf{1}}}.$$ Notice that only $\zz^{\br}$
+                    changes with respect to $n$.
                     <div style="height:5mm"></div>
                     <div class="definition fragment">
                         The <b>height function</b> in the direction $\br$ is $$h_\br(\zz)=-\sum_{j=1}^dr_j\log|z_j|.$$
@@ -358,9 +362,10 @@ diagonal(F)
                 </section>
 
                 <section>
-                    <h3>The Theory of ACSV</h3>
-                    Candidates for minimizing the height come from <b>critical points</b> of $h$.
+                    Candidates for points contributing to asymptotics come from the <b>critical points</b> of $h$ on
+                    $V(F)$.
 
+                    <div style="height:10mm"></div>
                     When $V(H)$ is smooth, these can be obtained by solving
                     $$
                     \begin{aligned}
@@ -371,11 +376,11 @@ diagonal(F)
 
                 <section>
                     <h3>Minimality</h3>
-                    Not all critical points are minimizers of the height function.
+                    How far can we deform our circles of integration?
 
                     <div class="definition fragment">
                         <b>Definition.</b><br>
-                        Given $V \subset \C^d$, we say $\bw \in V$ is <i>minimal</i> if there does not exist $\zz \in
+                        Given $V \subset \C^d$, we say $\bw \in V$ is <b>minimal</b> if there does not exist $\zz \in
                         V$
                         such that $|z_i| \lt |v_i|$ for all $i$.
                     </div>
@@ -392,7 +397,7 @@ diagonal(F)
                         </p>
 
                         <p>
-                            Combinatorial functions have an <i>easy</i> test for minimality.
+                            Combinatorial functions have an "easy" test for minimality.
                         </p>
 
                         <img src="../assets/minimality.jpeg" style="max-height: 60%;" alt="">
@@ -419,13 +424,13 @@ diagonal(F)
                 <section>
                     <h3>Computational ACSV</h3>
                     Our complexity bounds come from a particular univariate rational representation called the
-                    <i>Kronecker
-                        representation.</i>
+                    <b>Kronecker
+                        representation.</b>
 
                     <div class="definition">
                         <b>Definition.</b><br>
                         Let $\mathbf{f} = (f_1,\ldots,f_s) \subset \C[z_1,\ldots,z_d]$ be a zero-dimensional system. A
-                        <i>Kronecker representation</i> of $\mathbf{f}$ consists of a separating linear form $$u =
+                        <b>Kronecker representation</b> of $\mathbf{f}$ consists of a separating linear form $$u =
                         \lambda_1
                         f_1 + \cdots + \lambda_s f_s$$ and polynomials $$P, Q_1, \ldots, Q_d \in \C[u]$$ such that there
                         is
@@ -437,9 +442,9 @@ diagonal(F)
 
                 <section>
                     <h3>Computational ACSV</h3>
-                    Under generic assumptions on $H$, we obtain the following complexity bound.
+                    Under assumptions on $H$ that are satisfied generically, we obtain the following complexity bound.
 
-                    <div class="theorem">
+                    <div class="fragment theorem">
                         <b>Melczer, Salvy 2020.</b><br>
                         Let $H$ be a polynomial of degree $\delta$ and height $h$ that can be computed with a straight
                         line program of length $L$, and define $D = \delta^d$. A kronecker representation for the
@@ -470,12 +475,12 @@ kronecker_representation(sys, [x,y,z])
                     <pre class="sage-output"></pre>
 
                     <div class="fragment">
-                        We also offer an msolve backend.
+                        We also offer an <i>msolve</i> backend.
                     </div>
 
                     <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
-from sage_acsv import diagonal_asymptotics_combinatorial as diagonal, ACSVSettings as AS
-AS.set_default_kroneker_backend(AS.kronecker.MSOLVE)
+from sage_acsv import diagonal_asymptotics_combinatorial as diagonal, ACSVSettings as AS, kronecker_representation
+AS.set_default_kronecker_backend(AS.Kronecker.MSOLVE)
 var('x,y,z')
 sys = [x+y+z, x*y+y*z+x*z, x*y*z - 1]
 kronecker_representation(sys, [x,y,z])
@@ -489,8 +494,8 @@ kronecker_representation(sys, [x,y,z])
             <!--Whitney-->
             <section>
                 <section>
-                    <h3>Non-Smooth Case</h3>
-                    <div class="slide-flex">
+                    <h3>Relaxing the Smoothness Condition</h3>
+                    <div class="fragment slide-flex">
                         <p>
                             When $V(H)$ is non-smooth, we want to decompose it into smooth manifolds.
                         </p>
@@ -527,16 +532,6 @@ kronecker_representation(sys, [x,y,z])
                         </div>
 
                     </div>
-
-
-                    <div class="definition fragment">
-                        <b>Definition.</b><br>
-                        Let $X \subset \C^d$ be a variety and $Y \subset X_{sing}$ a subset of its singular locus. We
-                        say $Y$ satisfies <i>Whitney's Condition B</i> if whenever the sequences $\{x_i\in X\}$ and
-                        $\{y_i\in Y\}$ both converge to some $y \in Y$, their secant lines $\ell_i = [x_i,y_i]$ converge
-                        to some line $\ell \subset \C^d$, and the tangent spaces $T_{x_i}X$ converge to some linear
-                        subspace $T \subset \C^d$, then $\ell \subseteq T$.
-                    </div>
                 </section>
 
                 <section>
@@ -546,11 +541,14 @@ kronecker_representation(sys, [x,y,z])
                     <div class="theorem fragment">
                         <b>Helmer, Nanda 2022</b><br>
                         Let $X\subset \P^n$ be a pure-dimensional projective variety and $Y \subseteq X_{\text{sing}}$ a
-                        subset of the singular locus of $X$. Define $\textbf{Con}(X) \subseteq X \times \P^n$ to be the
-                        <i>conormal space of</i> $X$ with projection map $\kappa: X\times \P^n \to X$. Let
-                        $\{Y_i\}_{1\le i\le s}$ be the irreducible components of $\kappa^{-1}(Y)$ of dimension at most
-                        $\dim{Y}$. Finally, let $$A := \left[\bigcup_i \kappa(Y_i)\right]\cup Y_\text{sing}.$$ Then
-                        $Y-A$ satisfies Whitney's Condition B with respect to $X$.
+                        subset of the singular locus of $X$. Then there exists a computable variety $A \subseteq Y$ such
+                        that
+                        $Y-A$ satisfies Whitney's conditions with respect to $X$.
+
+                        <div style="height: 7mm;"></div>
+
+
+                        Such a computation is done over the <i>conormal space</i> of $X$.
                     </div>
                 </section>
 
@@ -572,14 +570,14 @@ kronecker_representation(sys, [x,y,z])
             <!--Non-smooth critical-->
             <section>
                 <section>
-                    <h3>Non-Smooth Case</h3>
+                    <h3>The General Critical Point Equation</h3>
                     Critical points on $V(p_1,\dots,p_s)$ come from the maximal minors of
 
                     $$
                     \begin{align*}
                     N = N_{\bw}(p_1,...,p_s) = \begin{pmatrix}
                     \nabla_{\log} p_1(\bw) \\
-                    \dots \\
+                    \vdots \\
                     \nabla_{\log} p_s(\bw) \\
                     \br
                     \end{pmatrix},
@@ -588,28 +586,37 @@ kronecker_representation(sys, [x,y,z])
 
                     where $\nabla_{\log} f = (z_1f_{z_1},\dots,z_df_{z_d})$.
 
-                    If $V(p_1,...,p_s)$ is non-smooth, additional algebraic techniques are used to clear extraneous
-                    solutions. One option is to <span style="color: red;"> take an ideal saturation</span>.
+                    <div style="height: 5mm;"></div>
+                    <div class="fragment">
+                        If $V(p_1,...,p_s)$ is non-smooth, additional algebraic techniques are used to clear extraneous
+                        solutions. One option is to <span style="color: red;"> take an ideal saturation</span>.
+                    </div>
+
                 </section>
 
                 <section>
-                    <h3>Transverse Case</h3>
+                    <h3>The Transverse Case</h3>
                     <div class="theorem">
                         Let $F(\zz)$ admit a square-free transverse factorization. If $\bw$ is the unique contributing
                         point
                         of $F(\zz)$. Then, under verifiable assumptions, $$f_{n\br} = \bw^{-n\br}(2\pi
-                        n)^{(s-d)/2}\sum_{k\ge0}C_kn^k$$ for computable constants $C_k$.
+                        n)^{(s-d)/2}\sum_{k\ge0}C_kn^{-k}$$ for computable constants $C_k$.
                     </div>
 
 
                 </section>
 
                 <section>
-                    <h3>Transverse Case</h3>
                     For higher order terms, we must compute an implicitly defined function. This can be achieved via
                     Newton Iteration.
 
-                    Consider the function $T(x)$ implicitly defined by $$xT^2-T-x = 0$$ in a neighbourhood of the origin.
+                    <div style="height: 5mm;"></div>
+                    <div class="fragment">
+                        Consider the function $T(x)$ implicitly defined by $$xT^2-T-x = 0$$ in a neighbourhood of the
+                        origin.
+                    </div>
+
+
 
                     <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
                         from sage_acsv.helpers import compute_newton_series
@@ -637,7 +644,7 @@ kronecker_representation(sys, [x,y,z])
                         \begin{align*}
                         N = N_{\bw}(p_1,...,p_s) = \begin{pmatrix}
                         \nabla_{\log} p_1(\bw) \\
-                        \dots \\
+                        \vdots \\
                         \nabla_{\log} p_s(\bw) \\
                         \br
                         \end{pmatrix},
@@ -680,7 +687,8 @@ kronecker_representation(sys, [x,y,z])
             <section>
                 <h2>Example 2. Apéry's Numbers</h2>
                 The irrationality of $\zeta(3)$ involved proving the convergence of a particular sequence involving the
-                <i>Apéry Numbers</i> given by the main diagonal of $$\frac{1}{1 - w(1 + x)(1 + y)(1 + z)(xyz + yz + y + z +
+                <i>Apéry Numbers</i> given by the main diagonal of $$\frac{1}{1 - w(1 + x)(1 + y)(1 + z)(xyz + yz + y +
+                z +
                 1)}.$$ This can be done easily given its asymptotics.
                 <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
                         var('w x y z')
@@ -725,12 +733,152 @@ kronecker_representation(sys, [x,y,z])
             </section>
 
             <section>
+                <section>
+                    <h2>Example 5. Rooted Binary Trees with Tracked Leaves</h2>
+
+                    <div style="height: 5mm;"></div>
+
+                    <div class="fragment definition">
+                        <b>Definition</b><br>
+                        A <i>rooted binary tree</i> consists of a a leaf node $\circ$ or an internal node $\bullet$ with
+                        one or two children who are binary rooted trees.
+                    </div>
+
+                    <div class="slide-flex">
+                        <div class="fragment">
+                            Let $T(x, y)$ be the generating function where $[x^ny^k]T(x,y)$ is the number of rooted
+                            binary trees of n total nodes and k leaves. Then,
+                            $$T(x,y) = xy + 2xT(x,y) + xT(x,y)^2.$$
+                        </div>
+
+                        <img class="fragment" src="../assets/trees.png" style="max-height: 30%;">
+                    </div>
+                </section>
+
+                <section>
+                    <div class="slide-flex">
+                        <div>
+                            $$T(x,y) = xy + 2xT(x,y) + xT(x,y)^2.$$
+                        </div>
+
+                        <img src="../assets/trees.png" style="max-height: 30%;">
+
+                        <div class="fragment">
+                            Then, $$T(x,y) = \frac{1-2x-\sqrt{1-4x(1 - x + xy)}}{2x}.$$
+                        </div>
+
+                        <div class="fragment example">
+                            <b>Fact.</b><br>
+                            Any algebraic series in $d$ variables is a <i>generalized diagonal</i> of a rational series
+                            in $d+1$ variables.
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="example">
+                        <b>Fact.</b><br>
+                        Any algebraic series in $d$ variables is a <i>generalized diagonal</i> of a rational series in
+                        $d+1$ variables.
+                    </div>
+
+                    <div style="height: 5mm;"></div>
+                    <div class="fragment">
+                        So what about our binary tree example?
+                    </div>
+
+                    <div class="fragment example">
+                        <b>Example.</b><br>
+                        The $[n, k]$ diagonal of $T(x,y)$ is the $[k, n+k, n+2k]$ diagonal of $$\tilde{T}(u, x, Y) =
+                        \frac{G(u,x,Y)}{H(u,x,Y)},$$
+                        where
+                        <div class="fragment" style="font-size: 10pt !important;">
+                            $$H(u,x,Y) = 16 \, Y^{9} u^{2} x^{8} + 16 \, Y^{8} u^{2} x^{7} + 12 \, Y^{7} u^{2} x^{6} + 4
+                            \,
+                            Y^{6} u^{2} x^{5} + 8 \, Y^{6} u x^{5} + Y^{5} u^{2} x^{4} + 4 \, Y^{5} u x^{4} + 8 \, Y^{4}
+                            u x^{4} + 2 \, Y^{4} u x^{3} + Y^{3} x^{2} + 2 \, Y x - 1,$$
+                        </div>
+                        <div class="fragment">
+                            and
+                            <div style="font-size: 4pt !important;">
+                                $$G(u,x,Y) = {\left(64 \, Y^{12} u^{3} x^{11} + 96 \, Y^{11} u^{3} x^{10} + 96 \,
+                                Y^{10} u^{3} x^{9} + 56 \, Y^{9} u^{3} x^{8} + 32 \, Y^{9} u^{2} x^{8} + 24 \, Y^{8}
+                                u^{3}
+                                x^{7} + 32 \, Y^{8} u^{2} x^{7} + 6 \, Y^{7} u^{3} x^{6} + 32 \, Y^{7} u^{2} x^{7} + 24
+                                \,
+                                Y^{7} u^{2} x^{6} + Y^{6} u^{3} x^{5} + 16 \, Y^{6} u^{2} x^{6} + 8 \, Y^{6} u^{2} x^{5}
+                                +
+                                12 \, Y^{6} u x^{5} + 8 \, Y^{5} u^{2} x^{5} + 2 \, Y^{5} u^{2} x^{4} + 6 \, Y^{5} u
+                                x^{4} +
+                                8 \, Y^{4} u x^{4} + 3 \, Y^{4} u x^{3} + 2 \, Y^{3} x^{2} - Y u x + 2 \, Y x -
+                                1\right)}
+                                Y^{2} x$$
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class=" example">
+                        <b>Example.</b><br>
+                        The $[n, k]$ diagonal of $T(x,y)$ is the $[k, n+k, n+2k]$ diagonal of $$\tilde{T}(u, x, Y) =
+                        \frac{G(u,x,Y)}{H(u,x,Y)},$$
+                        where
+                        <div  style="font-size: 10pt !important;">
+                            $$H(u,x,Y) = 16 \, Y^{9} u^{2} x^{8} + 16 \, Y^{8} u^{2} x^{7} + 12 \, Y^{7} u^{2} x^{6} + 4
+                            \,
+                            Y^{6} u^{2} x^{5} + 8 \, Y^{6} u x^{5} + Y^{5} u^{2} x^{4} + 4 \, Y^{5} u x^{4} + 8 \, Y^{4}
+                            u x^{4} + 2 \, Y^{4} u x^{3} + Y^{3} x^{2} + 2 \, Y x - 1,$$
+                        </div>
+                        <div>
+                            and
+                            <div style="font-size: 4pt !important;">
+                                $$G(u,x,Y) = {\left(64 \, Y^{12} u^{3} x^{11} + 96 \, Y^{11} u^{3} x^{10} + 96 \,
+                                Y^{10} u^{3} x^{9} + 56 \, Y^{9} u^{3} x^{8} + 32 \, Y^{9} u^{2} x^{8} + 24 \, Y^{8}
+                                u^{3}
+                                x^{7} + 32 \, Y^{8} u^{2} x^{7} + 6 \, Y^{7} u^{3} x^{6} + 32 \, Y^{7} u^{2} x^{7} + 24
+                                \,
+                                Y^{7} u^{2} x^{6} + Y^{6} u^{3} x^{5} + 16 \, Y^{6} u^{2} x^{6} + 8 \, Y^{6} u^{2} x^{5}
+                                +
+                                12 \, Y^{6} u x^{5} + 8 \, Y^{5} u^{2} x^{5} + 2 \, Y^{5} u^{2} x^{4} + 6 \, Y^{5} u
+                                x^{4} +
+                                8 \, Y^{4} u x^{4} + 3 \, Y^{4} u x^{3} + 2 \, Y^{3} x^{2} - Y u x + 2 \, Y x -
+                                1\right)}
+                                Y^{2} x$$
+
+                            </div>
+                        </div>
+                    </div>
+                    <pre contenteditable="true" class="fragment sage-cell" tabindex="0"><code class="language-python">
+                        var('u x Y')
+                        F = x*Y^2*(64*Y^12*u^3*x^11 + 96*Y^11*u^3*x^10 + 96*Y^10*u^3*x^9 + 56*Y^9*u^3*x^8 + 32*Y^9*u^2*x^8 + 24*Y^8*u^3*x^7 + 32*Y^8*u^2*x^7 + 6*Y^7*u^3*x^6 + 32*Y^7*u^2*x^7 + 24*Y^7*u^2*x^6 + Y^6*u^3*x^5 + 16*Y^6*u^2*x^6 + 8*Y^6*u^2*x^5 + 12*Y^6*u*x^5 + 8*Y^5*u^2*x^5 + 2*Y^5*u^2*x^4 + 6*Y^5*u*x^4 + 8*Y^4*u*x^4 + 3*Y^4*u*x^3 + 2*Y^3*x^2 - Y*u*x + 2*Y*x - 1)/(16*Y^9*u^2*x^8 + 16*Y^8*u^2*x^7 + 12*Y^7*u^2*x^6 + 4*Y^6*u^2*x^5 + 8*Y^6*u*x^5 + Y^5*u^2*x^4 + 4*Y^5*u*x^4 + 8*Y^4*u*x^4 + 2*Y^4*u*x^3 + Y^3*x^2 + 2*Y*x - 1)
+                        diagonal(F, r=[5,1,4])
+                    </code></pre>
+                    <pre class="sage-output"></pre>
+                    <div style="height: 5mm;"></div>
+                </section>
+                <section>
+                    <div class="theorem">
+                        <b>Theorem.</b><br>
+                        The number of rooted binary trees where exactly half the nodes are leaves is
+                        $$[u^nx^{2n}Y^{3n}]\tilde{T}(u,x,Y) = {2n \choose n}.$$
+                    </div>
+
+                    <div class="fragment">
+                        <b>Proof.</b><br>
+                        <div class="fragment">
+                            Left as an exercise.
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section>
                 <h3>What's Next?</h3>
                 <div style="height: 5mm;"></div>
 
                 <ul>
                     <li class="fragment">
-                        Complexity analysis of Non-Smooth ACSV.
+                        General complexity analysis of Non-Smooth ACSV.
                     </li>
                     <div style="height: 5mm;"></div>
                     <li class="fragment">
@@ -738,7 +886,7 @@ kronecker_representation(sys, [x,y,z])
                     </li>
                     <div style="height: 5mm;"></div>
                     <li class="fragment">
-                        Computing asymptotics of a <i>general direction</i>.
+                        Computing asymptotics given a <i>parametrized direction</i>.
                     </li>
                 </ul>
             </section>
