@@ -70,16 +70,17 @@
         <label class="slider_control left" >
           <input type="radio" name="slider" (click)="panImage(true)"/>
         </label>
-        <figure *ngFor='let image of displayImages' class="slider_content"
+        <div class="slider_images">
+          <figure *ngFor='let image of displayImages' class="slider_content"
                 (click)="showOverlay(image)">
           <img [src]='image.thumbImage'
                [alt]="image.title">
         </figure>
+        </div>
         <label class="slider_control right" >
           <input type="radio" name="slider" (click)="panImage(false)"/>
         </label>
       </div>
-
     </div>
     <div class='medium-break'></div>
   </div>

@@ -1,7 +1,8 @@
 /* Style themes */
 
 .style1 {
-    background-color: #143C67; /*#8c6be0;*/
+    background-color: #143C67;
+    /*#8c6be0;*/
     background-attachment: fixed;
     background-image: url('styles/wave.svg');
     background-repeat: no-repeat;
@@ -21,11 +22,12 @@
 .style3.alt {
     background-color: #184a7e;
 }
-.style3{
+
+.style3 {
     background-color: #143C67;
 }
 
-.style4{
+.style4 {
     background-color: #5c5c5c;
 }
 
@@ -46,6 +48,7 @@
     padding-left: 5%;
     padding-right: 5%;
 }
+
 .p-h-10 {
     padding-left: 10%;
     padding-right: 10%;
@@ -112,11 +115,12 @@ p {
 a {
     color: inherit;
 }
+
 a.hidden {
     text-decoration: none;
 }
 
-@media(max-width:720px){
+@media(max-width:720px) {
     p {
         font-size: 100%;
         line-height: 20px;
@@ -141,7 +145,7 @@ a.hidden {
 }
 
 .dark {
-    background-color:#c5becc;
+    background-color: #c5becc;
     border-color: #4663ac;
 }
 
@@ -172,8 +176,8 @@ a.hidden {
 }
 
 .ignore-others {
-z-index: 999;
-position: fixed;
+    z-index: 999;
+    position: fixed;
 }
 
 
@@ -183,36 +187,43 @@ position: fixed;
     display: flex;
     flex-direction: column;
     scroll-snap-type: y mandatory;
-  }
-  
-  /* Each page (full-screen height) */
-  .page {
+}
+
+/* Each page (full-screen height) */
+.page {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
     scroll-snap-align: start;
-  }
-  
-  /* Pagination Bubbles */
-  .pagination {
+}
+
+/* Pagination Bubbles */
+.pagination {
     position: fixed;
     bottom: 105px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
-  }
-  
-  .pagination span {
+}
+
+.pagination span {
     width: 10px;
     height: 10px;
     background: gray;
     border-radius: 50%;
     transition: background 0.3s;
-  }
-  
-  .pagination .active {
+}
+
+.pagination .active {
     background: white;
-  }
+}
+
+
+.preload {
+    position: absolute;
+    z-index: 0;
+    opacity: 0;
+}

@@ -150,7 +150,7 @@ a {
   bottom: calc(var(--slider-bullets-spacing-y) + var(--slider-bullets-height));
   left: 50%;
   z-index: 5;
-  width: 295px;
+  min-width: 295px;
   height: 383px;
   overflow: hidden;
   border: var(--slider-border-width) solid #fff;
@@ -214,4 +214,12 @@ a {
     background-position: center;
     background-size: 24px 24px;
   }
+}
+
+.slider_images {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  overflow: hidden;
+  max-width: 893px;
 }

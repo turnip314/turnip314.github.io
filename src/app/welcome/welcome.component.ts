@@ -60,7 +60,6 @@ export class WelcomeComponent {
     infinite = true;
     isMobile = false;
     start_index = 0;
-    range = 3;
 
 
     constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform){}
@@ -68,7 +67,7 @@ export class WelcomeComponent {
     ngOnInit() {
         this.showOverlay();
         this.imageObject = this.imageService.getWelcomeImages();
-        this.displayImages = this.imageObject.slice(this.start_index,this.range);
+        this.displayImages = this.imageObject
         this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
     }
     
@@ -101,7 +100,7 @@ export class WelcomeComponent {
             this.start_index = 0;
         }
         this.displayImages = []
-        for (let i = 0; i < this.range; i++) {
+        for (let i = 0; i < this.imageObject.length; i++) {
             this.displayImages.push(this.imageObject[(this.start_index+i)%(this.imageObject.length)]);
         }
     }
