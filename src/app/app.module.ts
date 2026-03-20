@@ -17,8 +17,6 @@ import { ProjectsComponent } from './projects/projects.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 import { PageUnderConstructionComponent } from './error/page-under-construction/page-under-construction.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-
 import { RouterModule } from '@angular/router';
 
 import { ContactComponent } from './contact/contact.component';
@@ -52,7 +50,6 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
     bootstrap: [AppComponent], imports: [BrowserModule,
         MatButtonModule,
         MatSidenavModule,
-        NgbModule,
         OverlayModule,
         MatCardModule,
         MatProgressBarModule,
