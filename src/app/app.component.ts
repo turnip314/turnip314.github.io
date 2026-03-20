@@ -6,26 +6,27 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
-  selector: 'page-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  animations: [
-    trigger('mediaUp', [
-      state('initial', style({
-        transform: 'translateY(-100px)',
-      })),
-      state('final', style({
-        transform: 'translateY(-183px)',
-      })),
-      transition('initial => final, final => initial', animate('300ms ease-in')),
-    ]),
-    trigger('hoverExpand', [
-      state('normal', style({ transform: 'scale(1)' })),
-      state('hovered', style({ transform: 'scale(1.1)' })),
-      transition('normal => hovered', animate('200ms ease-in')),
-      transition('hovered => normal', animate('200ms ease-out'))
-    ]),
-  ]
+    selector: 'page-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    animations: [
+        trigger('mediaUp', [
+            state('initial', style({
+                transform: 'translateY(-100px)',
+            })),
+            state('final', style({
+                transform: 'translateY(-183px)',
+            })),
+            transition('initial => final, final => initial', animate('300ms ease-in')),
+        ]),
+        trigger('hoverExpand', [
+            state('normal', style({ transform: 'scale(1)' })),
+            state('hovered', style({ transform: 'scale(1.1)' })),
+            transition('normal => hovered', animate('200ms ease-in')),
+            transition('hovered => normal', animate('200ms ease-out'))
+        ]),
+    ],
+    standalone: false
 })
 export class AppComponent {
   title = 'Turnip\'s Home Page';

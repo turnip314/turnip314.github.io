@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'pm-image-overlay',
-  templateUrl: './image-overlay.component.html',
-  styleUrls: ['./image-overlay.component.css']
+    selector: 'pm-image-overlay',
+    templateUrl: './image-overlay.component.html',
+    styleUrls: ['./image-overlay.component.css'],
+    standalone: false
 })
 export class ImageOverlayComponent implements OnInit {
   @Input() src: string;

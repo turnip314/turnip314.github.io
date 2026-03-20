@@ -13,10 +13,11 @@ import { Platform } from '@angular/cdk/platform';
         trigger('fadeIn', [
             state('void', style({ opacity: 0 })),
             transition(':enter, :leave', [
-              animate(1000)
+                animate(1000)
             ]),
         ]),
-      ],
+    ],
+    standalone: false
 })
 export class WelcomeComponent {
     private touchStartY = 0;

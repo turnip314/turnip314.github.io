@@ -2,9 +2,10 @@ import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'pm-academics',
-  templateUrl: './academics.component.html',
-  styleUrls: ['./academics.component.css']
+    selector: 'pm-academics',
+    templateUrl: './academics.component.html',
+    styleUrls: ['./academics.component.css'],
+    standalone: false
 })
 export class AcademicsComponent implements OnInit {
 

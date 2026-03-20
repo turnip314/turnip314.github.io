@@ -5,9 +5,10 @@ import { ImageOverlayComponent } from '../shared/image-overlay/image-overlay.com
 import { ImageService } from '../shared/services/image.service';
 
 @Component({
-  selector: 'pm-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.css']
+    selector: 'pm-gallery',
+    templateUrl: './gallery.component.html',
+    styleUrls: ['./gallery.component.css'],
+    standalone: false
 })
 export class GalleryComponent implements OnInit {
 

@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 const epsilon = 0.01
 
 @Component({
-  selector: 'pm-twentyfour',
-  templateUrl: './twentyfour.component.html',
-  styleUrls: ['./twentyfour.component.css']
+    selector: 'pm-twentyfour',
+    templateUrl: './twentyfour.component.html',
+    styleUrls: ['./twentyfour.component.css'],
+    standalone: false
 })
 export class TwentyFourComponent implements OnInit {
 

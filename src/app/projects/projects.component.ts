@@ -3,7 +3,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     templateUrl: './projects.component.html',
-    styleUrls: ['./projects.component.css']
+    styleUrls: ['./projects.component.css'],
+    standalone: false
 })
 export class ProjectsComponent {
     constructor(private _sanitizer: DomSanitizer) {
