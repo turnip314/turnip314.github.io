@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HostListener, inject, PLATFORM_ID } from '@angular/core';
+import { inject, PLATFORM_ID } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'pm-academics',
@@ -10,19 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcademicsComponent implements OnInit {
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: { target: { innerWidth: number; }; }) {
-    if (event.target.innerWidth <= 720) {
-      this.courseColumnsToDisplay = ['courseCode', 'courseName']
-      this.scholarshipColumnsToDisplay = ['name', 'value', 'year']
-      this.gradCourseColumnsToDisplay = ['courseCode', 'courseName']
-    }
-    else {
-      this.courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor']
-      this.scholarshipColumnsToDisplay = ['name', 'sponsor', 'value', 'year']
-      this.gradCourseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor', 'term'];
-    }
-  }
+  private resizeSub?: Subscription;
 
   private readonly platformId = inject(PLATFORM_ID);
   constructor() { }
@@ -210,7 +199,23 @@ export class AcademicsComponent implements OnInit {
         this.scholarshipColumnsToDisplay = ['name', 'sponsor', 'value', 'year']
         this.gradCourseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor', 'term'];
       }
-    }
 
+      this.resizeSub = fromEvent(window, 'resize').subscribe(() => {
+        if (window.innerWidth <= 720) {
+          this.courseColumnsToDisplay = ['courseCode', 'courseName']
+          this.scholarshipColumnsToDisplay = ['name', 'value', 'year']
+          this.gradCourseColumnsToDisplay = ['courseCode', 'courseName']
+        }
+        else {
+          this.courseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor']
+          this.scholarshipColumnsToDisplay = ['name', 'sponsor', 'value', 'year']
+          this.gradCourseColumnsToDisplay = ['courseCode', 'courseName', 'courseInstructor', 'term'];
+        }
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.resizeSub?.unsubscribe();
   }
 }

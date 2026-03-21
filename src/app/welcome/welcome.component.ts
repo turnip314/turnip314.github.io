@@ -1,6 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, HostListener, inject, PLATFORM_ID } from '@angular/core'
+import { Component, inject, PLATFORM_ID } from '@angular/core'
 import { LoadingComponent } from '../shared/loading/loading.component';
 import { ImageService } from '../shared/services/image.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
