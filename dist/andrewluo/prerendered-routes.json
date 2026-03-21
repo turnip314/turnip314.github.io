@@ -1,0 +1,12 @@
+{
+  "routes": {
+    "/": {},
+    "/academics": {},
+    "/apps/24": {},
+    "/apps/sagedeps": {},
+    "/contact": {},
+    "/gallery": {},
+    "/home": {},
+    "/projects": {}
+  }
+}

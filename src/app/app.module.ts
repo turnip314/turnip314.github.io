@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -72,6 +72,7 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
         ])], providers: [
         ContactService,
         ImageService,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        provideClientHydration(withEventReplay())
     ] })
 export class AppModule { }
