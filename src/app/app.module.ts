@@ -64,6 +64,7 @@ import {PixiCanvasComponent} from './pixi-canvas/pixi-canvas.component'
         FormsModule,
         RouterModule.forRoot([
             { path: 'home', component: WelcomeComponent },
+            { path: 'pixi', component: PixiCanvasComponent },
             { path: 'projects', component: ProjectsComponent },
             { path: 'academics', component: AcademicsComponent },
             { path: 'gallery', component: GalleryComponent },
