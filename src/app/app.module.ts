@@ -34,6 +34,8 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ImageService } from './shared/services/image.service';
 import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.component'
 
+import {PixiCanvasComponent} from './pixi-canvas/pixi-canvas.component'
+
 @NgModule({ declarations: [
         AppComponent,
         WelcomeComponent,
@@ -46,6 +48,7 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
         GalleryComponent,
         ImageOverlayComponent,
         TwentyFourComponent,
+        PixiCanvasComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         MatButtonModule,
