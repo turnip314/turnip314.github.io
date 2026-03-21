@@ -1,33 +1,49 @@
-
 <div class="flex-container vertical top-nav">
   <nav class='navbar fixed-top'>
-    <a class='navbar-brand'><img class="turnip-img" name="turnip-button" src='./assets/images/dropdown.png' width="48px" (click)="drawer.toggle();"></a>
+    <a class='navbar-brand'><img class="turnip-img"
+           name="turnip-button"
+           src='./assets/images/dropdown.png'
+           width="48px"
+           (click)="drawer.toggle();"></a>
     <ul class='nav nav-pills'>
-      <li><button class='button topnav-button' [routerLink]="['/home']" >Home</button></li>
-      <li><button class='button topnav-button' [routerLink]="['/academics']">Academics</button></li>
-      <li><button class='button topnav-button' [routerLink]="['/projects']">Projects</button></li>
-      <li><button class='button topnav-button' [routerLink]="['/gallery']">Gallery</button></li>
-      <li><a href="./assets/pdfs/CV.pdf" ><button class='button topnav-button'>CV</button></a></li>
-      <li><button class='button topnav-button' [routerLink]="['/contact']">Contact</button></li>
+      <li><button class='button topnav-button'
+                [routerLink]="['/home']">Home</button></li>
+      <li><button class='button topnav-button'
+                [routerLink]="['/academics']">Academics</button></li>
+      <li><button class='button topnav-button'
+                [routerLink]="['/projects']">Projects</button></li>
+      <li><button class='button topnav-button'
+                [routerLink]="['/gallery']">Gallery</button></li>
+      <li><a href="./assets/pdfs/CV.pdf"><button class='button topnav-button'>CV</button></a></li>
+      <li><button class='button topnav-button'
+                [routerLink]="['/contact']">Contact</button></li>
     </ul>
   </nav>
 </div>
 
 <div class="outer-page-container">
   <mat-drawer-container class="sidenav-container">
-    <mat-drawer #drawer class="sidenav" mode="over">
+    <mat-drawer #drawer
+                class="sidenav"
+                mode="over">
       <div class="sidenav-buttons">
         <div style="height: 20px;"></div>
-        <button class='button sidenav-button' [routerLink]="['/home']" >Home</button>
-        <button class='button sidenav-button' [routerLink]="['/academics']">Academics</button>
-        <button class='button sidenav-button' [routerLink]="['/projects']">Projects</button>
-        <button class='button sidenav-button' [routerLink]="['/gallery']">Gallery</button>
-        <a href="./assets/pdfs/CV.pdf" ><button class='button sidenav-button'>CV</button></a>
-        <button class='button sidenav-button' [routerLink]="['/contact']">Contact</button>
+        <button class='button sidenav-button'
+                [routerLink]="['/home']">Home</button>
+        <button class='button sidenav-button'
+                [routerLink]="['/academics']">Academics</button>
+        <button class='button sidenav-button'
+                [routerLink]="['/projects']">Projects</button>
+        <button class='button sidenav-button'
+                [routerLink]="['/gallery']">Gallery</button>
+        <a href="./assets/pdfs/CV.pdf"><button class='button sidenav-button'>CV</button></a>
+        <button class='button sidenav-button'
+                [routerLink]="['/contact']">Contact</button>
       </div>
     </mat-drawer>
-  
-    <div class="sidenav-content" (click)="onEmptyClick($event, drawer)">
+
+    <div class="sidenav-content"
+         (click)="onEmptyClick($event, drawer)">
       <div class='outer-container'>
         <div class='page-container'>
           <router-outlet></router-outlet>
@@ -35,30 +51,4 @@
       </div>
     </div>
   </mat-drawer-container>
-
-  <!--Links to media-->
-  <div [@mediaUp]="mediaState" (click) = "mediaState='final'" (mouseenter) = "mediaState='final'" (mouseleave) = "mediaState='initial'" class="flex-container vertical media">
-    <div class="flex-container center horizontal">
-      <hr class="line">
-    </div>
-    <div class="flex-container horizontal media-icons">
-      <input type="image" src="./assets/images/linkedin.png" 
-        onclick="window.open('https\://www.linkedin.com/in/andrew314/')"
-        [@hoverExpand]="hoverStates.linkedin" class="circle-container" (mouseenter)="hoverStates.linkedin = 'hovered'" (mouseleave)="hoverStates.linkedin='normal'"
-      />
-      <input type="image" src="./assets/images/github.png" 
-        onclick="window.open('https\://github.com/turnip314')"
-        [@hoverExpand]="hoverStates.github" class="circle-container" (mouseenter)="hoverStates.github = 'hovered'" (mouseleave)="hoverStates.github='normal'"
-      />
-      <input type="image" src="./assets/images/facebook.png" 
-        onclick="window.open('https\://www.facebook.com/turnip314/')"
-        [@hoverExpand]="hoverStates.facebook" class="circle-container" (mouseenter)="hoverStates.facebook = 'hovered'" (mouseleave)="hoverStates.facebook='normal'"
-      />
-    </div>
-    <div class="small-break"></div>
-  </div>
 </div>
-
-
-
-

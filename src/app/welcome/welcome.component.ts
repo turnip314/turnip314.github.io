@@ -1,10 +1,11 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, HostListener } from '@angular/core'
+import { Component, HostListener, inject, PLATFORM_ID } from '@angular/core'
 import { LoadingComponent } from '../shared/loading/loading.component';
 import { ImageService } from '../shared/services/image.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     templateUrl: './welcome.component.html',
@@ -16,62 +17,51 @@ import { Platform } from '@angular/cdk/platform';
                 animate(1000)
             ]),
         ]),
+        trigger('mediaUp', [
+            state('initial', style({
+                transform: 'translateY(-100px)',
+            })),
+            state('final', style({
+                transform: 'translateY(-183px)',
+            })),
+            transition('initial => final, final => initial', animate('300ms ease-in')),
+        ]),
+        trigger('hoverExpand', [
+            state('normal', style({ transform: 'scale(1)' })),
+            state('hovered', style({ transform: 'scale(1.1)' })),
+            transition('normal => hovered', animate('200ms ease-in')),
+            transition('hovered => normal', animate('200ms ease-out'))
+        ]),
     ],
     standalone: false
 })
 export class WelcomeComponent {
-    private touchStartY = 0;
-    private touchEndY = 0;
-    private moved = false;
-    @HostListener('wheel', ['$event'])
-    onMouseWheel(event: WheelEvent) {
-        if (event.deltaY > 30) 1;
-        else if (event.deltaY < -30) 1;
-    }
-    @HostListener('touchstart', ['$event'])
-    onTouchStart(event: TouchEvent) {
-        this.touchStartY = event.touches[0].clientY;
-    }
-
-    @HostListener('touchmove', ['$event'])
-    onTouchMove(event: TouchEvent) {
-        this.touchEndY = event.touches[0].clientY;
-        this.moved = true;
-        
-    }
-
-    @HostListener('touchend', ['$event'])
-    onTouchEnd() {
-        if (this.moved) this.detectSwipeDirection();
-    }
-
-    private detectSwipeDirection() {
-        const deltaY = this.touchEndY - this.touchStartY;
-        if (deltaY > 50) {
-
-        } else if (deltaY < -50) {
-
-        }
-        this.moved = false
-    }
-
-
     imageObject: any;
     displayImages: any;
     infinite = true;
     isMobile = false;
     start_index = 0;
 
+    hoverStates = {
+        linkedin: "normal",
+        github: "normal",
+        facebook: "normal"
+    }
 
-    constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform){}
+    private readonly platformId = inject(PLATFORM_ID);
+    constructor(private overlay: Overlay, private imageService: ImageService, private platform: Platform) { }
 
     ngOnInit() {
         this.showOverlay();
         this.imageObject = this.imageService.getWelcomeImages();
         this.displayImages = this.imageObject
-        this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
+
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
+        }
+
     }
-    
+
     showOverlay() {
         const overlayRef = this.overlay.create({
             positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
@@ -84,8 +74,10 @@ export class WelcomeComponent {
         }, 0);
     }
 
-    onScroll() {
-            
+    openLink(url: string) {
+        if (isPlatformBrowser(this.platformId)) {
+            window.open(url, '_blank');
+        }
     }
 
     panImage(left: boolean) {
@@ -94,15 +86,15 @@ export class WelcomeComponent {
         } else {
             this.start_index++;
         }
-        
+
         if (this.start_index < 0) {
-            this.start_index = this.imageObject.length-1;
+            this.start_index = this.imageObject.length - 1;
         } else if (this.start_index >= this.imageObject.length) {
             this.start_index = 0;
         }
         this.displayImages = []
         for (let i = 0; i < this.imageObject.length; i++) {
-            this.displayImages.push(this.imageObject[(this.start_index+i)%(this.imageObject.length)]);
+            this.displayImages.push(this.imageObject[(this.start_index + i) % (this.imageObject.length)]);
         }
     }
 }

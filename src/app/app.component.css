@@ -163,20 +163,4 @@
   background-color: transparent;
 }
 
-.media {
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-  background-color: #0A1E33;
-}
 
-.media-icons {
-  justify-content: space-evenly;
-}
-
-.line {
-  width: 50%;
-  border-top: 3px solid;
-  border-radius: 1%;
-  color: white;
-}

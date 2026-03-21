@@ -9,23 +9,6 @@ import { filter } from 'rxjs';
     selector: 'page-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    animations: [
-        trigger('mediaUp', [
-            state('initial', style({
-                transform: 'translateY(-100px)',
-            })),
-            state('final', style({
-                transform: 'translateY(-183px)',
-            })),
-            transition('initial => final, final => initial', animate('300ms ease-in')),
-        ]),
-        trigger('hoverExpand', [
-            state('normal', style({ transform: 'scale(1)' })),
-            state('hovered', style({ transform: 'scale(1.1)' })),
-            transition('normal => hovered', animate('200ms ease-in')),
-            transition('hovered => normal', animate('200ms ease-out'))
-        ]),
-    ],
     standalone: false
 })
 export class AppComponent {
@@ -33,12 +16,6 @@ export class AppComponent {
   sidenavOpen = false;
   mediaState = "initial";
   dropDownImage = "./assets/images/down-arrow.png";
-
-  hoverStates = {
-    linkedin: "normal",
-    github: "normal",
-    facebook: "normal"
-  }
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 

@@ -223,3 +223,15 @@ a {
   overflow: hidden;
   max-width: 893px;
 }
+
+/* socials */
+.media {
+  width: 100%;
+  z-index: 1;
+  background-color: #0A1E33;
+}
+
+.media-icons {
+  justify-content: space-evenly;
+
+}

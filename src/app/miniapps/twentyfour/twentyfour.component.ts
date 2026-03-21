@@ -16,11 +16,6 @@ export class TwentyFourComponent implements OnInit {
   message = '';
   answers = [];
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    
-  }
-
   constructor() { }
 
   ngOnInit(): void {

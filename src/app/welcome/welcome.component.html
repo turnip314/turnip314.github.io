@@ -67,18 +67,23 @@
 
     <div class="container-fluid">
       <div class="slider">
-        <label class="slider_control left" >
-          <input type="radio" name="slider" (click)="panImage(true)"/>
+        <label class="slider_control left">
+          <input type="radio"
+                 name="slider"
+                 (click)="panImage(true)" />
         </label>
         <div class="slider_images">
-          <figure *ngFor='let image of displayImages' class="slider_content"
-                (click)="showOverlay(image)">
-          <img [src]='image.thumbImage'
-               [alt]="image.title">
-        </figure>
+          <figure *ngFor='let image of displayImages'
+                  class="slider_content"
+                  (click)="showOverlay(image)">
+            <img [src]='image.thumbImage'
+                 [alt]="image.title">
+          </figure>
         </div>
-        <label class="slider_control right" >
-          <input type="radio" name="slider" (click)="panImage(false)"/>
+        <label class="slider_control right">
+          <input type="radio"
+                 name="slider"
+                 (click)="panImage(false)" />
         </label>
       </div>
     </div>
@@ -96,6 +101,36 @@
       https://www.youtube.com/channel/UCl_kh7K0eGbhvpgRDTE0qIg
   </div-->
   <div class='medium-break'></div>
+</section>
+
+<section>
+  <!--Links to media-->
+  <div class="flex-container vertical media">
+    <div class="flex-container center horizontal">
+      <hr class="line">
+    </div>
+    <div class="flex-container horizontal media-icons">
+      <input type="image"
+             src="./assets/images/linkedin.png"
+             (click)="openLink('https\://www.linkedin.com/in/andrew314/')"
+             [@hoverExpand]="hoverStates.linkedin"
+             (mouseenter)="hoverStates.linkedin = 'hovered'"
+             (mouseleave)="hoverStates.linkedin='normal'" />
+      <input type="image"
+             src="./assets/images/github.png"
+             (click)="openLink('https\://github.com/turnip314')"
+             [@hoverExpand]="hoverStates.github"
+             (mouseenter)="hoverStates.github = 'hovered'"
+             (mouseleave)="hoverStates.github='normal'" />
+      <input type="image"
+             src="./assets/images/facebook.png"
+             (click)="openLink('https\://www.facebook.com/turnip314/')"
+             [@hoverExpand]="hoverStates.facebook"
+             (mouseenter)="hoverStates.facebook = 'hovered'"
+             (mouseleave)="hoverStates.facebook='normal'" />
+    </div>
+    <div class="medium-break"></div>
+  </div>
 </section>
 
 <!--div class="pagination">
