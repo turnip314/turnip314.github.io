@@ -3,11 +3,12 @@ import {
   Component,
   ElementRef,
   ViewChild,
-  Inject,
   PLATFORM_ID,
-  NgZone
+  NgZone,
+  inject
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Game } from './engine/Game';
 
 @Component({
   selector: 'app-pixi-canvas',
@@ -21,9 +22,11 @@ export class PixiCanvasComponent implements AfterViewInit {
   container!: ElementRef<HTMLDivElement>;
 
   private app: any;
+  private game: Game;
   private tickerFn: any;
+  private readonly platformId = inject(PLATFORM_ID);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private ngZone: NgZone) { }
+  constructor(private ngZone: NgZone) { }
 
   async ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -34,57 +37,24 @@ export class PixiCanvasComponent implements AfterViewInit {
       const PIXI = await import('pixi.js');
 
       this.app = new PIXI.Application();
+      
 
       await this.app.init({
         resizeTo: this.container.nativeElement,
         background: '#1099bb',
         antialias: true,
-        resolution: window.devicePixelRatio
+        resolution: window.devicePixelRatio,
       });
-
       this.container.nativeElement.appendChild(this.app.canvas);
 
-      this.setupScene(PIXI);
-      this.startGameLoop();
+      this.game = new Game(this.app, PIXI);
+      this.game.start();
+
+      //this.app.renderer.resize(200, 200);
+      const scaling = (window.innerWidth/1280 < window.innerHeight/720)? window.innerWidth/1280 : window.innerHeight/720;
+      this.app.stage.scale.x=scaling;
+      this.app.stage.scale.y=scaling;
     });
-
-  }
-
-  setupScene(PIXI: any) {
-    const box = new PIXI.Graphics();
-    box.beginFill(0xff0000);
-    box.drawRect(0, 0, 100, 100);
-    box.endFill();
-
-    box.x = 500;
-    box.y = 500;
-
-    this.app.stage.addChild(box);
-
-    // store for updates
-    this.box = box;
-  }
-
-  private box: any;
-
-  startGameLoop() {
-    this.tickerFn = (ticker: any) => {
-      const delta = ticker.deltaTime;
-
-      this.update(delta);
-      this.render();
-    };
-
-    this.app.ticker.add(this.tickerFn);
-  }
-
-  update(delta: number) {
-    if (this.box) {
-      this.box.rotation += 0.01 * delta;
-    }
-  }
-
-  render() {
   }
 
   ngOnDestroy() {
