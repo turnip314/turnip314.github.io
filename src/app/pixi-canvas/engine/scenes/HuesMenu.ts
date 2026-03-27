@@ -1,3 +1,4 @@
+import { GameService } from "../../../shared/services/game.service";
 import { Game } from "../Game";
 import { Scene } from "../Scene";
 import { MenuButton } from "../entities/MenuButton";
@@ -12,10 +13,10 @@ export class HuesMenu extends Scene {
     private codeTextField: TextField | undefined;
     private gameIntention: string = "";
 
-    constructor(app: any, PIXI: any, game: Game) {
-        super(app, PIXI, game);
-        this.hostButton = new MenuButton(app, PIXI, 550, 200, 200, 70, 'Host', () => this.host())
-        this.joinButton = new MenuButton(app, PIXI, 550, 300, 200, 70, 'Join', () => this.join())
+    constructor(app: any, PIXI: any, game: Game, gameService: GameService) {
+        super(app, PIXI, game, gameService);
+        this.hostButton = new MenuButton(app, PIXI, 550, 200, 200, 60, 'Host', () => this.host())
+        this.joinButton = new MenuButton(app, PIXI, 550, 300, 200, 60, 'Join', () => this.join())
     }
 
     join() {
@@ -23,9 +24,9 @@ export class HuesMenu extends Scene {
         this.codeTextField?.destroy();
         this.nameTextField?.destroy();
         this.startButton?.destroy();
-        this.codeTextField = new TextField(this.app, this.PIXI, 550, 400, 200, 70, "Join Code");
-        this.nameTextField = new TextField(this.app, this.PIXI, 550, 500, 200, 70, "Nickname");
-        this.startButton = new MenuButton(this.app, this.PIXI, 550, 600, 200, 70, 'Start', () => this.start())
+        this.codeTextField = new TextField(this.app, this.PIXI, 550, 400, 200, 60, "Join Code");
+        this.nameTextField = new TextField(this.app, this.PIXI, 550, 500, 200, 60, "Nickname");
+        this.startButton = new MenuButton(this.app, this.PIXI, 550, 600, 200, 60, 'Start', () => this.start())
     }
 
     host() {
@@ -33,13 +34,33 @@ export class HuesMenu extends Scene {
         this.codeTextField?.destroy();
         this.nameTextField?.destroy();
         this.startButton?.destroy();
-        this.nameTextField = new TextField(this.app, this.PIXI, 550, 400, 200, 70, "Nickname");
-        this.startButton = new MenuButton(this.app, this.PIXI, 550, 500, 200, 70, 'Start', () => this.start())
+        this.codeTextField = undefined;
+        this.nameTextField = new TextField(this.app, this.PIXI, 550, 400, 200, 60, "Nickname");
+        this.startButton = new MenuButton(this.app, this.PIXI, 550, 500, 200, 60, 'Start', () => this.start())
     }
 
     start() {
-        let huesScene = new Hues(this.app, this.PIXI, this.nameTextField?.getText() ?? "", this.codeTextField?.getText() ?? "", this.game);
-        this.game.changeScene(huesScene);
+        const nickname = this.nameTextField?.getText() ?? "";
+        if (nickname.length < 3) return;
+        const code = this.codeTextField?.getText() ?? "";
+        if (code.length < 3 && this.gameIntention == "join") return;
+
+        if (this.gameIntention == "host") {
+            this.gameService.createGame(nickname).then(
+                result => {
+                    let huesScene = new Hues(this.app, this.PIXI, nickname, result.code, this.game, this.gameService, true);
+                    this.game.changeScene(huesScene);
+                }
+            )
+        } else if (this.gameIntention == "join") {
+            this.gameService.getGame(code, nickname).then(
+                result => {
+                    let huesScene = new Hues(this.app, this.PIXI, nickname, code, this.game, this.gameService);
+                    this.game.changeScene(huesScene);
+                }
+            )
+        }
+        
     }
 
     update(delta: number) {

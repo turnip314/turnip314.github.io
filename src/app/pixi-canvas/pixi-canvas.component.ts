@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Game } from './engine/Game';
+import { GameService } from '../shared/services/game.service';
 
 @Component({
   selector: 'app-pixi-canvas',
@@ -22,11 +23,11 @@ export class PixiCanvasComponent implements AfterViewInit {
   container!: ElementRef<HTMLDivElement>;
 
   private app: any;
-  private game: Game;
+  private game: Game | undefined;
   private tickerFn: any;
   private readonly platformId = inject(PLATFORM_ID);
 
-  constructor(private ngZone: NgZone) { }
+  constructor(private ngZone: NgZone, private gameService: GameService) { }
 
   async ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -41,13 +42,13 @@ export class PixiCanvasComponent implements AfterViewInit {
 
       await this.app.init({
         resizeTo: this.container.nativeElement,
-        background: '#1099bb',
+        background: '#000000',
         antialias: true,
         resolution: window.devicePixelRatio,
       });
       this.container.nativeElement.appendChild(this.app.canvas);
 
-      this.game = new Game(this.app, PIXI);
+      this.game = new Game(this.app, PIXI, this.gameService);
       this.game.start();
 
       //this.app.renderer.resize(200, 200);

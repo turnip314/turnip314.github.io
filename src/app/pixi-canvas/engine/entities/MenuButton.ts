@@ -36,7 +36,11 @@ export class MenuButton extends Entity {
         this.action = action;
 
         this.block.eventMode = 'static';
-        this.block.on('pointerdown', (event: { global: any; }) => {
+        this.block.on('pointerdown', () => {
+            this.action();
+        });
+        this.text.eventMode = 'static';
+        this.text.on('pointerdown', () => {
             this.action();
         });
 

@@ -481,9 +481,10 @@ export class Colours {
         '#0FB1E2']
     ]
 
-    static readonly White = "#ffffff"
+    static readonly White = "#ffffff";
     static readonly Black = "#000000";
     static readonly BlackTranslucent = "#00000090";
-    static readonly LightGray = "#444444"
+    static readonly LightGray = "#444444";
+    static readonly Transparent = "#00000000"
 }
 

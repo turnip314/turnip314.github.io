@@ -32,14 +32,14 @@ export class TextField extends Entity {
             height
         );
         this.block.endFill();
-        this.block.stroke({ width: 8, color: Colours.Black });
+        this.block.stroke({ width: 4, color: Colours.White });
         this.block.drawRect(
             x_start,
             y_start,
             width,
             height
         );
-        this.textBox = new PIXI.Text("", { fontFamily: 'Arial', fontSize: 24, fill: 0x000000, align: 'center' });
+        this.textBox = new PIXI.Text("", { fontFamily: 'Arial', fontSize: 24 * height/40, fill: 0x000000, align: 'center' });
         this.textBox.x = x_start + 10;
         this.textBox.y = y_start + 10;
 

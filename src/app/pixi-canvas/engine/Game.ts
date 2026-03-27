@@ -1,11 +1,12 @@
 import { Hues } from "./scenes/Hues";
 import { Scene } from "./Scene";
 import { HuesMenu } from "./scenes/HuesMenu";
+import { GameService } from "../../shared/services/game.service";
 
 export class Game {
     private currentScene: Scene | undefined;
 
-    constructor(private app: any, private PIXI: any) { }
+    constructor(private app: any, private PIXI: any, private gameService: GameService) { }
 
     start() {
         this.app.stage.eventMode = 'static';
@@ -20,7 +21,7 @@ export class Game {
             this.currentScene?.onGeneralClick(event.global.x, event.global.y);
         });
 
-        this.currentScene = new HuesMenu(this.app, this.PIXI, this);
+        this.currentScene = new HuesMenu(this.app, this.PIXI, this, this.gameService);
         this.app.ticker.add((ticker: any) => {
             this.update(ticker.deltaTime);
         });
