@@ -1,8 +1,8 @@
-import { GameService } from "./game.service";
+import { GameService } from "./services/game.service";
 import { Game } from "./Game";
 
 export abstract class Scene {
-  constructor(protected app: any, protected PIXI: any, protected game: Game, protected gameService: GameService) {}
+  constructor(protected app: any, protected PIXI: any, protected game: Game) {}
 
   abstract update(delta: number): void;
 

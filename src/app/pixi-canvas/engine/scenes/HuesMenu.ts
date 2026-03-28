@@ -1,9 +1,10 @@
-import { GameService } from "../game.service";
+import { GameService } from "../services/game.service";
 import { Game } from "../Game";
 import { Scene } from "../Scene";
 import { MenuButton } from "../entities/MenuButton";
 import { TextField } from "../entities/TextField";
 import { Hues } from "./Hues";
+import { HuesService } from "../services/hues.service";
 
 export class HuesMenu extends Scene {
     private hostButton: MenuButton | undefined;
@@ -13,8 +14,8 @@ export class HuesMenu extends Scene {
     private codeTextField: TextField | undefined;
     private gameIntention: string = "";
 
-    constructor(app: any, PIXI: any, game: Game, gameService: GameService) {
-        super(app, PIXI, game, gameService);
+    constructor(app: any, PIXI: any, game: Game, private gameService: HuesService) {
+        super(app, PIXI, game);
         this.hostButton = new MenuButton(app, PIXI, 550, 200, 200, 60, 'Host', () => this.host())
         this.joinButton = new MenuButton(app, PIXI, 550, 300, 200, 60, 'Join', () => this.join())
     }

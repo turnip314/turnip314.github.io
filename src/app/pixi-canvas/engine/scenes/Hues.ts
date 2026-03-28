@@ -1,10 +1,11 @@
-import { GameService } from "../game.service";
+import { GameService } from "../services/game.service";
 import { Game } from "../Game";
 import { Scene } from "../Scene";
 import { Colours } from "../data/Colours"
 import { ColourTile } from "../entities/ColourTile";
 import { MenuButton } from "../entities/MenuButton";
 import { ColourSelectionDialog } from "../entities/dialog/ColourSelectionDialog";
+import { HuesService } from "../services/hues.service";
 
 export class Hues extends Scene {
     private grid: ColourTile[][] = [];
@@ -29,8 +30,8 @@ export class Hues extends Scene {
     private startButton: MenuButton | undefined;
     private rightPanel: any;
 
-    constructor(app: any, PIXI: any, name: string, code: string, game: Game, gameService: GameService, host = false) {
-        super(app, PIXI, game, gameService);
+    constructor(app: any, PIXI: any, name: string, code: string, game: Game, private gameService: HuesService, host = false) {
+        super(app, PIXI, game);
         this.host = host;
 
         for (let i = 0; i < this.gridX; i++) {
