@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Game } from './engine/Game';
-import { GameService } from '../shared/services/game.service';
+import { GameService } from './engine/game.service';
 
 @Component({
   selector: 'app-pixi-canvas',
@@ -38,7 +38,7 @@ export class PixiCanvasComponent implements AfterViewInit {
       const PIXI = await import('pixi.js');
 
       this.app = new PIXI.Application();
-      
+
 
       await this.app.init({
         resizeTo: this.container.nativeElement,
@@ -48,13 +48,23 @@ export class PixiCanvasComponent implements AfterViewInit {
       });
       this.container.nativeElement.appendChild(this.app.canvas);
 
+      let testblock = new PIXI.Graphics();
+      testblock.beginFill('#333333');
+      testblock.rect(
+        0, 0, 1280, 720
+      );
+      testblock.endFill()
+      this.app.stage.addChild(testblock)
+
       this.game = new Game(this.app, PIXI, this.gameService);
       this.game.start();
 
       //this.app.renderer.resize(200, 200);
-      const scaling = (window.innerWidth/1280 < window.innerHeight/720)? window.innerWidth/1280 : window.innerHeight/720;
-      this.app.stage.scale.x=scaling;
-      this.app.stage.scale.y=scaling;
+      const scaling = (window.innerWidth / 1280 < window.innerHeight / 720) ? window.innerWidth / 1280 : window.innerHeight / 720;
+      this.app.stage.scale.x = scaling;
+      this.app.stage.scale.y = scaling;
+
+      
     });
   }
 

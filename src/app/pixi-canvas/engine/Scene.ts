@@ -1,4 +1,4 @@
-import { GameService } from "../../shared/services/game.service";
+import { GameService } from "./game.service";
 import { Game } from "./Game";
 
 export abstract class Scene {

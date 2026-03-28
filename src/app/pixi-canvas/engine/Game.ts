@@ -1,7 +1,7 @@
 import { Hues } from "./scenes/Hues";
 import { Scene } from "./Scene";
 import { HuesMenu } from "./scenes/HuesMenu";
-import { GameService } from "../../shared/services/game.service";
+import { GameService } from "./game.service";
 
 export class Game {
     private currentScene: Scene | undefined;

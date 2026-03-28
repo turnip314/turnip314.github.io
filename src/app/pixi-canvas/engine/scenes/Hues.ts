@@ -1,4 +1,4 @@
-import { GameService } from "../../../shared/services/game.service";
+import { GameService } from "../game.service";
 import { Game } from "../Game";
 import { Scene } from "../Scene";
 import { Colours } from "../data/Colours"
@@ -13,17 +13,21 @@ export class Hues extends Scene {
 
     private host = false;
 
-    private name: string = "";
+    private phase: number = 0;
     private code: string = "";
-    private turn: string = ""; // "clue, guess, reveal, ready"
+    private turnState: string = ""; // "clue, guess, reveal, ready"
     private selectedX: number = -1;
     private selectedY: number = -1;
     private clue: string = ""
     private guesses: any[] = [];
+    private players: any[] = [];
+    private playerDisplays: any[] = [];
 
     private colourSelectionDialog: ColourSelectionDialog | undefined;
     private guessButton: MenuButton | undefined;
     private readyButton: MenuButton | undefined;
+    private startButton: MenuButton | undefined;
+    private rightPanel: any;
 
     constructor(app: any, PIXI: any, name: string, code: string, game: Game, gameService: GameService, host = false) {
         super(app, PIXI, game, gameService);
@@ -37,9 +41,26 @@ export class Hues extends Scene {
             this.grid.push(row);
         }
 
-        this.name = name;
         this.code = code;
-        this.getTurn();
+
+        this.rightPanel = new this.PIXI.Graphics();
+        this.rightPanel.beginFill(Colours.White);
+        this.rightPanel.drawRect(
+            1110,
+            30,
+            160,
+            680
+        );
+        this.rightPanel.endFill();
+        this.app.stage.addChild(this.rightPanel);
+
+        this.turnState = "start";
+        if (host) {
+            this.startButton = new MenuButton(
+                this.app, this.PIXI, 600, 660, 200, 40, "Start Game", () => this.onStartGame()
+            )
+        }
+        this.pollForPlayers();
     }
 
     update(delta: number) {
@@ -47,7 +68,7 @@ export class Hues extends Scene {
     }
 
     onColourTileClick(x: number, y: number) {
-        if (this.turn == "guess") {
+        if (this.turnState == "guess") {
             this.selectedX = x;
             this.selectedY = y;
             this.onResetSelect();
@@ -63,57 +84,85 @@ export class Hues extends Scene {
         )
     }
 
-    onSubmitClue(x: number, y: number, clue: string) {
+    onDisplayPlayers() {
+        this.playerDisplays.forEach(
+            display => display.destroy()
+        );
+        this.playerDisplays = [];
+
+        const start = Math.min(...this.players.map(p => p.player_number))
+        this.players.forEach(
+            player => {
+                const text = new this.PIXI.Text(player.username, { fontFamily: 'Arial', fontSize: 24, fill: Colours.Black, align: 'center' });
+                text.x = 1120;
+                text.y = 60 + 40 * (player.player_number - start);
+                this.app.stage.addChild(text);
+                this.playerDisplays.push(
+                    text
+                )
+            }
+        )
+    }
+
+    async onStartGame(): Promise<boolean> {
+        await this.gameService.setGameMetadata(this.code, "started");
+        this.startButton?.destroy();
+        this.startButton = undefined;
+        return true;
+    }
+
+    async onSubmitClue(x: number, y: number, clue: string): Promise<boolean> {
         /* Called after a clue is given */
         console.log(x, y, clue)
-        if (this.turn == "clue") {
+        let success = true;
+        if (this.turnState == "clue") {
             this.selectedX = x;
             this.selectedY = y;
             this.clue = clue;
             this.colourSelectionDialog?.destroy();
-            this.gameService.submitClueAndResetPlayerStatus(
-                this.code, x, y, clue
-            ).then(
-                (success) => {
-                    // Calculate the next person whose turn it is to give a clue
-                    if (success) return this.getNextTurn();
-                }
-            ).then(
-                success => {
-                    // Wait for everyone to guess
-                    if (success) this.pollForGuesses();
-                }
-            ).finally(
-                () => {
-                    this.selectedX = -1;
-                    this.selectedY = -1;
-                }
+            success = await this.gameService.submitClueAndResetPlayerStatus(
+                this.code, x, y, clue, this.phase
             )
+            if (!success) return false;
+
+            if (this.phase == 1) {
+                success = await this.getNextTurn();
+                if (!success) return false;
+            }
+
+            // Note: phase is updated pre-emptively but should not be fetched until all players are ready
+            success = await this.gameService.updateGamePhase(this.code, 1 - this.phase);
+            this.pollForGuesses();
+            this.selectedX = -1;
+            this.selectedY = -1;
+        } else {
+            return false;
         }
+        return success;
     }
 
-    onSubmitGuess(x: number, y: number) {
-        if (this.turn == "guess") {
+    async onSubmitGuess(x: number, y: number): Promise<boolean> {
+        let success = true;
+        if (this.turnState == "guess") {
             console.log("submitting guess")
-            this.gameService.submitGuess(
-                this.code, x, y
-            ).then(
-                success => {
-                    if (success) {
-                        console.log("polling for guesses")
-                        this.turn = "";
-                        this.pollForGuesses();
-                    }
-                }
-            ).finally(
-                () => {
-                    this.selectedX = -1;
-                    this.selectedY = -1;
-                    this.guessButton?.destroy();
-                    this.onResetSelect();
-                }
+            success = await this.gameService.submitGuess(
+                this.code, x, y, this.phase
             )
+            if (!success) return false;
+
+            console.log("polling for guesses")
+            this.turnState = "";
+            this.pollForGuesses();
+
+            this.selectedX = -1;
+            this.selectedY = -1;
+            this.guessButton?.destroy();
+            this.onResetSelect();
+
+        } else {
+            return false;
         }
+        return success;
     }
 
     openColourSelectionDialog() {
@@ -132,7 +181,7 @@ export class Hues extends Scene {
 
     revealGuessButton() {
         this.guessButton = new MenuButton(
-            this.app, this.PIXI, 600, 660, 150, 40, "Submit Guess", () => this.onSubmitGuess(this.selectedX, this.selectedY)
+            this.app, this.PIXI, 600, 660, 200, 40, "Submit Guess", () => this.onSubmitGuess(this.selectedX, this.selectedY)
         )
     }
 
@@ -145,15 +194,16 @@ export class Hues extends Scene {
     async setPlayerToReady() {
         console.log("setting player to ready")
         let success = true;
-        if (this.host) {
-            success = await this.gameService.resetTurnState(this.code);
-            if (!success) throw "Cannot reset game state";
-        }
         success = await this.gameService.setSelfMetadata(
             this.code, "ready"
         )
+        if (!success) return;
+
+        if (this.host && this.phase == 1) {
+            success = await this.gameService.resetTurnState(this.code);
+        }
         if (success) {
-            this.turn = "ready";
+            this.turnState = "ready";
             this.readyButton?.destroy();
             this.readyButton = undefined;
         }
@@ -162,17 +212,18 @@ export class Hues extends Scene {
     getTurn() {
         console.log("getting turn")
         this.clue = "";
-        this.gameService.getGameMetadata(this.code).then(
-            metadata => {
+        this.gameService.getGameData(this.code).then(
+            data => {
                 console.log(this.code)
-                console.log(metadata)
-                if (metadata.includes(`turn:${this.gameService.getUserId()}`)) {
-                    this.turn = "clue";
+                console.log(data)
+                if (data.turn == this.gameService.getUserId()) {
+                    this.turnState = "clue";
                     this.openColourSelectionDialog();
                 } else {
-                    this.turn = "guess";
+                    this.turnState = "guess";
                     this.pollForClues();
                 }
+                this.phase = data.phase;
             }
         )
     }
@@ -180,7 +231,7 @@ export class Hues extends Scene {
     async getNextTurn() {
         console.log("Setting game state to next turn")
         let num: number = 0;
-        const self = await this.gameService.getSelf(this.code);
+        const self = await this.gameService.getSelf();
         num = self.player_number;
         const players = await this.gameService.getPlayers(this.code);
         let next_player_id = "";
@@ -197,7 +248,27 @@ export class Hues extends Scene {
                 }
             }
         }
-        return await this.gameService.setGameMetadata(this.code, `turn:${next_player_id}`);
+        return await this.gameService.updateGameTurn(this.code, next_player_id);
+    }
+
+    pollForPlayers() {
+        console.log("polling for players")
+        this.gameService.getPlayers(this.code).then(
+            players => {
+                this.players = players;
+                this.onDisplayPlayers();
+                this.gameService.getGameMetadata(this.code).then(
+                    metadata => {
+                        if (metadata == "started") this.getTurn();
+                    }
+                )
+            }
+        )
+        setTimeout(() => {
+            if (this.turnState == "start") {
+                this.pollForPlayers();
+            }
+        }, 5000)
     }
 
     pollForNextTurn() {
@@ -209,15 +280,15 @@ export class Hues extends Scene {
                         player => player.metadata.includes("ready")
                     )
                 ) {
-                    this.turn = "";
+                    this.turnState = "";
                     this.getTurn();
                 }
             }
         )
         setTimeout(() => {
             console.log("timeout")
-            console.log(this.turn)
-            if (this.turn == "ready") {
+            console.log(this.turnState)
+            if (this.turnState == "ready") {
                 this.pollForNextTurn();
             }
         }, 5000)
@@ -226,27 +297,27 @@ export class Hues extends Scene {
     pollForGuesses() {
         this.gameService.getGuesses(this.code).then(
             guesses => {
-                this.guesses = guesses;
+                this.guesses = guesses
                 return this.gameService.getPlayers(this.code)
             }
         ).then(
             players => {
-                if (this.guesses.length == players.length - 1) {
-                    this.turn = "reveal";
+                if (this.guesses.filter(guess => guess.phase == this.phase).length == players.length - 1) {
+                    this.turnState = "reveal";
                     this.revealReadyButton();
                 }
             }
         )
 
         setTimeout(() => {
-            if (this.turn == "clue" || this.turn == "guess") {
+            if (this.turnState == "clue" || this.turnState == "guess") {
                 this.pollForGuesses();
             }
         }, 5000)
     }
 
     pollForClues() {
-        this.gameService.getClue(this.code).then(
+        this.gameService.getClue(this.code, this.phase).then(
             data => {
                 if (data != undefined) {
                     this.clue = data.clue;
@@ -274,5 +345,10 @@ export class Hues extends Scene {
 
         this.colourSelectionDialog?.destroy();
         this.guessButton?.destroy();
+        this.startButton?.destroy();
+        this.rightPanel?.destroy();
+        this.playerDisplays.forEach(
+            display => display.destroy()
+        );
     }
 }

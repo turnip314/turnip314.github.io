@@ -1,4 +1,4 @@
-import { GameService } from "../../../shared/services/game.service";
+import { GameService } from "../game.service";
 import { Game } from "../Game";
 import { Scene } from "../Scene";
 import { MenuButton } from "../entities/MenuButton";
@@ -39,28 +39,24 @@ export class HuesMenu extends Scene {
         this.startButton = new MenuButton(this.app, this.PIXI, 550, 500, 200, 60, 'Start', () => this.start())
     }
 
-    start() {
+    async start() {
         const nickname = this.nameTextField?.getText() ?? "";
         if (nickname.length < 3) return;
         const code = this.codeTextField?.getText() ?? "";
         if (code.length < 3 && this.gameIntention == "join") return;
 
         if (this.gameIntention == "host") {
-            this.gameService.createGame(nickname).then(
-                result => {
-                    let huesScene = new Hues(this.app, this.PIXI, nickname, result.code, this.game, this.gameService, true);
-                    this.game.changeScene(huesScene);
-                }
-            )
+            const result = await this.gameService.createGame(nickname);
+            await this.gameService.initializeGameState(result.code);
+
+            let huesScene = new Hues(this.app, this.PIXI, nickname, result.code, this.game, this.gameService, true);
+            this.game.changeScene(huesScene);
+
         } else if (this.gameIntention == "join") {
-            this.gameService.getGame(code, nickname).then(
-                result => {
-                    let huesScene = new Hues(this.app, this.PIXI, nickname, code, this.game, this.gameService);
-                    this.game.changeScene(huesScene);
-                }
-            )
+            const result = await this.gameService.getGame(code, nickname)
+            let huesScene = new Hues(this.app, this.PIXI, nickname, code, this.game, this.gameService);
+            this.game.changeScene(huesScene);
         }
-        
     }
 
     update(delta: number) {

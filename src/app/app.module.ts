@@ -36,7 +36,7 @@ import { ImageOverlayComponent } from './shared/image-overlay/image-overlay.comp
 
 import {PixiCanvasComponent} from './pixi-canvas/pixi-canvas.component'
 import { SupabaseService } from './shared/services/supabase.service';
-import { GameService } from './shared/services/game.service';
+import { GameService } from './pixi-canvas/engine/game.service';
 
 @NgModule({ declarations: [
         AppComponent,

@@ -30,9 +30,9 @@ export class MenuButton extends Entity {
         );
         this.block.endFill();
         
-        this.text = new PIXI.Text(text, { fontFamily: 'Arial', fontSize: 24, fill: Colours.Black, align: 'center' });
-        this.text.x = this.x_start + 10;
-        this.text.y = this.y_start + 10;
+        this.text = new PIXI.Text(text, { fontFamily: 'Arial', fontSize: height/1.3, fill: Colours.Black, align: 'center' });
+        this.text.x = this.x_start + 5;
+        this.text.y = this.y_start + 5;
         this.action = action;
 
         this.block.eventMode = 'static';
