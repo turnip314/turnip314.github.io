@@ -44,7 +44,6 @@ export class PixiCanvasComponent implements AfterViewInit {
                 resizeTo: this.container.nativeElement,
                 background: '#000000',
                 antialias: true,
-                resolution: window.devicePixelRatio,
             });
             this.container.nativeElement.appendChild(this.app.canvas);
 
@@ -52,7 +51,7 @@ export class PixiCanvasComponent implements AfterViewInit {
             testblock.beginFill('#ffffff04');
             testblock.rect(
                 0, 0, 1280, 720
-            );
+            ).fill('#ffffff04');
             testblock.endFill()
             this.app.stage.addChild(testblock)
 
