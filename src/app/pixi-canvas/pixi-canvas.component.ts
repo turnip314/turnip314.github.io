@@ -49,7 +49,7 @@ export class PixiCanvasComponent implements AfterViewInit {
             this.container.nativeElement.appendChild(this.app.canvas);
 
             let testblock = new PIXI.Graphics();
-            testblock.beginFill('#333333');
+            testblock.beginFill('#ffffff04');
             testblock.rect(
                 0, 0, 1280, 720
             );

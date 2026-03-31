@@ -11,10 +11,17 @@ export class ColourSelectionDialog extends Entity {
     private text: any;
     private clue: TextField | undefined;
     private submit: MenuButton | undefined;
+    private locked: boolean = false;
     private x: number = -1;
     private y: number = -1;
-    constructor(app: any, PIXI: any, choices: [number, number, string][], onSubmit: (x: number, y: number, clue: string) => void) {
+    constructor(
+        app: any, PIXI: any, 
+        choices: [number, number, string][], 
+        onSubmit: (x: number, y: number, clue: string) => void, 
+        choice: [number, number] | undefined = undefined // locks the choice
+    ) {
         super(app, PIXI);
+
         choices.forEach(
             choice => this.choices.push(
                 new ColourSelectionTile(
@@ -22,6 +29,13 @@ export class ColourSelectionDialog extends Entity {
                 )
             )
         )
+
+        if (choice != undefined) {
+            for (let i = 0; i < this.choices.length; i++) {
+                if (choices[i][0] == choice[0] && choices[i][1] == choice[1]) this.onSelectColour(choice[0], choice[1], i);
+            }
+            this.locked = true;
+        }
 
         this.block = new this.PIXI.Graphics();
         this.block.beginFill(Colours.BlackTranslucent);
@@ -59,6 +73,7 @@ export class ColourSelectionDialog extends Entity {
     }
 
     onSelectColour(x: number, y: number, pos: number): void {
+        if (this.locked) return;
         this.x = x;
         this.y = y;
         this.choices.forEach(
@@ -66,6 +81,7 @@ export class ColourSelectionDialog extends Entity {
         )
         this.choices[pos].select();
     }
+
     onGeneralClick(): void {
         this.clue?.unselect();
     }

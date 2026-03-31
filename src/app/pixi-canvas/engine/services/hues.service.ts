@@ -84,7 +84,7 @@ export class HuesService extends GameService{
         }
         const { data, error } = await supabase
             .from('hues_guess')
-            .upsert(
+            .insert(
                 guessObj
             )
 

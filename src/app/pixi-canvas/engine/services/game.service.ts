@@ -170,4 +170,20 @@ export class GameService {
 
         return true;
     }
+
+    async updateSelfScore(gameCode: string, score: number): Promise<boolean> {
+        const supabase = this.supabaseService.getClient();
+
+        const response = await supabase
+            .from('players')
+            .update(
+                { score: score }
+            )
+            .eq('game_code', gameCode)
+            .eq('user_id', this.userId!!)
+
+            if (response.error) throw response.error;
+
+            return true;
+    }
 }
