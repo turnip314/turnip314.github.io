@@ -504,7 +504,7 @@ function solve(nums: number[]) {
                         cur.flatten();
                         cur.arrange();
 
-                        if (cur.eval() - 24 < epsilon && 24 - cur.eval() < epsilon) {
+                        if (cur.eval() - 24 < epsilon && 24 - cur.eval() < epsilon && !cur.has_negatives()) {
                             solutions.push(cur.toString());
                         }
                     });
