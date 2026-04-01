@@ -25,7 +25,7 @@ export class TwentyFour extends Scene {
 
     constructor(app: any, PIXI: any, game: Game,) {
         super(app, PIXI, game);
-        this.textBox = new TextField(this.app, this.PIXI, 520, 450, 200, 50, "Answer");
+        this.textBox = new TextField(this.app, this.PIXI, 520, 450, 200, 50, "Answer", 14);
         this.submitButton = new MenuButton(this.app, this.PIXI, 750, 450, 55, 50, ">>", () => this.onSubmit(this.textBox?.getText()!!));
 
         this.newGameButton = new MenuButton(this.app, this.PIXI, 900, 200, 250, 40, "New Game", () => this.onNewGame());
