@@ -15,17 +15,17 @@ export class ColourSelectionDialog extends Entity {
     private x: number = -1;
     private y: number = -1;
     constructor(
-        app: any, PIXI: any, 
+        world: any, PIXI: any, 
         choices: [number, number, string][], 
         onSubmit: (x: number, y: number, clue: string) => void, 
         choice: [number, number] | undefined = undefined // locks the choice
     ) {
-        super(app, PIXI);
+        super(world, PIXI);
 
         choices.forEach(
             choice => this.choices.push(
                 new ColourSelectionTile(
-                    app, PIXI, choice[2], choice[0], choice[1], this.choices.length, (x, y, p) => this.onSelectColour(x, y, p)
+                    world, PIXI, choice[2], choice[0], choice[1], this.choices.length, (x, y, p) => this.onSelectColour(x, y, p)
                 )
             )
         )
@@ -39,20 +39,20 @@ export class ColourSelectionDialog extends Entity {
             400
         );
         this.block.endFill();
-        this.app.stage.addChild(this.block);
+        this.world.addChild(this.block);
         this.choices.forEach(tile => tile.draw());
 
         this.text = new PIXI.Text("Select a colour", { fontFamily: 'Arial', fontSize: 24, fill: Colours.White, align: 'center' });
         this.text.x = 515;
         this.text.y = 160;
-        this.app.stage.addChild(this.text);
+        this.world.addChild(this.text);
 
         this.clue = new TextField(
-            app, PIXI, 515, 480, 200, 50, "Clue"
+            world, PIXI, 515, 480, 200, 50, "Clue"
         )
 
         this.submit = new MenuButton(
-            app, PIXI, 740, 480, 50, 50, ">>", () => {
+            world, PIXI, 740, 480, 50, 50, ">>", () => {
                 if (this.clue?.getText() == "") return;
                 if (this.x == -1) return;
                 if (this.y == -1) return;

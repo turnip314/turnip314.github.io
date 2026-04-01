@@ -14,10 +14,10 @@ export class HuesMenu extends Scene {
     private codeTextField: TextField | undefined;
     private gameIntention: string = "";
 
-    constructor(app: any, PIXI: any, game: Game, private gameService: HuesService) {
-        super(app, PIXI, game);
-        this.hostButton = new MenuButton(app, PIXI, 550, 200, 200, 60, 'Host', () => this.host())
-        this.joinButton = new MenuButton(app, PIXI, 550, 300, 200, 60, 'Join', () => this.join())
+    constructor(world: any, PIXI: any, game: Game, private gameService: HuesService) {
+        super(world, PIXI, game);
+        this.hostButton = new MenuButton(world, PIXI, 550, 200, 200, 60, 'Host', () => this.host())
+        this.joinButton = new MenuButton(world, PIXI, 550, 300, 200, 60, 'Join', () => this.join())
     }
 
     join() {
@@ -25,9 +25,9 @@ export class HuesMenu extends Scene {
         this.codeTextField?.destroy();
         this.nameTextField?.destroy();
         this.startButton?.destroy();
-        this.codeTextField = new TextField(this.app, this.PIXI, 550, 400, 200, 60, "Join Code");
-        this.nameTextField = new TextField(this.app, this.PIXI, 550, 500, 200, 60, "Nickname");
-        this.startButton = new MenuButton(this.app, this.PIXI, 550, 600, 200, 60, 'Start', () => this.start())
+        this.codeTextField = new TextField(this.world, this.PIXI, 550, 400, 200, 60, "Join Code");
+        this.nameTextField = new TextField(this.world, this.PIXI, 550, 500, 200, 60, "Nickname");
+        this.startButton = new MenuButton(this.world, this.PIXI, 550, 600, 200, 60, 'Start', () => this.start())
     }
 
     host() {
@@ -36,8 +36,8 @@ export class HuesMenu extends Scene {
         this.nameTextField?.destroy();
         this.startButton?.destroy();
         this.codeTextField = undefined;
-        this.nameTextField = new TextField(this.app, this.PIXI, 550, 400, 200, 60, "Nickname");
-        this.startButton = new MenuButton(this.app, this.PIXI, 550, 500, 200, 60, 'Start', () => this.start())
+        this.nameTextField = new TextField(this.world, this.PIXI, 550, 400, 200, 60, "Nickname");
+        this.startButton = new MenuButton(this.world, this.PIXI, 550, 500, 200, 60, 'Start', () => this.start())
     }
 
     async start() {
@@ -50,12 +50,12 @@ export class HuesMenu extends Scene {
             const result = await this.gameService.createGame(nickname);
             await this.gameService.initializeGameState(result.code);
 
-            let huesScene = new Hues(this.app, this.PIXI, nickname, result.code, this.game, this.gameService, true);
+            let huesScene = new Hues(this.world, this.PIXI, nickname, result.code, this.game, this.gameService, true);
             this.game.changeScene(huesScene);
 
         } else if (this.gameIntention == "join") {
             const result = await this.gameService.getGame(code, nickname)
-            let huesScene = new Hues(this.app, this.PIXI, nickname, code, this.game, this.gameService);
+            let huesScene = new Hues(this.world, this.PIXI, nickname, code, this.game, this.gameService);
             this.game.changeScene(huesScene);
         }
     }

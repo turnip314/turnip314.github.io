@@ -7,8 +7,8 @@ export class ColourSelectionTile extends Entity {
     private position: number;
     private readonly SIZE: number = 120;
     private readonly GAPSIZE: number = 10;
-    constructor(app: any, PIXI: any, hex: string, row: number, col: number, position: number, onClick: (row: number, col: number, pos: number) => void) {
-        super(app, PIXI);
+    constructor(world: any, PIXI: any, hex: string, row: number, col: number, position: number, onClick: (row: number, col: number, pos: number) => void) {
+        super(world, PIXI);
         this.position = position;
         this.block = new this.PIXI.Graphics();
         this.block.beginFill(hex);
@@ -26,7 +26,7 @@ export class ColourSelectionTile extends Entity {
     }
 
     draw() {
-        this.app.stage.addChild(this.block);
+        this.world.addChild(this.block);
     }
 
     select() {
@@ -46,7 +46,7 @@ export class ColourSelectionTile extends Entity {
             this.SIZE,
             this.SIZE
         );
-        this.app.stage.addChild(this.border);
+        this.world.addChild(this.border);
     }
 
     unselect() {

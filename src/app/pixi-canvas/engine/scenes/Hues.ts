@@ -36,14 +36,14 @@ export class Hues extends Scene {
     private clueText: any;
     private scoreText: any;
 
-    constructor(app: any, PIXI: any, name: string, code: string, game: Game, private gameService: HuesService, host = false) {
-        super(app, PIXI, game);
+    constructor(world: any, PIXI: any, name: string, code: string, game: Game, private gameService: HuesService, host = false) {
+        super(world, PIXI, game);
         this.host = host;
 
         for (let i = 0; i < this.gridX; i++) {
             let row: Array<any> = [];
             for (let j = 0; j < this.gridY; j++) {
-                row.push(new ColourTile(app, PIXI, Colours.colours[i][j], i, j, (x: number, y: number) => this.onColourTileClick(x, y)));
+                row.push(new ColourTile(world, PIXI, Colours.colours[i][j], i, j, (x: number, y: number) => this.onColourTileClick(x, y)));
             }
             this.grid.push(row);
         }
@@ -59,7 +59,7 @@ export class Hues extends Scene {
             680
         );
         this.rightPanel.endFill();
-        this.app.stage.addChild(this.rightPanel);
+        this.world.addChild(this.rightPanel);
 
         if (this.host) {
             let joinText = new this.PIXI.Text("Room Code:", { fontFamily: 'Arial', fontSize: 24, fill: Colours.White, align: 'center' });
@@ -68,27 +68,27 @@ export class Hues extends Scene {
             let codeText = new this.PIXI.Text(this.code, { fontFamily: 'Arial', fontSize: 24, fill: Colours.White, align: 'center' });
             codeText.x = 170;
             codeText.y = 604;
-            this.app.stage.addChild(joinText);
-            this.app.stage.addChild(codeText);
+            this.world.addChild(joinText);
+            this.world.addChild(codeText);
             this.roomCodeDisplay = [joinText, codeText];
         }
 
         this.clueText = new this.PIXI.Text("Waiting for clue...", { fontFamily: 'Arial', fontSize: 24, fill: Colours.White, align: 'center' });
         this.clueText.x = 800;
         this.clueText.y = 604;
-        this.app.stage.addChild(this.clueText);
+        this.world.addChild(this.clueText);
 
         this.scoreText = new this.PIXI.Text("Score: 0", { fontFamily: 'Arial', fontSize: 24, fill: Colours.White, align: 'center' });
         this.scoreText.x = 1120;
         this.scoreText.y = 604;
-        this.app.stage.addChild(this.scoreText);
+        this.world.addChild(this.scoreText);
 
 
         this.turnState = "start";
         if (host) {
             this.turn = "clue";
             this.startButton = new MenuButton(
-                this.app, this.PIXI, 440, 610, 200, 40, "Start Game", () => this.onStartGame()
+                this.world, this.PIXI, 440, 610, 200, 40, "Start Game", () => this.onStartGame()
             )
         } else {
             this.turn = "guess";
@@ -129,7 +129,7 @@ export class Hues extends Scene {
                 const text = new this.PIXI.Text(`${player.username} ${player.score}`, { fontFamily: 'Arial', fontSize: 24, fill: Colours.Black, align: 'center' });
                 text.x = 1120;
                 text.y = 60 + 40 * (player.player_number - start);
-                this.app.stage.addChild(text);
+                this.world.addChild(text);
                 this.playerDisplays.push(
                     text
                 )
@@ -234,11 +234,11 @@ export class Hues extends Scene {
                 );
             }
             this.colourSelectionDialog = new ColourSelectionDialog(
-                this.app, this.PIXI, this.colourChoices, (rx: number, ry: number, clue: string) => this.onSubmitClue(rx, ry, clue)
+                this.world, this.PIXI, this.colourChoices, (rx: number, ry: number, clue: string) => this.onSubmitClue(rx, ry, clue)
             );
         } else {
             this.colourSelectionDialog = new ColourSelectionDialog(
-                this.app, this.PIXI, this.colourChoices, (rx: number, ry: number, clue: string) => this.onSubmitClue(rx, ry, clue),
+                this.world, this.PIXI, this.colourChoices, (rx: number, ry: number, clue: string) => this.onSubmitClue(rx, ry, clue),
                 [this.clueX, this.clueY]
             );
         }
@@ -248,13 +248,13 @@ export class Hues extends Scene {
 
     revealGuessButton() {
         this.guessButton = new MenuButton(
-            this.app, this.PIXI, 600, 604, 200, 40, "Submit Guess", () => this.onSubmitGuess(this.selectedX, this.selectedY)
+            this.world, this.PIXI, 600, 604, 200, 40, "Submit Guess", () => this.onSubmitGuess(this.selectedX, this.selectedY)
         )
     }
 
     revealReadyButton() {
         this.readyButton = new MenuButton(
-            this.app, this.PIXI, 600, 604, 100, 40, "Ready", () => this.setPlayerToReady().then(() => this.pollForNextTurn())
+            this.world, this.PIXI, 600, 604, 100, 40, "Ready", () => this.setPlayerToReady().then(() => this.pollForNextTurn())
         )
     }
 

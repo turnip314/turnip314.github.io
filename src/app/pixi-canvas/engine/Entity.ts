@@ -1,5 +1,5 @@
 export abstract class Entity {
-  constructor(protected app: any, protected PIXI: any) {}
+  constructor(protected world: any, protected PIXI: any) {}
 
   abstract update(delta: number): void;
 

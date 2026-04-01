@@ -8,8 +8,8 @@ export class ColourTile extends Entity {
     private location: [number, number] = [0, 0];
     private readonly SIZE: number = 32;
     private readonly GAPSIZE: number = 4;
-    constructor(app: any, PIXI: any, hex: string, x: number, y: number, onClick: (arg0: number, arg1: number) => void) {
-        super(app, PIXI);
+    constructor(world: any, PIXI: any, hex: string, x: number, y: number, onClick: (arg0: number, arg1: number) => void) {
+        super(world, PIXI);
         this.block = new this.PIXI.Graphics();
         this.block.beginFill(hex);
         this.block.drawRect(
@@ -26,7 +26,7 @@ export class ColourTile extends Entity {
 
         this.location = [x, y];
 
-        this.app.stage.addChild(this.block);
+        this.world.addChild(this.block);
     }
 
     select() {
@@ -46,7 +46,7 @@ export class ColourTile extends Entity {
             this.SIZE,
             this.SIZE
         )
-        this.app.stage.addChild(this.border);
+        this.world.addChild(this.border);
     }
 
     unselect() {
@@ -57,7 +57,7 @@ export class ColourTile extends Entity {
         this.scoreText = new this.PIXI.Text(score.toString(), { fontFamily: 'Arial', fontSize: 24, fill: Colours.BlackTranslucent, align: 'center' });
         this.scoreText.x = 800;
         this.scoreText.y = 604;
-        this.app.stage.addChild(this.scoreText);
+        this.world.addChild(this.scoreText);
     }
 
     update(delta: number): void {

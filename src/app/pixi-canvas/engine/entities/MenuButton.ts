@@ -8,7 +8,7 @@ export class MenuButton extends Entity {
     private y_start: number;
     private action: any;
     constructor(
-        app: any,
+        world: any,
         PIXI: any,
         x_start: number,
         y_start: number,
@@ -17,7 +17,7 @@ export class MenuButton extends Entity {
         text: string,
         action: () => void
     ) {
-        super(app, PIXI);
+        super(world, PIXI);
         this.x_start = x_start;
         this.y_start = y_start;
         this.block = new this.PIXI.Graphics();
@@ -46,8 +46,8 @@ export class MenuButton extends Entity {
             this.action();
         });
 
-        this.app.stage.addChild(this.block);
-        this.app.stage.addChild(this.text);
+        this.world.addChild(this.block);
+        this.world.addChild(this.text);
     }
 
     update(delta: number): void {

@@ -26,15 +26,15 @@ export class Game {
             this.update(ticker.deltaTime);
         });
 
-            console.log(game)
+        console.log(game)
         switch (game) {
             case "hues": {
                 console.log(123)
-                this.currentScene = new HuesMenu(this.app, this.PIXI, this, this.gameService.toChildService(HuesService) as HuesService);
+                this.currentScene = new HuesMenu(this.world, this.PIXI, this, this.gameService.toChildService(HuesService) as HuesService);
             } break;
             case "24": {
                 console.log(234)
-                this.currentScene = new TwentyFour(this.app, this.PIXI, this);
+                this.currentScene = new TwentyFour(this.world, this.PIXI, this);
             } break;
             default: return;
         }

@@ -23,15 +23,15 @@ export class TwentyFour extends Scene {
     private revealButton: MenuButton | undefined;
     private answersText: any[] = [];
 
-    constructor(app: any, PIXI: any, game: Game,) {
-        super(app, PIXI, game);
-        this.textBox = new TextField(this.app, this.PIXI, 520, 450, 200, 50, "Answer", 14);
-        this.submitButton = new MenuButton(this.app, this.PIXI, 750, 450, 55, 50, ">>", () => this.onSubmit(this.textBox?.getText()!!));
+    constructor(world: any, PIXI: any, game: Game,) {
+        super(world, PIXI, game);
+        this.textBox = new TextField(this.world, this.PIXI, 520, 450, 200, 50, "Answer", 14);
+        this.submitButton = new MenuButton(this.world, this.PIXI, 750, 450, 55, 50, ">>", () => this.onSubmit(this.textBox?.getText()!!));
 
-        this.newGameButton = new MenuButton(this.app, this.PIXI, 900, 200, 250, 40, "New Game", () => this.onNewGame());
-        this.revealButton = new MenuButton(this.app, this.PIXI, 900, 250, 250, 40, "Reveal Answers", () => this.onShowAnswers());
+        this.newGameButton = new MenuButton(this.world, this.PIXI, 900, 200, 250, 40, "New Game", () => this.onNewGame());
+        this.revealButton = new MenuButton(this.world, this.PIXI, 900, 250, 250, 40, "Reveal Answers", () => this.onShowAnswers());
         this.resultsText = new this.PIXI.Text("", { fontFamily: 'Arial', fontSize: 24, fill: Colours.Red, align: 'center' })
-        this.app.stage.addChild(this.resultsText);
+        this.world.addChild(this.resultsText);
         this.onLoadTextures().then(
             () => this.onNewGame()
         )
@@ -67,11 +67,11 @@ export class TwentyFour extends Scene {
         this.resultsText.text = this.message;
         this.resultsText.x = 520;
         this.resultsText.y = 520;
-        this.app.stage.addChild(this.resultsText);
+        this.world.addChild(this.resultsText);
     }
 
     onNewGame() {
-        this.textBox.unset();
+        this.textBox?.unset();
         this.cardSprites.forEach(sprite => sprite.destroy());
         this.cardSprites = [];
         this.resultsText.text = "";
@@ -105,7 +105,7 @@ export class TwentyFour extends Scene {
             const sprite = new this.PIXI.Sprite(texture)
             sprite.x = 550 + 80 * (i%2)
             sprite.y = 200 + 120 * Math.floor(i/2);
-            this.app.stage.addChild(sprite);
+            this.world.addChild(sprite);
 
             this.cardSprites.push(sprite);
         }
@@ -216,7 +216,7 @@ export class TwentyFour extends Scene {
             this.answersText.push(
                 text
             );
-            this.app.stage.addChild(text);
+            this.world.addChild(text);
         }
     }
 }

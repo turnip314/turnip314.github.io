@@ -67,8 +67,6 @@ export class PixiCanvasComponent implements AfterViewInit {
             this.game = new Game(this.app, this.world, PIXI, this.gameService);
             this.game.start(app);
 
-            
-
             const scale = Math.min(
                 container.clientWidth / 1280,
                 container.clientHeight / 720

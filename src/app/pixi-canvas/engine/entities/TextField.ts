@@ -13,7 +13,7 @@ export class TextField extends Entity {
     private selectionDelay: number = 5;
     private charLimit = 10;
     constructor(
-        app: any,
+        world: any,
         PIXI: any,
         x_start: number,
         y_start: number,
@@ -22,7 +22,7 @@ export class TextField extends Entity {
         name: string,
         charLimit: number = 10
     ) {
-        super(app, PIXI);
+        super(world, PIXI);
         this.name = name;
 
         this.block = new this.PIXI.Graphics();
@@ -54,8 +54,8 @@ export class TextField extends Entity {
             this.selected = true;
         });
 
-        this.app.stage.addChild(this.block);
-        this.app.stage.addChild(this.textBox);
+        this.world.addChild(this.block);
+        this.world.addChild(this.textBox);
 
         this.input.addListener(this);
         this.charLimit = charLimit;
