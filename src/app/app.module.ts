@@ -66,12 +66,12 @@ import { GameService } from './pixi-canvas/engine/services/game.service';
         FormsModule,
         RouterModule.forRoot([
             { path: 'home', component: WelcomeComponent },
-            { path: 'pixi', component: PixiCanvasComponent },
+            { path: 'pixi', component: PixiCanvasComponent, data: { app: 'hues' } },
             { path: 'projects', component: ProjectsComponent },
             { path: 'academics', component: AcademicsComponent },
             { path: 'gallery', component: GalleryComponent },
             { path: 'contact', component: ContactComponent },
-            { path: 'apps/24', component: TwentyFourComponent },
+            { path: 'apps/24', component: PixiCanvasComponent, data: { app: '24' } },
             { path: 'apps/sagedeps', redirectTo: 'miniapps/sagedeps/index.html', pathMatch: 'full' },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: '**', component: PageNotFoundComponent }

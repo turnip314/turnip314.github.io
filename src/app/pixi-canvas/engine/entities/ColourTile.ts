@@ -4,6 +4,7 @@ import { Entity } from "../Entity";
 export class ColourTile extends Entity {
     private block: any;
     private border: any;
+    private scoreText: any;
     private location: [number, number] = [0, 0];
     private readonly SIZE: number = 32;
     private readonly GAPSIZE: number = 4;
@@ -52,11 +53,19 @@ export class ColourTile extends Entity {
         this.border?.destroy();
     }
 
+    displayScore(score: number) {
+        this.scoreText = new this.PIXI.Text(score.toString(), { fontFamily: 'Arial', fontSize: 24, fill: Colours.BlackTranslucent, align: 'center' });
+        this.scoreText.x = 800;
+        this.scoreText.y = 604;
+        this.app.stage.addChild(this.scoreText);
+    }
+
     update(delta: number): void {
 
     }
 
     destroy(): void {
         this.block.destroy();
+        this.scoreText?.destroy();
     }
 }

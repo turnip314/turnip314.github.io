@@ -30,13 +30,6 @@ export class ColourSelectionDialog extends Entity {
             )
         )
 
-        if (choice != undefined) {
-            for (let i = 0; i < this.choices.length; i++) {
-                if (choices[i][0] == choice[0] && choices[i][1] == choice[1]) this.onSelectColour(choice[0], choice[1], i);
-            }
-            this.locked = true;
-        }
-
         this.block = new this.PIXI.Graphics();
         this.block.beginFill(Colours.BlackTranslucent);
         this.block.rect(
@@ -66,6 +59,13 @@ export class ColourSelectionDialog extends Entity {
                 onSubmit(this.x, this.y, this.clue?.getText() || "")
             }
         )
+
+        if (choice != undefined) {
+            for (let i = 0; i < this.choices.length; i++) {
+                if (choices[i][0] == choice[0] && choices[i][1] == choice[1]) this.onSelectColour(choice[0], choice[1], i);
+            }
+            this.locked = true;
+        }
     }
 
     update(delta: number): void {

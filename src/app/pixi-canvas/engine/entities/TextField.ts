@@ -11,6 +11,7 @@ export class TextField extends Entity {
     private selected: boolean = false;
     private input = new Input();
     private selectionDelay: number = 5;
+    private charLimit = 10;
     constructor(
         app: any,
         PIXI: any,
@@ -18,7 +19,8 @@ export class TextField extends Entity {
         y_start: number,
         width: number,
         height: number,
-        name: string
+        name: string,
+        charLimit: number = 10
     ) {
         super(app, PIXI);
         this.name = name;
@@ -56,6 +58,7 @@ export class TextField extends Entity {
         this.app.stage.addChild(this.textBox);
 
         this.input.addListener(this);
+        this.charLimit = charLimit;
     }
 
     update(delta: number): void {
@@ -76,7 +79,7 @@ export class TextField extends Entity {
     }
 
     notify(key: any) {
-        if (this.selected && this.text.length < 10 && key.length <= 1) {
+        if (this.selected && this.text.length < this.charLimit && key.length <= 1) {
             this.text += key;
         }
         else if (this.selected && key == "Backspace") {
@@ -95,6 +98,11 @@ export class TextField extends Entity {
             this.selected = false;
             this.selectionDelay = 5;
         }
+        
+    }
+
+    unset(): void {
+        this.text = "";
         
     }
 

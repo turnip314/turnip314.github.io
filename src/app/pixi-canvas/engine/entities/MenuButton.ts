@@ -37,10 +37,12 @@ export class MenuButton extends Entity {
 
         this.block.eventMode = 'static';
         this.block.on('pointerdown', () => {
+            console.log("click1")
             this.action();
         });
         this.text.eventMode = 'static';
         this.text.on('pointerdown', () => {
+            console.log("click2")
             this.action();
         });
 

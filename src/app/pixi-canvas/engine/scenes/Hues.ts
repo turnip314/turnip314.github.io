@@ -1,4 +1,3 @@
-import { GameService } from "../services/game.service";
 import { Game } from "../Game";
 import { Scene } from "../Scene";
 import { Colours } from "../data/Colours"
@@ -127,7 +126,7 @@ export class Hues extends Scene {
         const start = Math.min(...this.players.map(p => p.player_number))
         this.players.forEach(
             player => {
-                const text = new this.PIXI.Text(player.username, { fontFamily: 'Arial', fontSize: 24, fill: Colours.Black, align: 'center' });
+                const text = new this.PIXI.Text(`${player.username} ${player.score}`, { fontFamily: 'Arial', fontSize: 24, fill: Colours.Black, align: 'center' });
                 text.x = 1120;
                 text.y = 60 + 40 * (player.player_number - start);
                 this.app.stage.addChild(text);
@@ -136,6 +135,28 @@ export class Hues extends Scene {
                 )
             }
         )
+    }
+
+    onDisplayClueRegions() {
+        for (let i = this.clueX-2; i < this.clueX+3; i++) {
+            for (let j = this.clueY-2; j < this.clueY+3; j++) {
+                if (i >= 0 && j >= 0 && i < this.gridX && j < this.gridY) {
+
+                }
+            }
+        }
+        for (let i = this.clueX-1; i < this.clueX+2; i++) {
+            for (let j = this.clueY-1; j < this.clueY+2; j++) {
+                if (i >= 0 && j >= 0 && i < this.gridX && j < this.gridY) {
+                    
+                }
+            }
+        }
+        
+    }
+
+    onDisplayPlayerGuesses() {
+
     }
 
     async onStartGame(): Promise<boolean> {
@@ -227,13 +248,13 @@ export class Hues extends Scene {
 
     revealGuessButton() {
         this.guessButton = new MenuButton(
-            this.app, this.PIXI, 600, 660, 200, 40, "Submit Guess", () => this.onSubmitGuess(this.selectedX, this.selectedY)
+            this.app, this.PIXI, 600, 604, 200, 40, "Submit Guess", () => this.onSubmitGuess(this.selectedX, this.selectedY)
         )
     }
 
     revealReadyButton() {
         this.readyButton = new MenuButton(
-            this.app, this.PIXI, 600, 660, 100, 40, "Ready", () => this.setPlayerToReady().then(() => this.pollForNextTurn())
+            this.app, this.PIXI, 600, 604, 100, 40, "Ready", () => this.setPlayerToReady().then(() => this.pollForNextTurn())
         )
     }
 
@@ -332,13 +353,14 @@ export class Hues extends Scene {
     async pollForNextTurn() {
         console.log("polling for next turn")
         let players = await this.gameService.getPlayers(this.code)
+        this.players = players;
+        this.onDisplayPlayers();
         if (
             players.every(
                 player => player.metadata.includes("ready")
             )
         ) {
             this.turnState = "";
-            this.players = await this.gameService.getPlayers(this.code);
             this.getTurn();
         }
 
@@ -357,7 +379,10 @@ export class Hues extends Scene {
         if (this.guesses.filter(guess => guess.phase == this.phase).length == players.length - 1) {
             this.turnState = "reveal";
             if (this.phase == 1) {
+                // Reveal all guesses
                 await this.updateScore();
+            } else if (this.turn == "clue") {
+                // Reveal all guesses
             }
             this.revealReadyButton();
         } else {

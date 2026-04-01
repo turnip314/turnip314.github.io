@@ -10,7 +10,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { Game } from './engine/Game';
 import { GameService } from './engine/services/game.service';
-import { Application } from 'pixi.js';
+import { Application, Container } from 'pixi.js';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-pixi-canvas',
@@ -25,10 +26,11 @@ export class PixiCanvasComponent implements AfterViewInit {
 
     private app: Application | undefined;
     private game: Game | undefined;
+    private world: Container | undefined;
     private tickerFn: any;
     private readonly platformId = inject(PLATFORM_ID);
 
-    constructor(private ngZone: NgZone, private gameService: GameService) { }
+    constructor(private ngZone: NgZone, private route: ActivatedRoute, private gameService: GameService) { }
 
     async ngAfterViewInit() {
         if (!isPlatformBrowser(this.platformId)) return;
@@ -40,12 +42,17 @@ export class PixiCanvasComponent implements AfterViewInit {
 
             this.app = new PIXI.Application();
 
+            const container = this.container.nativeElement;
             await this.app.init({
-                resizeTo: this.container.nativeElement,
+                width: container.clientWidth,
+                height: container.clientHeight,
                 background: '#000000',
                 antialias: true,
             });
             this.container.nativeElement.appendChild(this.app.canvas);
+
+            this.world = new PIXI.Container();
+            this.app.stage.addChild(this.world);
 
             let testblock = new PIXI.Graphics();
             testblock.beginFill('#ffffff04');
@@ -53,15 +60,21 @@ export class PixiCanvasComponent implements AfterViewInit {
                 0, 0, 1280, 720
             ).fill('#ffffff04');
             testblock.endFill()
-            this.app.stage.addChild(testblock)
+            this.world.addChild(testblock)
 
-            this.game = new Game(this.app, PIXI, this.gameService);
-            this.game.start("hues");
+            const app = this.route.snapshot.data.app;
+            console.log(app);
+            this.game = new Game(this.app, this.world, PIXI, this.gameService);
+            this.game.start(app);
 
-            //this.app.renderer.resize(200, 200);
-            const scaling = (window.innerWidth / 1280 < window.innerHeight / 720) ? window.innerWidth / 1280 : window.innerHeight / 720;
-            this.app.stage.scale.x = scaling;
-            this.app.stage.scale.y = scaling;
+            
+
+            const scale = Math.min(
+                container.clientWidth / 1280,
+                container.clientHeight / 720
+            );
+
+            this.app.stage.scale.set(scale);
         });
     }
 
