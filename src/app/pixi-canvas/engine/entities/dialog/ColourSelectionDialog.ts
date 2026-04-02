@@ -7,6 +7,7 @@ import { TextField } from "../TextField";
 
 export class ColourSelectionDialog extends Entity {
     private choices: ColourSelectionTile[] = [];
+    private container: any;
     private block: any;
     private text: any;
     private clue: TextField | undefined;
@@ -15,44 +16,45 @@ export class ColourSelectionDialog extends Entity {
     private x: number = -1;
     private y: number = -1;
     constructor(
-        world: any, PIXI: any, 
-        choices: [number, number, string][], 
-        onSubmit: (x: number, y: number, clue: string) => void, 
+        world: any, PIXI: any,
+        choices: [number, number, string][],
+        onSubmit: (x: number, y: number, clue: string) => void,
         choice: [number, number] | undefined = undefined // locks the choice
     ) {
         super(world, PIXI);
 
+        this.container = new this.PIXI.Container();
+
+        // Position the container
+        this.container.x = 440;
+        this.container.y = 150;
+
+        this.world.addChild(this.container);
+
+        this.block = new this.PIXI.Graphics()
+            .rect(0, 0, 350, 400)
+            .fill({color: Colours.BlackTranslucent});
+        this.container.addChild(this.block);
+
         choices.forEach(
             choice => this.choices.push(
                 new ColourSelectionTile(
-                    world, PIXI, choice[2], choice[0], choice[1], this.choices.length, (x, y, p) => this.onSelectColour(x, y, p)
+                    this.block, PIXI, choice[2], choice[0], choice[1], this.choices.length, (x, y, p) => this.onSelectColour(x, y, p)
                 )
             )
         )
 
-        this.block = new this.PIXI.Graphics();
-        this.block.beginFill(Colours.BlackTranslucent);
-        this.block.rect(
-            440,
-            150,
-            400,
-            400
-        );
-        this.block.endFill();
-        this.world.addChild(this.block);
-        this.choices.forEach(tile => tile.draw());
-
         this.text = new PIXI.Text("Select a colour", { fontFamily: 'Arial', fontSize: 24, fill: Colours.White, align: 'center' });
-        this.text.x = 515;
-        this.text.y = 160;
-        this.world.addChild(this.text);
+        this.text.x = 50;
+        this.text.y = 10;
+        this.container.addChild(this.text);
 
         this.clue = new TextField(
-            world, PIXI, 515, 480, 200, 50, "Clue"
+            this.container, PIXI, 50, 330, 200, 50, "Clue"
         )
 
         this.submit = new MenuButton(
-            world, PIXI, 740, 480, 50, 50, ">>", () => {
+            this.container, PIXI, 270, 330, 55, 50, ">>", () => {
                 if (this.clue?.getText() == "") return;
                 if (this.x == -1) return;
                 if (this.y == -1) return;
@@ -85,12 +87,13 @@ export class ColourSelectionDialog extends Entity {
     onGeneralClick(): void {
         this.clue?.unselect();
     }
-    
+
     destroy(): void {
         this.choices.forEach(tile => tile.destroy());
         this.block.destroy();
         this.text.destroy();
         this.clue?.destroy();
         this.submit?.destroy();
+        this.container?.destroy();
     }
 }

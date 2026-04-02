@@ -1,5 +1,6 @@
 
 import { Colours } from "../data/Colours";
+import { Card } from "../entities/Card";
 import { MenuButton } from "../entities/MenuButton";
 import { TextField } from "../entities/TextField";
 import { Game } from "../Game";
@@ -8,13 +9,11 @@ import { Scene } from "../Scene";
 const epsilon = 0.01;
 
 export class TwentyFour extends Scene {
-    private cards: number[] = [];
-    private inputText: string = '';
+    private numbers: number[] = [];
     private message: string = '';
     private answers: string[] = [];
 
-    private texture: any;
-    private cardSprites: any[] = [];
+    private cards: Card[] = [];
     private cardsContainer: any;
     private textBox: TextField | undefined;
     private submitButton: MenuButton | undefined;
@@ -32,17 +31,26 @@ export class TwentyFour extends Scene {
         this.revealButton = new MenuButton(this.world, this.PIXI, 900, 250, 250, 40, "Reveal Answers", () => this.onShowAnswers());
         this.resultsText = new this.PIXI.Text("", { fontFamily: 'Arial', fontSize: 24, fill: Colours.Red, align: 'center' })
         this.world.addChild(this.resultsText);
-        this.onLoadTextures().then(
-            () => this.onNewGame()
-        )
+
+        this.cardsContainer = new this.PIXI.Container();
+        this.cardsContainer.x = 550;
+        this.cardsContainer.y = 200;
+        this.world.addChild(this.cardsContainer);
+
+        this.onNewGame()
     }
 
     update(delta: number) {
         this.textBox?.update(delta);
     }
 
-    async onLoadTextures() {
-        this.texture = await this.PIXI.Assets.load('../../../../assets/sprites/cards.png');
+    destroy(): void {
+        this.cards.forEach(card => card.destroy());
+        this.submitButton?.destroy();
+        this.resultsText?.destroy();
+        this.newGameButton?.destroy();
+        this.revealButton?.destroy();
+        this.answersText.forEach(text => text.destroy());
     }
 
     onSubmit(answer: any) {
@@ -72,42 +80,34 @@ export class TwentyFour extends Scene {
 
     onNewGame() {
         this.textBox?.unset();
-        this.cardSprites.forEach(sprite => sprite.destroy());
-        this.cardSprites = [];
+        this.cards.forEach(sprite => sprite.destroy());
+        this.cards = [];
         this.resultsText.text = "";
         this.answersText.forEach(text => text.destroy());
         this.answersText = [];
         this.message = '';
         this.answers = [];
-        this.cards = [];
+        this.numbers = [];
         for (let i = 0; i < 4; ++i) {
-            this.cards.push(1 + Math.floor(Math.random() * 10))
+            this.numbers.push(1 + Math.floor(Math.random() * 10))
         }
 
-        if (solve(this.cards).size == 0) {
+        if (solve(this.numbers).size == 0) {
             this.onNewGame();
         } else {
-            this.cards.sort();
+            this.numbers.sort();
             this.onGenerateCards();
         }
     }
 
-    async onGenerateCards() {
-        console.log(this.cards)
+    onGenerateCards() {
+        console.log(this.numbers)
         for (let i = 0; i < 4; i++) {
-            const num = this.cards[i]-1; // Card indexing starts at 1
-
-            const rectangle = new this.PIXI.Rectangle(62*num, 81.5 * Math.floor(4*Math.random()), 62, 81.5);
-            const texture = new this.PIXI.Texture({
-                source: this.texture.source,
-                frame: rectangle
-            });
-            const sprite = new this.PIXI.Sprite(texture)
-            sprite.x = 550 + 80 * (i%2)
-            sprite.y = 200 + 120 * Math.floor(i/2);
-            this.world.addChild(sprite);
-
-            this.cardSprites.push(sprite);
+            this.cards.push(
+                new Card(
+                    this.cardsContainer, this.PIXI, this.numbers[i], Math.floor(4*Math.random()), 80 * (i%2), 120 * Math.floor(i/2)
+                )
+            );
         }
     }
 
@@ -173,7 +173,7 @@ export class TwentyFour extends Scene {
             return false;
         }
         for (let i = 0; i < 4; ++i) {
-            if (numList[i] != this.cards[i]) {
+            if (numList[i] != this.numbers[i]) {
                 return false;
             }
         }
@@ -208,7 +208,7 @@ export class TwentyFour extends Scene {
 
     onShowAnswers() {
         if (this.answersText.length > 0) return;
-        this.answers = [...solve(this.cards)];
+        this.answers = [...solve(this.numbers)];
         for (let i = 0; i < this.answers.length; i++) {
             const text = new this.PIXI.Text(this.answers[i], { fontFamily: 'Arial', fontSize: 24, fill: Colours.Green, align: 'center' });
             text.x = 900;

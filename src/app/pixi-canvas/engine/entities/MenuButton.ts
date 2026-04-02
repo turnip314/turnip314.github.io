@@ -20,17 +20,17 @@ export class MenuButton extends Entity {
         super(world, PIXI);
         this.x_start = x_start;
         this.y_start = y_start;
-        this.block = new this.PIXI.Graphics();
-        this.block.beginFill(Colours.LightGray);
-        this.block.drawRect(
-            x_start,
-            y_start,
-            width,
-            height
-        );
-        this.block.endFill();
-        
-        this.text = new PIXI.Text(text, { fontFamily: 'Arial', fontSize: height/1.3, fill: Colours.Black, align: 'center' });
+        this.block = new this.PIXI.Graphics()
+            .rect(
+                x_start,
+                y_start,
+                width,
+                height
+            )
+            .fill({color: Colours.LightGray})
+            .stroke({ width: 4, color: Colours.White });
+
+        this.text = new PIXI.Text(text, { fontFamily: 'Arial', fontSize: height / 1.3, fill: Colours.Black, align: 'center' });
         this.text.x = this.x_start + 5;
         this.text.y = this.y_start + 5;
         this.action = action;
@@ -40,11 +40,7 @@ export class MenuButton extends Entity {
             console.log("click1")
             this.action();
         });
-        this.text.eventMode = 'static';
-        this.text.on('pointerdown', () => {
-            console.log("click2")
-            this.action();
-        });
+        this.text.eventMode = 'none';
 
         this.world.addChild(this.block);
         this.world.addChild(this.text);

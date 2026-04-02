@@ -16,8 +16,8 @@ export class HuesMenu extends Scene {
 
     constructor(world: any, PIXI: any, game: Game, private gameService: HuesService) {
         super(world, PIXI, game);
-        this.hostButton = new MenuButton(world, PIXI, 550, 200, 200, 60, 'Host', () => this.host())
-        this.joinButton = new MenuButton(world, PIXI, 550, 300, 200, 60, 'Join', () => this.join())
+        this.hostButton = new MenuButton(world, PIXI, 550, 100, 200, 60, 'Host', () => this.host())
+        this.joinButton = new MenuButton(world, PIXI, 550, 200, 200, 60, 'Join', () => this.join())
     }
 
     join() {
@@ -25,9 +25,9 @@ export class HuesMenu extends Scene {
         this.codeTextField?.destroy();
         this.nameTextField?.destroy();
         this.startButton?.destroy();
-        this.codeTextField = new TextField(this.world, this.PIXI, 550, 400, 200, 60, "Join Code");
-        this.nameTextField = new TextField(this.world, this.PIXI, 550, 500, 200, 60, "Nickname");
-        this.startButton = new MenuButton(this.world, this.PIXI, 550, 600, 200, 60, 'Start', () => this.start())
+        this.codeTextField = new TextField(this.world, this.PIXI, 550, 300, 200, 60, "Join Code");
+        this.nameTextField = new TextField(this.world, this.PIXI, 550, 400, 200, 60, "Nickname");
+        this.startButton = new MenuButton(this.world, this.PIXI, 550, 500, 200, 60, 'Start', () => this.start())
     }
 
     host() {
@@ -36,8 +36,8 @@ export class HuesMenu extends Scene {
         this.nameTextField?.destroy();
         this.startButton?.destroy();
         this.codeTextField = undefined;
-        this.nameTextField = new TextField(this.world, this.PIXI, 550, 400, 200, 60, "Nickname");
-        this.startButton = new MenuButton(this.world, this.PIXI, 550, 500, 200, 60, 'Start', () => this.start())
+        this.nameTextField = new TextField(this.world, this.PIXI, 550, 300, 200, 60, "Nickname");
+        this.startButton = new MenuButton(this.world, this.PIXI, 550, 400, 200, 60, 'Start', () => this.start())
     }
 
     async start() {

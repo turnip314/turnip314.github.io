@@ -10,15 +10,14 @@ export class ColourTile extends Entity {
     private readonly GAPSIZE: number = 4;
     constructor(world: any, PIXI: any, hex: string, x: number, y: number, onClick: (arg0: number, arg1: number) => void) {
         super(world, PIXI);
-        this.block = new this.PIXI.Graphics();
-        this.block.beginFill(hex);
-        this.block.drawRect(
-            30 + x * (this.SIZE + this.GAPSIZE),
-            30 + y * (this.SIZE + this.GAPSIZE),
-            this.SIZE,
-            this.SIZE
-        );
-        this.block.endFill();
+        this.block = new this.PIXI.Graphics()
+            .rect(
+                30 + x * (this.SIZE + this.GAPSIZE),
+                30 + y * (this.SIZE + this.GAPSIZE),
+                this.SIZE,
+                this.SIZE
+            )
+            .fill({ color: hex });
         this.block.eventMode = 'static';
         this.block.on('pointerdown', (event: { global: any; }) => {
             onClick(x, y);
@@ -30,22 +29,16 @@ export class ColourTile extends Entity {
     }
 
     select() {
-        this.border = new this.PIXI.Graphics();
-        this.border.beginFill(Colours.Transparent);
-        this.border.rect(
-            30 + this.location[0] * (this.SIZE + this.GAPSIZE),
-            30 + this.location[1] * (this.SIZE + this.GAPSIZE),
-            this.SIZE,
-            this.SIZE
-        );
-        this.border.endFill();
-        this.border.stroke({ width: 4, color: Colours.White });
-        this.border.rect(
-            30 + this.location[0] * (this.SIZE + this.GAPSIZE),
-            30 + this.location[1] * (this.SIZE + this.GAPSIZE),
-            this.SIZE,
-            this.SIZE
-        )
+        this.border = new this.PIXI.Graphics()
+            .rect(
+                30 + this.location[0] * (this.SIZE + this.GAPSIZE),
+                30 + this.location[1] * (this.SIZE + this.GAPSIZE),
+                this.SIZE,
+                this.SIZE
+            )
+            .fill({color: Colours.Transparent})
+            .stroke({ width: 4, color: Colours.White });
+
         this.world.addChild(this.border);
     }
 

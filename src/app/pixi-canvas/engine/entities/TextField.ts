@@ -25,23 +25,16 @@ export class TextField extends Entity {
         super(world, PIXI);
         this.name = name;
 
-        this.block = new this.PIXI.Graphics();
-        this.block.beginFill(Colours.LightGray);
-        this.block.drawRect(
-            x_start,
-            y_start,
-            width,
-            height
-        );
-        this.block.endFill();
-        this.block.stroke({ width: 4, color: Colours.White });
-        this.block.drawRect(
-            x_start,
-            y_start,
-            width,
-            height
-        );
-        this.textBox = new PIXI.Text("", { fontFamily: 'Arial', fontSize: 24 * height/40, fill: 0x000000, align: 'center' });
+        this.block = new this.PIXI.Graphics()
+            .rect(
+                x_start,
+                y_start,
+                width,
+                height
+            )
+            .fill({ color: Colours.LightGray })
+            .stroke({ width: 4, color: Colours.White });
+        this.textBox = new PIXI.Text("", { fontFamily: 'Arial', fontSize: 24 * height / 40, fill: 0x000000, align: 'center' });
         this.textBox.x = x_start + 10;
         this.textBox.y = y_start + 10;
 
@@ -49,10 +42,7 @@ export class TextField extends Entity {
         this.block.on('pointerdown', (event: any) => {
             this.selected = true;
         });
-        this.textBox.eventMode = 'static';
-        this.textBox.on('pointerdown', (event: any) => {
-            this.selected = true;
-        });
+        this.textBox.eventMode = 'none';
 
         this.world.addChild(this.block);
         this.world.addChild(this.textBox);
@@ -83,7 +73,7 @@ export class TextField extends Entity {
             this.text += key;
         }
         else if (this.selected && key == "Backspace") {
-            this.text = this.text.slice(0, this.text.length-1);
+            this.text = this.text.slice(0, this.text.length - 1);
         }
     }
 
@@ -98,12 +88,12 @@ export class TextField extends Entity {
             this.selected = false;
             this.selectionDelay = 5;
         }
-        
+
     }
 
     unset(): void {
         this.text = "";
-        
+
     }
 
     destroy(): void {
