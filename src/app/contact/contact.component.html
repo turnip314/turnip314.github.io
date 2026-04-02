@@ -1,32 +1,13 @@
 
-<div class='large-break'></div>
-<div class='p-h-10'>
-    <div class='title-text'>Contact Me</div>
+
+<div class='p-h-10 style3 alt'>
+    <div class='large-break'></div>
+    <h2>Contact Me</h2>
     <hr class='line-break-light'>
 
     <div class="container">
-        <div class="flex-container vertical">
-            <form [formGroup]="formData" (ngSubmit)="onSubmit(formData.value)">
-            <div class="form-group">
-                <input type="hidden" name="access_key" formControlName="access_key" value="d78109c9-9464-42c4-81e2-ac493e1a0230">
-            </div>
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Full Name" formControlName="name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email"formControlName="email">
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea class="form-control message" formControlName="message" name="message">
-                </textarea>
-            </div>
-            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-            <button type="submit" class="btn btn-primary" [disabled]="!formData.valid">Submit</button>
-            </form>
-        </div>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSezVCoRLMWhV2eKADTNO8X4Xj0ztYnerBWjQ6nVzYjVGYy1Cw/viewform?embedded=true" width="640" height="691" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
      </div>
+     <div class='large-break'></div>
 </div>
-<div class='large-break'></div>
+
