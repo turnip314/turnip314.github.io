@@ -233,5 +233,13 @@ a {
 
 .media-icons {
   justify-content: space-evenly;
+}
 
+.icon {
+  max-width: 15%;
+  align-content: center;
+}
+
+img {
+  max-width: 100%;
 }
