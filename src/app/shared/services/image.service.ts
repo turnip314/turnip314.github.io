@@ -400,8 +400,42 @@ export class ImageService {
                 name: 'Puerto Vallarta',
                 description: 'Puerto Vallarta, Mexico'
             },
+            {
+                image: 'furong.png',  
+                name: 'Tang\'s Paradise Lake',
+                description: 'Xi\'an'
+            },
+            {
+                image: 'butterfly.png',  
+                name: 'Cambridge Butterfly Conservatory',
+                description: 'Cambridge, Ontario'
+            },
+            {
+                image: 'changjiang-night.png',  
+                name: 'Changjiang Bridge Night',
+                description: 'Wuhan, China'
+            },
+            {
+                image: 'hongkong.png',  
+                name: 'Hong Kong Aerial View',
+                description: 'Hong Kong'
+            },
+            {
+                image: 'perimeter.png',  
+                name: 'Perimeter Institute',
+                description: 'Waterloo, Ontario'
+            },
+            {
+                image: 'terracotta.png',  
+                name: 'Terracotta Army',
+                description: 'Xi\'an, China'
+            },
         ];
 
+        for (let i = images.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [images[i], images[j]] = [images[j], images[i]];
+        }
         return images.map(x => {
             return {
                 image: 'assets/images/scenic/' + x.image,
