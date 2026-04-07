@@ -93,36 +93,6 @@
     <div class="medium-break"></div>
 </section>
 
-<section class='style3 p-h-10'>
-    <div class="medium-break"></div>
-    <h2>Programming Projects</h2>
-    <hr class='line-break-light'/>
-
-    <div class='grid-container fade-in'>
-        <div *ngFor="let project of projects" style="height:90%">
-            <div class="grid-item">
-                <div class="description">
-                    <div>
-                        <h3>{{project.title}}</h3>
-                        <hr class='line-break-light'/>
-                        <p>
-                            {{project.description}}
-                        </p>
-                    </div> 
-                </div>
-                <div class="aspect-ratio">
-                    <img *ngIf="project.demos[project.view].type == 'image'"
-                        class='project-img' [src]="project.demos[project.view].src">
-                    <iframe *ngIf="project.demos[project.view].type == 'video'" class="project-video"
-                        [src]="project.demos[project.view].src" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="medium-break"></div>
-        </div>
-    </div>
-    <div class="medium-break"></div>
-</section>
-
 <div class="flex-container grid">
     
 </div>
