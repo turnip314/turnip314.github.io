@@ -7,7 +7,7 @@ export class Card extends Entity {
     private sprite: any;
     constructor(world: any, PIXI: any, private value: number, private suit: number, x: number, y: number) {
         super(world, PIXI);
-        const rectangle = new this.PIXI.Rectangle(62 * (value-1), 81.5 * suit, 62, 81.5);
+        const rectangle = new this.PIXI.Rectangle(73 * (value-1), 98* suit, 73, 98);
         this.getTexture().then(
             texture => {
                 const croppedTexture = new this.PIXI.Texture({

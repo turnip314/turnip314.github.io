@@ -72,6 +72,7 @@ import { GameService } from './pixi-canvas/engine/services/game.service';
             { path: 'gallery', component: GalleryComponent },
             { path: 'contact', component: ContactComponent },
             { path: 'apps/24', component: PixiCanvasComponent, data: { app: '24' } },
+            { path: 'apps/big3', component: PixiCanvasComponent, data: { app: 'big3' } },
             { path: 'apps/sagedeps', redirectTo: 'miniapps/sagedeps/index.html', pathMatch: 'full' },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: '**', component: PageNotFoundComponent }
