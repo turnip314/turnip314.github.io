@@ -36,14 +36,14 @@ export class Big3Service extends CardsService {
     }
 
     createNewGame(deckMultiplier: number = 1): GameState {
-        let deck: Card[] = [];
+        let deck: CardData[] = [];
         for (let i = 0; i < NUM_RANKS; i++) {
             for (let j = 0; j < NUM_SUITS*deckMultiplier; j++) {
-                deck.push(new Card(i, j));
+                deck.push(new CardData(i, j));
             }
         }
         deck = shuffle(deck);
-        const hands: Card[][] = [[], [], [], []];
+        const hands: CardData[][] = [[], [], [], []];
         for (let i = 0; i < deck.length; i++) {
             hands[i % NUM_PLAYERS].push(deck[i]);
         }
@@ -63,14 +63,14 @@ export class Big3Service extends CardsService {
     }
 
     simulateGame(deckMultiplier: number) {
-        let deck: Card[] = [];
+        let deck: CardData[] = [];
         for (let i = 0; i < NUM_RANKS; i++) {
             for (let j = 0; j < NUM_SUITS*deckMultiplier; j++) {
-                deck.push(new Card(i, j));
+                deck.push(new CardData(i, j));
             }
         }
         deck = shuffle(deck);
-        const hands: Card[][] = [[], [], [], []];
+        const hands: CardData[][] = [[], [], [], []];
         for (let i = 0; i < deck.length; i++) {
             hands[i % NUM_PLAYERS].push(deck[i]);
         }
@@ -88,11 +88,11 @@ export class Big3Service extends CardsService {
 
 class UniversalState {
     constructor(
-        public deck: Card[],
+        public deck: CardData[],
         public deckMultiplier: number = 1,
-        public lastPlay: Card[] | null = null,
+        public lastPlay: CardData[] | null = null,
         public turn: number = 0,
-        public playedCards: Card[][] = [[], [], [], []],
+        public playedCards: CardData[][] = [[], [], [], []],
         public playersInRound: number[] = [0, 1, 2, 3],
     ) {
 
@@ -126,7 +126,7 @@ class UniversalState {
         return this.playersInRound.length;
     }
 
-    playCards(playerNumber: number, cards: Card[]) {
+    playCards(playerNumber: number, cards: CardData[]) {
         this.lastPlay = cards;
         this.playedCards[playerNumber].push(...cards);
         this.getNextTurn();
@@ -156,16 +156,20 @@ export class GameState {
 
     possibleNextPlayerStates: GameState[] | undefined;
     validNextPlayerStates: GameState[] | undefined;
-    possibleNextPlayerMoves: Card[][] | undefined;
-    validNextPlayerMoves: Card[][] | undefined;
+    possibleNextPlayerMoves: CardData[][] | undefined;
+    validNextPlayerMoves: CardData[][] | undefined;
 
     constructor(
         public readonly universalState: UniversalState,
         public readonly playerNumber: number,
-        private hand: Card[]
+        private hand: CardData[]
     ) {
         // sort hand by rank, then suit
         this.hand.sort((a, b) => a.rank - b.rank || a.suit - b.suit);
+    }
+
+    getHand(): CardData[] {
+        return [...this.hand];
     }
 
     isWinningState(): boolean {
@@ -176,7 +180,7 @@ export class GameState {
         return this.hand.map(c => `${c.toString()}`).join(', ');
     }
 
-    getAllOpponentUnplayedCards(): Card[] {
+    getAllOpponentUnplayedCards(): CardData[] {
         return this.universalState.deck.filter(
             card => !this.universalState.playedCards.flat().includes(card) && !this.hand.includes(card)
         );
@@ -186,18 +190,22 @@ export class GameState {
         return this.universalState.playedCards.map(cards => NUM_RANKS - cards.length);
     }
 
-    opponentPlays(cards: Card[]) {
+    opponentPlays(cards: CardData[]) {
         this.validNextPlayerMoves = undefined;
         this.validNextPlayerStates = undefined;
     }
 
-    playCards(cards: Card[]) {
+    playCards(cards: CardData[]) {
         this.hand = this.hand.filter(card => !cards.includes(card));
         this.possibleNextPlayerStates = undefined; // Reset possible states since the game state has changed.
         this.possibleNextPlayerMoves = undefined; // Reset possible moves since the last play has changed.
     }
 
-    getAllValidMoves(): Card[][] {
+    pass() {
+        this.universalState.pass(this.playerNumber);
+    }
+
+    getAllValidMoves(): CardData[][] {
         if (this.validNextPlayerMoves) return this.validNextPlayerMoves;
         const possibleMoves = this.getAllPossibleMoves();
         // If it's the first turn of the round, any move is valid.
@@ -218,14 +226,14 @@ export class GameState {
         })
     }
 
-    getAllPossibleMoves(): Card[][] {
+    getAllPossibleMoves(): CardData[][] {
         if (this.possibleNextPlayerMoves) return this.possibleNextPlayerMoves;
-        let possibleMoves: Card[][] = [];
+        let possibleMoves: CardData[][] = [];
 
         // Get singles, pairs, triples, and quads, ...
         for (let rank = 0; rank < NUM_RANKS; rank++) {
             const cardsOfRank = this.hand.filter(card => card.rank === rank);
-            let acc: Card[] = [];
+            let acc: CardData[] = [];
             for (let i = 0; i < cardsOfRank.length; i++) {
                 acc.push(cardsOfRank[i]);
                 possibleMoves.push([...acc]);
@@ -235,15 +243,16 @@ export class GameState {
         // Get straights
         for (let size = 1; size <= NUM_SUITS * this.universalState.deckMultiplier; size++) {
             for (let i = 0; i < this.hand.length; i++) {
-                let acc: Card[] = [];
+                let acc: CardData[] = [];
                 let count = 0;
-                if (this.hand[i].rank > 8) continue; // Double straights can't start with a card higher than 8 (since they need 6 cards).
+                if (this.hand[i].rank > 8) break; // Double straights can't start with a card higher than 8 (since they need 6 cards).
                 for (let j = i; j < this.hand.length - 1; j++) {
                     // Double straights can't exceed an Ace (10).
                     if (this.hand[j].rank > 10) break;
-                    if (acc.length === 0 || count === 0 && this.hand[j].rank === acc[acc.length - 1].rank + 1) {
+                    if (acc.length === 0 || (count === 0 && this.hand[j].rank === acc[acc.length - 1].rank + 1)) {
                         acc.push(this.hand[j]);
                         count++;
+                        count = count % size;
                     } else if (count != 0 && this.hand[j].rank === acc[acc.length - 1].rank) {
                         count++;
                         acc.push(this.hand[j]);
@@ -295,7 +304,7 @@ export class GameState {
         return this.possibleNextPlayerStates;
     }
 
-    isPartOfPairOrStraight(card: Card): boolean {
+    isPartOfPairOrStraight(card: CardData): boolean {
         for (const move of this.getAllPossibleMoves()) {
             if (move.length >= 2 && move.some(c => c === card)) {
                 return true;
@@ -356,7 +365,7 @@ class EvaluationData {
 // (We don't care about other turns since the player has no control over them)
 class Evaluator {
     private trackedMoves: {
-        evaluationData: EvaluationData, move: Card[], playerStarted: boolean
+        evaluationData: EvaluationData, move: CardData[], playerStarted: boolean
     }[] = [];
 
     constructor(private preloadedData?: any) {
@@ -407,7 +416,7 @@ class Evaluator {
         }
     }
 
-    getProbabilityMoveWinsRound(state: GameState, move: Card[]): number {
+    getProbabilityMoveWinsRound(state: GameState, move: CardData[]): number {
         // Probability that a move cannot be beaten by opponents. Does not factor in passing or opponent psychology.
         // This is a general heuristic only. It is not a rigorous computation.
         const numOpps = state.universalState.getNumberOfPlayersLeftInRound() - 1;
@@ -445,13 +454,13 @@ class Evaluator {
         return (1 - (1 / numOpps) ** size) ** (numOpps * numCombinationsLarger);
     }
 
-    getBestMove(state: GameState): Card[] {
+    getBestMove(state: GameState): CardData[] {
         // For each move, compute probability of winning round * probability of winning game from state on player turn
         // Add probability of losing round * probability of winning game from state on opponent turn
         const moves = state.getAllValidMoves();
         const states = state.getNextValidStates();
         if (moves.length != states.length) throw Error("Moves does not match states. Something wrong occurred.");
-        let bestMove: Card[] = [];
+        let bestMove: CardData[] = [];
         let bestEval: number = -1;
         for (let i = 0; i < moves.length; i++) {
             const evalFormat = states[i].toEvaluationFormat();
@@ -465,7 +474,7 @@ class Evaluator {
         return bestMove;
     }
 
-    trackMove(state: GameState, move: Card[], playerStarted: boolean): void {
+    trackMove(state: GameState, move: CardData[], playerStarted: boolean): void {
         // Store that a move was played in the given state to update probabilities once game is complete.
         const evaluationFormat = state.toEvaluationFormat();
 
@@ -477,7 +486,7 @@ class Evaluator {
     }
 }
 
-class Card {
+class CardData {
     constructor(public readonly rank: number, public readonly suit: number){}
 
     toString(): string {

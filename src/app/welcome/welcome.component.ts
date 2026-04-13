@@ -19,21 +19,6 @@ import { last } from 'rxjs';
             state('hovered', style({ transform: 'scale(1.1)' })),
             transition('normal => hovered', animate('200ms ease-in')),
             transition('hovered => normal', animate('200ms ease-out'))
-        ]),
-        trigger('listAnimation', [
-            transition('* => *', [
-                query(':enter, :leave', style({ position: 'relative' }), { optional: true }),
-
-                query(':enter', [
-                    style({ opacity: 0, transform: 'translateY(-10px)' }),
-                    animate('300ms ease-out', style({ opacity: 1, transform: 'none' }))
-                ], { optional: true }),
-
-                query(':leave', [
-                    animate('300ms ease-in',
-                        style({ opacity: 0, transform: 'translateY(10px)' }))
-                ], { optional: true }),
-            ])
         ])
     ],
     standalone: false
@@ -155,8 +140,8 @@ export class WelcomeComponent {
                 });
             });
         } else {
+            // first, animate
             requestAnimationFrame(() => {
-                // 3. LAST: record new positions
                 const lastRects = new Map<string, DOMRect>();
                 const elements = container.querySelectorAll('.item');
 
@@ -164,7 +149,6 @@ export class WelcomeComponent {
                     lastRects.set(el.dataset.id, el.getBoundingClientRect());
                 });
 
-                // 4. INVERT + PLAY
                 elements.forEach((el: any) => {
                     const id = el.dataset.id;
                     const first = firstRects.get(id);
@@ -183,6 +167,7 @@ export class WelcomeComponent {
 
                 });
             });
+            // then, update list once all visible items are in the right location
             setTimeout(() => updateFn(), 300);
             setTimeout(() => {
             const elements = container.querySelectorAll('.item');

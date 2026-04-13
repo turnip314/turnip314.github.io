@@ -1,6 +1,6 @@
 
 import { Colours } from "../data/Colours";
-import { Card } from "../entities/Card";
+import { Card } from "../entities/cards/Card";
 import { MenuButton } from "../entities/MenuButton";
 import { TextField } from "../entities/TextField";
 import { Game } from "../Game";
