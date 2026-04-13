@@ -10,6 +10,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon'
 
+import { provideAnimations } from '@angular/platform-browser/animations';
+
 import { LoadingComponent } from './shared/loading/loading.component';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -82,6 +84,7 @@ import { GameService } from './pixi-canvas/engine/services/game.service';
         SupabaseService,
         GameService,
         provideHttpClient(withInterceptorsFromDi()),
-        provideClientHydration(withEventReplay())
+        provideClientHydration(withEventReplay()),
+        provideAnimations()
     ] })
 export class AppModule { }

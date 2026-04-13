@@ -1,37 +1,40 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, inject, PLATFORM_ID } from '@angular/core'
+import { Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core'
 import { LoadingComponent } from '../shared/loading/loading.component';
 import { ImageService } from '../shared/services/image.service';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
+import { last } from 'rxjs';
+
+
 
 @Component({
     templateUrl: './welcome.component.html',
     styleUrls: ['./welcome.component.css'],
     animations: [
-        trigger('fadeIn', [
-            state('void', style({ opacity: 0 })),
-            transition(':enter, :leave', [
-                animate(1000)
-            ]),
-        ]),
-        trigger('mediaUp', [
-            state('initial', style({
-                transform: 'translateY(-100px)',
-            })),
-            state('final', style({
-                transform: 'translateY(-183px)',
-            })),
-            transition('initial => final, final => initial', animate('300ms ease-in')),
-        ]),
         trigger('hoverExpand', [
             state('normal', style({ transform: 'scale(1)' })),
             state('hovered', style({ transform: 'scale(1.1)' })),
             transition('normal => hovered', animate('200ms ease-in')),
             transition('hovered => normal', animate('200ms ease-out'))
         ]),
+        trigger('listAnimation', [
+            transition('* => *', [
+                query(':enter, :leave', style({ position: 'relative' }), { optional: true }),
+
+                query(':enter', [
+                    style({ opacity: 0, transform: 'translateY(-10px)' }),
+                    animate('300ms ease-out', style({ opacity: 1, transform: 'none' }))
+                ], { optional: true }),
+
+                query(':leave', [
+                    animate('300ms ease-in',
+                        style({ opacity: 0, transform: 'translateY(10px)' }))
+                ], { optional: true }),
+            ])
+        ])
     ],
     standalone: false
 })
@@ -59,7 +62,6 @@ export class WelcomeComponent {
         if (isPlatformBrowser(this.platformId)) {
             this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 720;
         }
-
     }
 
     showOverlay() {
@@ -81,20 +83,114 @@ export class WelcomeComponent {
     }
 
     panImage(left: boolean) {
-        if (left) {
-            this.start_index--;
-        } else {
-            this.start_index++;
-        }
+        this.animateReorder(
+            () => {
+                if (left) {
+                    this.start_index--;
+                } else {
+                    this.start_index++;
+                }
 
-        if (this.start_index < 0) {
-            this.start_index = this.imageObject.length - 1;
-        } else if (this.start_index >= this.imageObject.length) {
-            this.start_index = 0;
-        }
-        this.displayImages = []
-        for (let i = 0; i < this.imageObject.length; i++) {
-            this.displayImages.push(this.imageObject[(this.start_index + i) % (this.imageObject.length)]);
+                if (this.start_index < 0) {
+                    this.start_index = this.imageObject.length - 1;
+                } else if (this.start_index >= this.imageObject.length) {
+                    this.start_index = 0;
+                }
+                this.displayImages = []
+                for (let i = 0; i < this.imageObject.length; i++) {
+                    this.displayImages.push(this.imageObject[(this.start_index + i) % (this.imageObject.length)]);
+                }
+            },
+            left
+        )
+
+    }
+
+    trackById(index: number, item: any) {
+        return item.thumbImage;
+    }
+
+    @ViewChild('listContainer', { static: true })
+    container!: ElementRef<HTMLElement>;
+
+    items = [];
+
+    animateReorder(updateFn: () => void, left: boolean) {
+        const container = this.container.nativeElement;
+
+        // 1. FIRST: record initial positions
+        const firstRects = new Map<string, DOMRect>();
+        container.querySelectorAll('.item').forEach((el: any) => {
+            firstRects.set(el.dataset.id, el.getBoundingClientRect());
+        });
+
+        if (left) {
+            updateFn();
+            requestAnimationFrame(() => {
+                // 3. LAST: record new positions
+                const lastRects = new Map<string, DOMRect>();
+                const elements = container.querySelectorAll('.item');
+
+                elements.forEach((el: any) => {
+                    lastRects.set(el.dataset.id, el.getBoundingClientRect());
+                });
+
+                // 4. INVERT + PLAY
+                elements.forEach((el: any) => {
+                    const id = el.dataset.id;
+                    const first = firstRects.get(id);
+                    const last = lastRects.get(id);
+
+                    el.style.transition = 'none';
+                    el.style.transform = 'translateX(-293px)';
+
+                    // Play
+                    requestAnimationFrame(() => {
+                        el.style.transform = '';
+                        el.style.transition = 'transform 300ms ease';
+                    });
+
+                    return;
+
+                });
+            });
+        } else {
+            requestAnimationFrame(() => {
+                // 3. LAST: record new positions
+                const lastRects = new Map<string, DOMRect>();
+                const elements = container.querySelectorAll('.item');
+
+                elements.forEach((el: any) => {
+                    lastRects.set(el.dataset.id, el.getBoundingClientRect());
+                });
+
+                // 4. INVERT + PLAY
+                elements.forEach((el: any) => {
+                    const id = el.dataset.id;
+                    const first = firstRects.get(id);
+                    const last = lastRects.get(id);
+
+                    el.style.transition = 'none';
+                    el.style.transform = '';
+
+                    // Play
+                    requestAnimationFrame(() => {
+                        el.style.transform = 'translateX(-295px)';
+                        el.style.transition = 'transform 300ms ease';
+                    });
+
+                    return;
+
+                });
+            });
+            setTimeout(() => updateFn(), 300);
+            setTimeout(() => {
+            const elements = container.querySelectorAll('.item');
+
+            elements.forEach((el: any) => {
+                el.style.transform = '';
+            });
+        }, 300);
         }
     }
 }

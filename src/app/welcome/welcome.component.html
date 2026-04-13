@@ -61,12 +61,16 @@
                  name="slider"
                  (click)="panImage(true)" />
         </label>
-        <div class="slider_images">
-          <figure *ngFor='let image of displayImages'
-                  class="slider_content"
-                  (click)="showOverlay(image)">
-            <img [src]='image.thumbImage'
+        <div class="slider_images" #listContainer>
+          <figure *ngFor='let image of displayImages; let i = index; trackBy: trackById'
+                  class="item slider_content"
+                  (click)="showOverlay(image)"
+                  [attr.data-id]="image.thumbImage">
+            <div>
+              <img [src]='image.thumbImage'
                  [alt]="image.title">
+            </div>
+            
           </figure>
         </div>
         <label class="slider_control right">

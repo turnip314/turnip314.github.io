@@ -243,3 +243,7 @@ a {
 img {
   max-width: 100%;
 }
+
+.item {
+  transition: transform 300ms ease, opacity 300ms ease;
+}
