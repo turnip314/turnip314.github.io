@@ -25,7 +25,7 @@ export class TwentyFour extends Scene {
     constructor(world: any, PIXI: any, game: Game,) {
         super(world, PIXI, game);
         this.textBox = new TextField(this.world, this.PIXI, 520, 450, 200, 50, "Answer", 14);
-        this.submitButton = new MenuButton(this.world, this.PIXI, 750, 450, 55, 50, ">>", () => this.onSubmit(this.textBox?.getText()!!));
+        this.submitButton = new MenuButton(this.world, this.PIXI, 750, 450, 60, 50, ">>", () => this.onSubmit(this.textBox?.getText()!!));
 
         this.newGameButton = new MenuButton(this.world, this.PIXI, 900, 200, 250, 40, "New Game", () => this.onNewGame());
         this.revealButton = new MenuButton(this.world, this.PIXI, 900, 250, 250, 40, "Reveal Answers", () => this.onShowAnswers());
@@ -218,6 +218,10 @@ export class TwentyFour extends Scene {
             );
             this.world.addChild(text);
         }
+    }
+
+    onGeneralClick(x: number, y: number): void {
+        this.textBox?.unselect();
     }
 }
 

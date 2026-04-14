@@ -54,7 +54,7 @@ export class ColourSelectionDialog extends Entity {
         )
 
         this.submit = new MenuButton(
-            this.container, PIXI, 270, 330, 55, 50, ">>", () => {
+            this.container, PIXI, 270, 330, 60, 50, ">>", () => {
                 if (this.clue?.getText() == "") return;
                 if (this.x == -1) return;
                 if (this.y == -1) return;

@@ -11,7 +11,7 @@ export class TextField extends Entity {
     private selected: boolean = false;
     private input = new Input();
     private selectionDelay: number = 5;
-    private charLimit = 10;
+    private charLimit = 9;
     constructor(
         world: any,
         PIXI: any,
@@ -20,13 +20,13 @@ export class TextField extends Entity {
         width: number,
         height: number,
         name: string,
-        charLimit: number = 10
+        charLimit: number = 9
     ) {
         super(world, PIXI);
         this.name = name;
 
         this.block = new this.PIXI.Graphics()
-            .rect(
+            .roundRect(
                 x_start,
                 y_start,
                 width,
@@ -34,9 +34,10 @@ export class TextField extends Entity {
             )
             .fill({ color: Colours.LightGray })
             .stroke({ width: 4, color: Colours.White });
+        this.block.cursor = "text";
         this.textBox = new PIXI.Text("", { fontFamily: 'Arial', fontSize: 24 * height / 40, fill: 0x000000, align: 'center' });
         this.textBox.x = x_start + 10;
-        this.textBox.y = y_start + 10;
+        this.textBox.y = y_start + 9;
 
         this.block.eventMode = 'static';
         this.block.on('pointerdown', (event: any) => {
@@ -59,7 +60,7 @@ export class TextField extends Entity {
 
         if (this.selected) {
             this.textBox.style.fill = Colours.Black;
-            if (this.flashTimer < 0) this.textBox.text = this.text + "|";
+            if (this.flashTimer < 0) this.textBox.text = this.text + "│";
             else this.textBox.text = this.text;
             this.selectionDelay -= delta;
         } else if (this.text == "") {
@@ -80,7 +81,6 @@ export class TextField extends Entity {
     select(): void {
         this.selected = true;
         this.selectionDelay = 5;
-        console.log(123)
     }
 
     unselect(): void {
