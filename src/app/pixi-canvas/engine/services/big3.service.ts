@@ -11,7 +11,8 @@ const NUM_PLAYERS = 4;
     providedIn: 'root'
 })
 export class Big3Service extends CardsService {
-    private gameState: GameState | null = null;
+    private playerGameState: GameState | null = null;
+    private evaluator: Evaluator | undefined;
     // Keeps track of all cards played by each player.
     private playerNumber = 0;
     private gameStates: GameState[] = [];
@@ -21,14 +22,14 @@ export class Big3Service extends CardsService {
         super(supabaseService);
     }
 
-    getEvaluationData(): void {
-        if (GameState.evaluationData) return;
+    loadEvaluator(): void {
+        if (this.evaluator) return;
 
         // Load evaluation data from file (this is a large file, so we load it on demand rather than at startup)
         fetch('assets/data/big3.json')
             .then(response => response.json())
             .then(data => {
-                GameState.loadEvaluationData(data);
+                this.evaluator = new Evaluator(data)
             })
             .catch(error => {
                 console.error('Error loading evaluation data:', error);
@@ -38,7 +39,7 @@ export class Big3Service extends CardsService {
     createNewGame(deckMultiplier: number = 1): GameState {
         let deck: CardData[] = [];
         for (let i = 0; i < NUM_RANKS; i++) {
-            for (let j = 0; j < NUM_SUITS*deckMultiplier; j++) {
+            for (let j = 0; j < NUM_SUITS * deckMultiplier; j++) {
                 deck.push(new CardData(i, j));
             }
         }
@@ -49,11 +50,12 @@ export class Big3Service extends CardsService {
         }
         deck.sort((a, b) => a.rank - b.rank || a.suit - b.suit);
 
-        const universalState: UniversalState = new UniversalState(deck);
+        this.universalState = new UniversalState(deck);
         for (let i = 0; i < NUM_PLAYERS; i++) {
-            const gameState = new GameState(universalState, i, hands[i])
+            const gameState = new GameState(this.universalState, i, hands[i])
             this.gameStates.push(gameState)
         }
+        this.playerGameState = this.gameStates[this.playerNumber];
         return this.gameStates[this.playerNumber];
     }
 
@@ -65,7 +67,7 @@ export class Big3Service extends CardsService {
     simulateGame(deckMultiplier: number) {
         let deck: CardData[] = [];
         for (let i = 0; i < NUM_RANKS; i++) {
-            for (let j = 0; j < NUM_SUITS*deckMultiplier; j++) {
+            for (let j = 0; j < NUM_SUITS * deckMultiplier; j++) {
                 deck.push(new CardData(i, j));
             }
         }
@@ -78,11 +80,66 @@ export class Big3Service extends CardsService {
 
         this.universalState = new UniversalState(deck);
 
-        const gameStates: GameState[] = [];
+        this.gameStates = [];
         for (let i = 0; i < NUM_PLAYERS; i++) {
             const gameState = new GameState(this.universalState, i, hands[i])
-            gameStates.push(gameState)
+            this.gameStates.push(gameState)
         }
+        this.playerGameState = this.gameStates[this.playerNumber];
+    }
+
+    opponentMakesNextMove(): CardData[] | null {
+        console.log(this.universalState?.lastPlay)
+        const turn = this.universalState?.turn!!;
+        if (turn == this.playerNumber) throw Error("It's the player's turn!");
+        const move = this.evaluator?.getBestMove(this.gameStates[turn]) || null;
+        if (move) {
+            this.gameStates[turn].playCards(move);
+            this.gameStates.forEach(state => state.resetCachedStates());
+        } else {
+            this.universalState?.pass(turn);
+            this.gameStates.forEach(state => state.resetCachedStates());
+        }
+
+        return move;
+    }
+
+    playCards(selectedCards: CardData[]): boolean {
+        if (this.playerGameState?.playerNumber != this.universalState?.turn) return false;
+        const validMoves = this.playerGameState?.getAllValidMoves() || [];
+        const isValid = validMoves.some(
+            move => {
+                if (move.length != selectedCards?.length) return false;
+                for (let j = 0; j < move.length; j++) {
+                    if (move[j].rank != selectedCards[j].rank) return false;
+                }
+                return true;
+            }
+        )
+        if (isValid) {
+            this.playerGameState?.playCards(selectedCards);
+        }
+        return isValid;
+    }
+
+    getOpponentCards(): CardData[] {
+        return this.universalState!.deck.filter(
+            card => !this.playerGameState?.getHand().includes(card) && 
+                    !this.universalState?.playedCards.flat().includes(card)
+        );
+    }
+
+    getPlayersInRound(): number[] {
+        return this.universalState?.playersInRound!;
+    }
+
+    getCurrentTurn(): number {
+        return this.universalState!.turn;
+    }
+    pass(): boolean {
+        if (this.playerNumber != this.universalState?.turn) return false;
+        this.playerGameState?.pass();
+        return true
     }
 }
 
@@ -126,7 +183,7 @@ class UniversalState {
         return this.playersInRound.length;
     }
 
-    playCards(playerNumber: number, cards: CardData[]) {
+    playCards(playerNumber: number, cards: CardData[], checkValid: boolean = false) {
         this.lastPlay = cards;
         this.playedCards[playerNumber].push(...cards);
         this.getNextTurn();
@@ -136,22 +193,24 @@ class UniversalState {
         this.playersInRound = this.playersInRound.filter(p => p != playerNumber);
         if (this.playersInRound.length == 1) {
             this.lastPlay = null;
+            this.turn = this.playersInRound[0];
             this.playersInRound = [];
             for (let i = 0; i < NUM_PLAYERS; i++) {
                 if (this.isPlayerInGame(i)) this.playersInRound.push(i);
             }
+            
+        } else {
+            this.getNextTurn();
         }
-        this.getNextTurn();
     }
 
     getNextTurn() {
-        this.turn = (this.turn + 1)%NUM_PLAYERS;
-        while (!this.isPlayerInGame(this.turn)) this.turn = (this.turn + 1)%NUM_PLAYERS;
+        this.turn = (this.turn + 1) % NUM_PLAYERS;
+        while (!this.isPlayerInGame(this.turn)) this.turn = (this.turn + 1) % NUM_PLAYERS;
     }
 }
 
 export class GameState {
-    static evaluationData: Evaluator | undefined; // This will hold precomputed evaluation data for game states, loaded from a file.
     static cachedDistances: Map<string, number> = new Map(); // Cache for distances to winning states.
 
     possibleNextPlayerStates: GameState[] | undefined;
@@ -190,13 +249,14 @@ export class GameState {
         return this.universalState.playedCards.map(cards => NUM_RANKS - cards.length);
     }
 
-    opponentPlays(cards: CardData[]) {
+    resetCachedStates() {
         this.validNextPlayerMoves = undefined;
         this.validNextPlayerStates = undefined;
     }
 
     playCards(cards: CardData[]) {
         this.hand = this.hand.filter(card => !cards.includes(card));
+        this.universalState.playCards(this.playerNumber, cards);
         this.possibleNextPlayerStates = undefined; // Reset possible states since the game state has changed.
         this.possibleNextPlayerMoves = undefined; // Reset possible moves since the last play has changed.
     }
@@ -280,7 +340,7 @@ export class GameState {
                     this.universalState.deck,
                     this.universalState.deckMultiplier,
                     this.universalState.lastPlay,
-                    (this.universalState.turn + 1)%NUM_PLAYERS,
+                    (this.universalState.turn + 1) % NUM_PLAYERS,
                     this.universalState.playedCards.map((cards, index) => index === this.playerNumber ? [...cards, ...move] : cards)
                 ),
                 this.playerNumber,
@@ -328,10 +388,6 @@ export class GameState {
         return distance;
     }
 
-    // A static loader for evaluation data
-    static loadEvaluationData(data: any): void {
-        GameState.evaluationData = new Evaluator(data);
-    }
 
     toEvaluationFormat(): EvaluationData {
         // Convert the game state to a format that can be used for lookups in the evaluation data.
@@ -388,7 +444,7 @@ class Evaluator {
         const distanceBin = evaluationData.shortestDistanceToWinning; // distance to winning can be used directly as a key since it's a small integer
         const averageHandValueBin = this.getQuantileBin(evaluationData.averageHandValue, evaluationData.playerCardsLeft); // bin average hand value into quantiles based on number of cards left in hand
         const averageTotalValueBin = this.getQuantileBin(evaluationData.averageTotalValue, evaluationData.numCardsLeft); // bin average total value into quantiles based on number of cards left unplayed
-        const leadingOpponentCardsLeftBin = Math.floor((evaluationData.leadingOpponentCardsLeft+1)/2); // number of leading opponent cards left is divided by 2 to reduce space
+        const leadingOpponentCardsLeftBin = Math.floor((evaluationData.leadingOpponentCardsLeft + 1) / 2); // number of leading opponent cards left is divided by 2 to reduce space
         const largeCardsBin = evaluationData.numLargeCards;
         return `${distanceBin}-${averageHandValueBin}-${averageTotalValueBin}-${leadingOpponentCardsLeftBin}-${largeCardsBin}`;
     }
@@ -396,22 +452,22 @@ class Evaluator {
     getProbabilityOfWinning(evaluationData: EvaluationData, playerGoesFirst: boolean): number {
         const key = this.formatEvaluationDataToKey(evaluationData);
         const playersLeft = evaluationData.playersLeft;
-        if (this.preloadedData[playersLeft.toString()][playerGoesFirst.toString()][key]) {
+        if (this.preloadedData[playersLeft.toString()]?.[playerGoesFirst.toString()]?.[key]) {
             return this.preloadedData[playersLeft.toString()][playerGoesFirst.toString()][key];
         } else {
             // Placeholder heuristic: Probability of winning increases with average hand value and opponent cards left and decreases with distance to winning.
             const averageHandValueBin = this.getQuantileBin(evaluationData.averageHandValue, evaluationData.playerCardsLeft);
             const distance = evaluationData.shortestDistanceToWinning;
-            const leadingOpponentCardsLeft = Math.floor((evaluationData.leadingOpponentCardsLeft+1)/2);
+            const leadingOpponentCardsLeft = Math.floor((evaluationData.leadingOpponentCardsLeft + 1) / 2);
             const largeCardsBin = evaluationData.numLargeCards;
             const heuristic = Math.min(
                 Math.max(
-                    ((playerGoesFirst ? 1 : 0) * 3 + averageHandValueBin  + largeCardsBin + leadingOpponentCardsLeft - distance) / (4 * playersLeft),
+                    ((playerGoesFirst ? 1 : 0) * 3 + averageHandValueBin + largeCardsBin + leadingOpponentCardsLeft - distance) / (4 * playersLeft),
                     0.1
                 ),
                 0.9
             );
-            this.preloadedData[playersLeft][playerGoesFirst ? 1 : 0][key] = heuristic;
+            this.preloadedData[playersLeft][playerGoesFirst ? "true" : "false"][key] = heuristic;
             return heuristic;
         }
     }
@@ -454,7 +510,7 @@ class Evaluator {
         return (1 - (1 / numOpps) ** size) ** (numOpps * numCombinationsLarger);
     }
 
-    getBestMove(state: GameState): CardData[] {
+    getBestMove(state: GameState): CardData[] | null {
         // For each move, compute probability of winning round * probability of winning game from state on player turn
         // Add probability of losing round * probability of winning game from state on opponent turn
         const moves = state.getAllValidMoves();
@@ -471,6 +527,10 @@ class Evaluator {
                 bestEval = curEval;
             }
         }
+
+        // Evaluation of passing
+        let curEval = this.getProbabilityOfWinning(state.toEvaluationFormat(), false)
+        if (curEval > bestEval) return null;
         return bestMove;
     }
 
@@ -487,7 +547,7 @@ class Evaluator {
 }
 
 class CardData {
-    constructor(public readonly rank: number, public readonly suit: number){}
+    constructor(public readonly rank: number, public readonly suit: number) { }
 
     toString(): string {
         return `${this.rank}-${this.suit}`

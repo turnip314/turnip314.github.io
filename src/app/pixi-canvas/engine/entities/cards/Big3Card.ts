@@ -10,7 +10,7 @@ export class Big3Card extends Card {
         public readonly card: { rank: number, suit: number },
         private onClick: () => void = () => { }
     ) {
-        super(world, PIXI, 1 + (card.rank + 3) % 13, card.suit, 0, 0, onClick);
+        super(world, PIXI, 1 + (card.rank + 3) % 13, card.suit, -100, -100, onClick);
     }
 
     toggleSelect() {
@@ -24,7 +24,7 @@ export class Big3Card extends Card {
     }
 
     play() {
-        
+
     }
 
     update(delta: number): void {

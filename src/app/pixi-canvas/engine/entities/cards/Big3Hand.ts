@@ -40,7 +40,7 @@ export class Big3Hand extends Entity {
         const middle = this.cards.length / 2.0;
         for (let i = 0; i < this.cards.length; i++) {
             // The +1 is because PIXI behaves weirdly when x is set to 0, for some unknown reason
-            const result = this.cards[i].changePosition(600+(i-middle) * 30+1, 580, i+1);
+            const result = this.cards[i].changePosition(640+(i-middle) * 30+1, 580, i+1);
             if (!result) {
                 setTimeout(() => this.display(), 300);
                 break;

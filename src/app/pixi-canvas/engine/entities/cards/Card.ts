@@ -4,6 +4,7 @@ import { Entity } from "../../Entity";
 export class Card extends Entity {
     protected readonly SIZE: number = 32;
     protected static texture: any;
+    protected static backTexture: any;
     protected sprite: any;
     constructor(
         world: any,
@@ -40,8 +41,40 @@ export class Card extends Entity {
         return Card.texture;
     }
 
+    protected async getBackTexture() {
+        if (Card.backTexture == undefined) Card.backTexture = await this.PIXI.Assets.load('../../../../assets/sprites/card_back.png');
+        return Card.backTexture;
+    }
+
     update(delta: number): void {
 
+    }
+
+    show() {
+        if (!this.sprite) { 
+            setTimeout(() => this.show(), 300);
+            return;
+        }
+        const rectangle = new this.PIXI.Rectangle(73 * (this.value - 1), 98 * this.suit, 73, 98);
+        this.getTexture().then(
+            texture => {
+                const croppedTexture = new this.PIXI.Texture({
+                    source: texture.source,
+                    frame: rectangle
+                });
+                this.sprite.texture = croppedTexture
+            }
+        )
+    }
+
+    hide() {
+        if (!this.sprite) { 
+            setTimeout(() => this.hide(), 300);
+            return;
+        }
+        this.getBackTexture().then(
+            texture => this.sprite.texture = texture
+        );
     }
 
     toggleSelect() {

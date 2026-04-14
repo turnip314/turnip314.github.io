@@ -488,5 +488,6 @@ export class Colours {
     static readonly Transparent = "#00000000";
     static readonly Green = "#00ff00";
     static readonly Red = "#ff0000";
+    static readonly Yellow = "#ffff00";
 }
 
