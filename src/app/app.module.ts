@@ -8,6 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon'
 
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -63,6 +64,7 @@ import { GameService } from './pixi-canvas/engine/services/game.service';
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatTableModule,
+        MatSortModule,
         MatIconModule,
         ReactiveFormsModule,
         FormsModule,

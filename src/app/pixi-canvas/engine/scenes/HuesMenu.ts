@@ -55,6 +55,9 @@ export class HuesMenu extends Scene {
 
         } else if (this.gameIntention == "join") {
             const result = await this.gameService.getGame(code, nickname)
+            if (result.metadata == "started") {
+                return;
+            }
             let huesScene = new Hues(this.world, this.PIXI, nickname, code, this.game, this.gameService);
             this.game.changeScene(huesScene);
         }

@@ -6,6 +6,7 @@ import { HuesService } from "./services/hues.service";
 import { TwentyFour } from "./scenes/TwentyFour";
 import { Big3 } from "./scenes/Big3";
 import { Big3Service } from "./services/big3.service";
+import { Textures } from "./data/Textures";
 
 export class Game {
     private currentScene: Scene | undefined;
@@ -35,11 +36,14 @@ export class Game {
                 this.currentScene = new HuesMenu(this.world, this.PIXI, this, this.gameService.toChildService(HuesService) as HuesService);
             } break;
             case "24": {
-                console.log(234)
-                this.currentScene = new TwentyFour(this.world, this.PIXI, this);
+                Textures.loadCardTextures(this.PIXI).then(
+                    () => this.currentScene = new TwentyFour(this.world, this.PIXI, this)
+                );
             } break;
             case "big3": {
-                this.currentScene = new Big3(this.world, this.PIXI, this, this.gameService.toChildService(Big3Service) as Big3Service);
+                Textures.loadCardTextures(this.PIXI).then(
+                    () => this.currentScene = new Big3(this.world, this.PIXI, this, this.gameService.toChildService(Big3Service) as Big3Service)
+                );
             }
             default: return;
         }

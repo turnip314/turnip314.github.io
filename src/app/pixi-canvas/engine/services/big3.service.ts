@@ -136,6 +136,11 @@ export class Big3Service extends CardsService {
     getCurrentTurn(): number {
         return this.universalState!.turn;
     }
+
+    getNextTurn(): number {
+        return this.universalState?.getNextTurn()!!;
+    }
+
     pass(): boolean {
         if (this.playerNumber != this.universalState?.turn) return false;
         this.playerGameState?.pass();
@@ -186,11 +191,13 @@ class UniversalState {
     playCards(playerNumber: number, cards: CardData[], checkValid: boolean = false) {
         this.lastPlay = cards;
         this.playedCards[playerNumber].push(...cards);
-        this.getNextTurn();
     }
 
     pass(playerNumber: number) {
         this.playersInRound = this.playersInRound.filter(p => p != playerNumber);
+    }
+
+    getNextTurn(): number {
         if (this.playersInRound.length == 1) {
             this.lastPlay = null;
             this.turn = this.playersInRound[0];
@@ -198,15 +205,12 @@ class UniversalState {
             for (let i = 0; i < NUM_PLAYERS; i++) {
                 if (this.isPlayerInGame(i)) this.playersInRound.push(i);
             }
-            
         } else {
-            this.getNextTurn();
+            this.turn = (this.turn + 1) % NUM_PLAYERS;
+            while (!this.isPlayerInRound(this.turn)) this.turn = (this.turn + 1) % NUM_PLAYERS;
         }
-    }
-
-    getNextTurn() {
-        this.turn = (this.turn + 1) % NUM_PLAYERS;
-        while (!this.isPlayerInGame(this.turn)) this.turn = (this.turn + 1) % NUM_PLAYERS;
+        
+        return this.turn;
     }
 }
 
