@@ -22,6 +22,7 @@ export class AcademicsComponent implements OnInit {
     { code: 'CS 656', name: 'Computer Networks', instructor: 'Uzma Maroof', year: 2025 },
     { code: 'CS 860', name: 'Commutative Algebra and Complexity', instructor: 'Rafael Oliveira', year: 2025 },
     { code: 'MATH 900', name: 'University Mathematics Teaching Techniques', instructor: 'Zack Cramer', year: 2026 },
+    { code: 'CS 860', name: 'Algorithmic Spectral Graph Theory', instructor: 'Lap Chi Lau', year: 2026 },
   ]
 
   private readonly courses = {

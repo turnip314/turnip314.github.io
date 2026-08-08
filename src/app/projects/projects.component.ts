@@ -13,6 +13,18 @@ export class ProjectsComponent {
 
     presentations = [
         {
+            title: "Assessing Student Learning in Technology and Computer Science in Light of AI Usage",
+            locations: [
+                "Graduate Students/Post-docs Teaching in Higher Education Conference, Aug. 2026.",
+            ],
+            links: [
+                {
+                    name: "Slides",
+                    url: "/assets/pdfs/GSPTHE_2026.pdf"
+                },
+            ]
+        },
+        {
             title: "Applications of Computer Algebra in Analytic Combinatorics",
             locations: [
                 "University of Waterloo, Symbolic Computation Group Seminar, Feb. 2026.",
