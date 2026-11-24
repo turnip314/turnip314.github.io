@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../contact.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { ContactService } from '../contact.service';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private builder: FormBuilder, private contact: ContactService) { }
+    constructor(private builder: FormBuilder, private contact: ContactService) { }
 
-  ngOnInit() {
+    ngOnInit() {
 
-  }
+    }
 
 }

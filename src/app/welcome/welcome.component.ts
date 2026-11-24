@@ -3,11 +3,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core'
 import { LoadingComponent } from '../shared/loading/loading.component';
 import { ImageService } from '../shared/services/image.service';
-import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
-import { last } from 'rxjs';
-
 
 
 @Component({
@@ -170,12 +168,12 @@ export class WelcomeComponent {
             // then, update list once all visible items are in the right location
             setTimeout(() => updateFn(), 300);
             setTimeout(() => {
-            const elements = container.querySelectorAll('.item');
+                const elements = container.querySelectorAll('.item');
 
-            elements.forEach((el: any) => {
-                el.style.transform = '';
-            });
-        }, 300);
+                elements.forEach((el: any) => {
+                    el.style.transform = '';
+                });
+            }, 300);
         }
     }
 }

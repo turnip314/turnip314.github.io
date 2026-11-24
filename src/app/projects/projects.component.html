@@ -1,63 +1,89 @@
 <section class='style3 p-h-10'>
     <div class='medium-break'></div>
     <h2>Research Projects</h2>
-    <hr class='line-break-light'/>
+    <hr class='line-break-light' />
     <div class="grid-item">
-        <div class="m-t-10">
+        <div class="description">
             <h3>Sage ACSV</h3>
-            <hr class='line-break-light'/>
+            <hr class='line-break-light' />
             <p>
-                An open-source computer algebra package for computing asymptotic terms of rational generating functions. Built using SageMath.
-                This work was done as part of a co-authored research project by Benjamin Hackl, Andrew Luo (myself), Stephen Melczer, Jesse Selover, and Elaine Wong.
+                An open-source computer algebra package for computing asymptotic terms of rational generating functions.
+                Built using SageMath.
+                This work was done as part of a co-authored research project by Benjamin Hackl, Andrew Luo (myself),
+                Stephen Melczer, Jesse Selover, and Elaine Wong.
                 My part was sponsored by the NSERC undergraduate student research program in 2022.
             </p>
             <div class="small-break"></div>
             <div class="flex-container horizontal even-spacing">
-                <a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/sage-acsv/">
+                <a class="project-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   href="https://pypi.org/project/sage-acsv/">
                     <div class="flex-container vertical">
-                        <img src="./assets/images/pypi.png" style="width: 80px; height: 77.25px; align-self: center;">
+                        <img src="./assets/images/pypi.png"
+                             alt="PyPI">
                         <p>Link to PyPi</p>
                     </div>
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/ACSVMath/sage_acsv/">
+                <a class="project-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   href="https://github.com/ACSVMath/sage_acsv/">
                     <div class="flex-container vertical">
-                        <img src="./assets/images/github.png" style="width: 77.25px; height: 77.25px; align-self: center;">
+                        <img src="./assets/images/github.png"
+                             alt="GitHub">
                         <p>Link to Github</p>
                     </div>
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://acsvmath.github.io/sage_acsv/">
+                <a class="project-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   href="https://acsvmath.github.io/sage_acsv/">
                     <div class="flex-container vertical">
-                        <img src="https://acsvmath.github.io/sage_acsv/_static/acsv-logo.svg" style="width: 77.25px; height: 77.25px; align-self: center;">
+                        <img src="https://acsvmath.github.io/sage_acsv/_static/acsv-logo.svg"
+                             alt="Sage ACSV documentation">
                         <p>Link to Documentation</p>
                     </div>
                 </a>
             </div>
             <div class="small-break"></div>
             <p>
-                Since its initial release, I have contributed to further improvements of the package, including adding support
-                for a wider range of rational generating functions whose singular variety is not necessarily smooth. This is part of
-                a joint work with Benjamin Hackl, Andrew Luo (myself), Stephen Melczer, Eric Schost. My work is partially funded by the 
+                Since its initial release, I have contributed to further improvements of the package, including adding
+                support
+                for a wider range of rational generating functions whose singular variety is not necessarily smooth.
+                This is part of
+                a joint work with Benjamin Hackl, Andrew Luo (myself), Stephen Melczer, Eric Schost. My work is
+                partially funded by the
                 Queen Elizabeth II Scholarship in Science & Technology and NSERC Canada Graduate Scholarship - Master's.
             </p>
         </div>
-        <div class="description m-t-10">
+        <div class="description">
             <h3>Sage Deps</h3>
-            <hr class='line-break-light'/>
-            <p >
-                A dependency analysis tool for SageMath. Built using Python. Performs import and usage dependency analysis of classes defined in SageMath
+            <hr class='line-break-light' />
+            <p>
+                A dependency analysis tool for SageMath. Built using Python. Performs import and usage dependency
+                analysis of classes defined in SageMath
                 across its different Python and Cython interfaces.
             </p>
             <div class="small-break"></div>
             <div class="flex-container horizontal even-spacing">
-                <a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/sage-deps/">
-                    <div class="flex-container vertical paragraph-text project">
-                        <img src="./assets/images/pypi.png" style="width: 80px; height: 77.25px; align-self: center;">
+                <a class="project-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   href="https://pypi.org/project/sage-deps/">
+                    <div class="flex-container vertical">
+                        <img src="./assets/images/pypi.png"
+                             alt="PyPI">
                         <p>Link to PyPi</p>
                     </div>
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/turnip314/sage-deps">
-                    <div class="flex-container vertical paragraph-text project">
-                        <img src="./assets/images/github.png" style="width: 77.25px; height: 77.25px; align-self: center;">
+                <a class="project-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   href="https://github.com/turnip314/sage-deps">
+                    <div class="flex-container vertical">
+                        <img src="./assets/images/github.png"
+                             alt="GitHub">
                         <p>Link to GitHub</p>
                     </div>
                 </a>
@@ -70,32 +96,23 @@
 <section class='style3 alt p-h-10'>
     <div class="medium-break"></div>
     <h2>Presentations</h2>
-    <hr class='line-break-light'/>
-    <div *ngFor="let presentation of presentations">
-        <div class="description m-t-10">
+    <hr class='line-break-light' />
+    <div class="grid-item">
+        <div *ngFor="let presentation of presentations"
+             class="description">
             <h3>{{presentation.title}}</h3>
-            <hr class='line-break-light'/>
+            <hr class='line-break-light' />
             <p *ngFor="let location of presentation.locations">
                 {{location}}
             </p>
-            <ul class="flex-container vertical fit">
-                <p>
-                    <li *ngFor="let link of presentation.links">
-                        <a target="_blank" rel="noopener noreferrer" href="{{link.url}}">
-                            {{link.name}}
-                        </a>
-                    </li>
-                </p>
-                
-            </ul>
+            <div class="flex-container horizontal link-row">
+                <a *ngFor="let link of presentation.links"
+                   class="link-button"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   href="{{link.url}}">{{link.name}}</a>
+            </div>
         </div>
     </div>
     <div class="medium-break"></div>
 </section>
-
-<div class="flex-container grid">
-    
-</div>
-
-
-<div class="medium-break"></div>

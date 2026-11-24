@@ -1,6 +1,6 @@
 .pixi-container {
   width: 100vw;
-  height: 99vh;
+  height: calc(100dvh - var(--nav-height));
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center error-page">
     <div style="height: 150px;"></div>
     <h1>
         Uh oh!
@@ -7,15 +7,13 @@
         Looks like this page doesn't exist.
     </h3>
     <div style="height: 20px;"></div>
-    <button class="btn btn-warning" [routerLink]="['/home']">
+    <button class="link-button"
+            [routerLink]="['/home']">
         Go Back!
     </button>
-
     <div style="height: 30px;"></div>
-
     <div class="text-center">
         <img src="./assets/images/bad-fib.jpg"
-             class="img-responsive center-block"
-             style="height:300px;padding-bottom:50px" />
+             alt="Nautilus shell with a golden spiral overlay" />
     </div>
 </div>

@@ -1,168 +1,171 @@
 <section class="flex-container vertical about-me style1">
-  <div *ngIf="!isMobile"
-       class='medium-break'></div>
-  <div class='text-region'>
-    <!--Intro -->
-    <div class="title-text container-fluid">
-      <div class='small-break'></div>
-      <h1>
-        Hello! My name is Andrew Luo.
-      </h1>
-      <div class='small-break'></div>
-    </div>
+    <div *ngIf="!isMobile"
+         class='medium-break'></div>
+    <div class='text-region'>
+        <!--Intro -->
+        <div class="title-text container-fluid">
+            <div class='small-break'></div>
+            <h1>
+                Hello! My name is Andrew Luo.
+            </h1>
+            <div class='small-break'></div>
+        </div>
 
-    <div class='small-break'></div>
-    <div class="circle-container">
-      <img class='circle-img'
-           src="https://i.ibb.co/fqBsW6b/me.png"
-           alt="Me"
-           loading="eager">
-    </div>
-    <div class='small-break'></div>
+        <div class='small-break'></div>
+        <div class="circle-container">
+            <img class='circle-img'
+                 src="https://i.ibb.co/fqBsW6b/me.png"
+                 alt="Me"
+                 loading="eager">
+        </div>
+        <div class='small-break'></div>
 
-    <!--Intro Continued-->
-    <div class="container-fluid">
-      <div class='small-break'></div>
-      <p class='text-center'>
-        I'm a PhD in Computer Science student at the <a target="_blank"
-           rel="noopener noreferrer"
-           href='https://uwaterloo.ca/'>University of Waterloo</a>.
-      </p>
-      <div class='small-break'></div>
-      <p class='text-center'>
-        I completed my Bachelor of Mathematics at the University of Waterloo with triple majors in Computer Science,
-        Pure Mathematics, and Combinatorics & Optimization.
-      </p>
-      <div class='medium-break'></div>
+        <!--Intro Continued-->
+        <div class="container-fluid">
+            <div class='small-break'></div>
+            <p class='text-center'>
+                I'm a PhD in Computer Science student at the <a target="_blank"
+                   rel="noopener noreferrer"
+                   href='https://uwaterloo.ca/'>University of Waterloo</a>.
+            </p>
+            <div class='small-break'></div>
+            <p class='text-center'>
+                I completed my Bachelor of Mathematics at the University of Waterloo with triple majors in Computer
+                Science,
+                Pure Mathematics, and Combinatorics & Optimization.
+            </p>
+            <div class='medium-break'></div>
+        </div>
     </div>
-  </div>
-  <div class="small-break"></div>
+    <div class="small-break"></div>
 </section>
 
 <section class="flex-container vertical about-me style3">
-  <div class='medium-break'></div>
-  <div class='text-region'>
-    <h2>About Me</h2>
-    <hr class='line-break-light'>
-    <p>
-      I love mathematical problem solving. My favourite area of math is enumerative combinatorics, and my current research is in the use of
-      computational algebraic techniques to determine asymptotic growth of combinatorial sequences through their generating functions.
-      I have participated in many math contests in the past including the Euclid Contest, the Canadian Open Math Challenge, the
-      Canadian Mathematical Olympiad, and the American Invitational Math Exam. I also currently help with the marking of the Euclid Contest!
-      Feel free to check out some of my <a [routerLink]="['/projects']">projects</a> and <a [routerLink]="['/academics']">academic work</a>.
-      You can <a [routerLink]="['/contact']">contact me</a> if you have any questions or want to chat!
-    </p>
-    <div class="small-break"></div>
+    <div class='medium-break'></div>
+    <div class='text-region'>
+        <h2>About Me</h2>
+        <hr class='line-break-light'>
+        <p>
+            I love mathematical problem solving. My favourite area of math is enumerative combinatorics, and my current
+            research is in the use of
+            computational algebraic techniques to determine asymptotic growth of combinatorial sequences through their
+            generating functions.
+            I have participated in many math contests in the past including the Euclid Contest, the Canadian Open Math
+            Challenge, the
+            Canadian Mathematical Olympiad, and the American Invitational Math Exam. I also currently help with the
+            marking of the Euclid Contest!
+            Feel free to check out some of my <a [routerLink]="['/projects']">projects</a> and <a
+               [routerLink]="['/academics']">academic work</a>.
+            You can <a [routerLink]="['/contact']">contact me</a> if you have any questions or want to chat!
+        </p>
+        <div class="small-break"></div>
 
-    <div class="container-fluid">
-      <div class="slider">
-        <label class="slider_control left">
-          <input type="radio"
-                 name="slider"
-                 (click)="panImage(true)" />
-        </label>
-        <div class="slider_images" #listContainer>
-          <figure *ngFor='let image of displayImages; let i = index; trackBy: trackById'
-                  class="item slider_content"
-                  (click)="showOverlay(image)"
-                  [attr.data-id]="image.thumbImage">
-            <div>
-              <img [src]='image.thumbImage'
-                 [alt]="image.title">
+        <div class="container-fluid">
+            <div class="slider">
+                <label class="slider_control left">
+                    <input type="radio"
+                           name="slider"
+                           (click)="panImage(true)" />
+                </label>
+                <div class="slider_images"
+                     #listContainer>
+                    <figure *ngFor='let image of displayImages; let i = index; trackBy: trackById'
+                            class="item slider_content"
+                            (click)="showOverlay(image)"
+                            [attr.data-id]="image.thumbImage">
+                        <div>
+                            <img [src]='image.thumbImage'
+                                 [alt]="image.title">
+                        </div>
+
+                    </figure>
+                </div>
+                <label class="slider_control right">
+                    <input type="radio"
+                           name="slider"
+                           (click)="panImage(false)" />
+                </label>
             </div>
-            
-          </figure>
         </div>
-        <label class="slider_control right">
-          <input type="radio"
-                 name="slider"
-                 (click)="panImage(false)" />
-        </label>
-      </div>
+        <div class='medium-break'></div>
+        <p>
+            Outside of academics, I enjoy rock climbing, exploring nature, and travelling. So far, I have been to six
+            different countries across three continents
+            (not including layovers). I hope to increase these numbers once I have the time and money (i.e. when I am
+            out of school...). You can see some the photos
+            I have taken <a [routerLink]="['/gallery']">here</a>.
+        </p>
+
     </div>
     <div class='medium-break'></div>
-    <p>
-      Outside of academics, I enjoy rock climbing, exploring nature, and travelling. So far, I have been to six different countries across three continents
-      (not including layovers). I hope to increase these numbers once I have the time and money (i.e. when I am out of school...). You can see some the photos
-      I have taken <a [routerLink]="['/gallery']">here</a>.
-    </p>
-    
-  </div>
-  <div class='medium-break'></div>
 </section>
 
 <section class="flex-container vertical style3 alt">
-  <div class='medium-break'></div>
-  <div class="text-region flex-container vertical">
-    <h2>Where You Might Know Me...</h2>
-    <hr class='line-break-light'>
-    <div class='small-break'></div>
-    <div class='flex-container horizontal'>
-      <div class="icon"><img
-             src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/University_of_Waterloo_seal.svg/960px-University_of_Waterloo_seal.svg.png">
-      </div>
-      <div class="text-region">
-        <h3>University of Waterloo</h3>
-        <h4>2018 - Present</h4>
-        <hr class='line-break-light'>
-        <p>
-          I first joined the University of Waterloo in 2018 as an undergraduate student, and have stayed here since for my
-          graduate studies.
-        </p>
-      </div>
-    </div>
-    <div class='small-break'></div>
-    <div class='flex-container horizontal'>
-      <div class="icon"><img
-             src="https://d3hk6w1rfu80ox.cloudfront.net/media/uploads/listings/ycGQE6egcZGO.jpg">
-      </div>
-      <div class="text-region">
-        <h3>Canada/USA Mathcamp</h3>
-        <h4>2016, 2017, 2018</h4>
-        <hr class='line-break-light'>
-        <p>
-          I was a camper from 2016 to 2018. If you are a Mathcamp alumnus from these years, please reach out!
-        </p>
-      </div>
-    </div>
     <div class='medium-break'></div>
-  </div>
+    <div class="text-region flex-container vertical">
+        <h2>Where You Might Know Me...</h2>
+        <hr class='line-break-light'>
+        <div class='small-break'></div>
+        <div class='flex-container horizontal affiliation'>
+            <div class="icon"><img
+                     src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/University_of_Waterloo_seal.svg/960px-University_of_Waterloo_seal.svg.png"
+                     alt="University of Waterloo seal">
+            </div>
+            <div class="text-region">
+                <h3>University of Waterloo</h3>
+                <h4>2018 - Present</h4>
+                <hr class='line-break-light'>
+                <p>
+                    I first joined the University of Waterloo in 2018 as an undergraduate student, and have stayed here
+                    since for my
+                    graduate studies.
+                </p>
+            </div>
+        </div>
+        <div class='small-break'></div>
+        <div class='flex-container horizontal affiliation'>
+            <div class="icon"><img src="https://d3hk6w1rfu80ox.cloudfront.net/media/uploads/listings/ycGQE6egcZGO.jpg"
+                     alt="Canada/USA Mathcamp logo">
+            </div>
+            <div class="text-region">
+                <h3>Canada/USA Mathcamp</h3>
+                <h4>2016, 2017, 2018</h4>
+                <hr class='line-break-light'>
+                <p>
+                    I was a camper from 2016 to 2018. If you are a Mathcamp alumnus from these years, please reach out!
+                </p>
+            </div>
+        </div>
+        <div class='medium-break'></div>
+    </div>
 </section>
 
 <section>
-  <!--Links to media-->
-  <div class="flex-container vertical media">
-    <div class="flex-container center horizontal">
-      <hr class="line">
+    <!--Links to media-->
+    <div class="flex-container vertical media">
+        <div class="flex-container horizontal media-icons">
+            <input type="image"
+                   src="./assets/images/linkedin.png"
+                   alt="LinkedIn"
+                   (click)="openLink('https\://www.linkedin.com/in/andrew314/')"
+                   [@hoverExpand]="hoverStates.linkedin"
+                   (mouseenter)="hoverStates.linkedin = 'hovered'"
+                   (mouseleave)="hoverStates.linkedin='normal'" />
+            <input type="image"
+                   src="./assets/images/github.png"
+                   alt="GitHub"
+                   (click)="openLink('https\://github.com/turnip314')"
+                   [@hoverExpand]="hoverStates.github"
+                   (mouseenter)="hoverStates.github = 'hovered'"
+                   (mouseleave)="hoverStates.github='normal'" />
+            <input type="image"
+                   src="./assets/images/facebook.png"
+                   alt="Facebook"
+                   (click)="openLink('https\://www.facebook.com/turnip314/')"
+                   [@hoverExpand]="hoverStates.facebook"
+                   (mouseenter)="hoverStates.facebook = 'hovered'"
+                   (mouseleave)="hoverStates.facebook='normal'" />
+        </div>
+        <div class="medium-break"></div>
     </div>
-    <div class="flex-container horizontal media-icons">
-      <input type="image"
-             src="./assets/images/linkedin.png"
-             (click)="openLink('https\://www.linkedin.com/in/andrew314/')"
-             [@hoverExpand]="hoverStates.linkedin"
-             (mouseenter)="hoverStates.linkedin = 'hovered'"
-             (mouseleave)="hoverStates.linkedin='normal'" />
-      <input type="image"
-             src="./assets/images/github.png"
-             (click)="openLink('https\://github.com/turnip314')"
-             [@hoverExpand]="hoverStates.github"
-             (mouseenter)="hoverStates.github = 'hovered'"
-             (mouseleave)="hoverStates.github='normal'" />
-      <input type="image"
-             src="./assets/images/facebook.png"
-             (click)="openLink('https\://www.facebook.com/turnip314/')"
-             [@hoverExpand]="hoverStates.facebook"
-             (mouseenter)="hoverStates.facebook = 'hovered'"
-             (mouseleave)="hoverStates.facebook='normal'" />
-    </div>
-    <div class="medium-break"></div>
-  </div>
 </section>
-
-<!--div class="pagination">
-  <span *ngFor="let page of pages; let i = index" 
-        [class.active]="curPage === i">
-  </span>
-</div-->
-
-<div class='medium-break'></div>

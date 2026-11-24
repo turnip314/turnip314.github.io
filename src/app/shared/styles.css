@@ -1,8 +1,9 @@
+/* Shared component styles. Colour/size tokens are defined in src/styles.css. */
+
 /* Style themes */
 
 .style1 {
-    background-color: #143C67;
-    /*#8c6be0;*/
+    background-color: var(--color-section);
     background-attachment: fixed;
     background-image: url('styles/wave.svg');
     background-repeat: no-repeat;
@@ -15,20 +16,16 @@
     }
 }
 
-.style2 {
-    background-color: #b74e91;
+.style3 {
+    background-color: var(--color-section);
 }
 
 .style3.alt {
-    background-color: #184a7e;
-}
-
-.style3 {
-    background-color: #143C67;
+    background-color: var(--color-section-alt);
 }
 
 .style4 {
-    background-color: #5c5c5c;
+    background-color: var(--color-gallery);
 }
 
 /* Some quick formatting shortcuts */
@@ -37,38 +34,17 @@
 }
 
 .medium-break {
-    height: 50px;
+    height: 56px;
 }
 
 .small-break {
     height: 20px;
 }
 
-.p-h-5 {
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
+/* Horizontal page padding. Caps the content width on wide screens so lines stay readable. */
 .p-h-10 {
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.m-h-5 {
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.m-b-10 {
-    margin-bottom: 10px;
-}
-
-.m-b-5 {
-    margin-bottom: 5px;
-}
-
-.m-t-5 {
-    margin-top: 15px;
+    padding-left: max(8%, (100% - 1080px) / 2);
+    padding-right: max(8%, (100% - 1080px) / 2);
 }
 
 .center {
@@ -78,93 +54,125 @@
 
 
 /* Text styles */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-sans);
+}
+
 h1 {
-    font-size: 350%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(255, 255, 255);
+    font-size: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text-strong);
     text-align: center;
     margin-top: 0.1em;
 }
 
 h2 {
-    font-size: 300%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(255, 255, 255);
-    height: fit-content;
-    line-height: 100%;
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--text-strong);
 }
 
 h3 {
-    font-size: 200%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgba(255, 255, 255, 0.9);
-    height: fit-content;
-    line-height: 100%;
+    font-size: clamp(1.25rem, 1rem + 0.9vw, 1.65rem);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 h4 {
-    font-size: 150%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgba(255, 255, 255, 0.9);
-    height: fit-content;
-    line-height: 100%;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    color: var(--text-muted);
 }
 
 p {
-    font-size: 150%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgba(255, 255, 255, 0.8);
-    height: fit-content;
-    line-height: 32px;
-    text-align: justify;
-    text-justify: inter-word;
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 0.92rem + 0.35vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--text);
 }
 
 a {
     color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
-a.hidden {
+a:hover {
+    color: var(--text-strong);
+    text-decoration-color: currentColor;
+}
+
+/* Divider under headings. Directly under a section title it becomes a short accent bar. */
+hr.line-break-light {
+    border: 0;
+    border-top: 1px solid var(--border-subtle);
+    opacity: 1;
+    margin: 0.75rem 0 1.25rem;
+}
+
+h2+hr.line-break-light {
+    width: 64px;
+    height: 4px;
+    border-top: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-accent-light), var(--color-purple));
+    margin: 0.9rem 0 1.75rem;
+}
+
+
+/* Pill-shaped link button */
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 96px;
+    height: 38px;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--text-strong);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-@media(max-width:720px) {
-    p {
-        font-size: 100%;
-        line-height: 20px;
-    }
+.link-button:hover {
+    color: var(--text-strong);
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.65);
+    transform: translateY(-1px);
+}
 
-    h1 {
-        font-size: 180%;
-        line-height: 32px;
-    }
-
-    h2 {
-        font-size: 125%;
-    }
-
-    h4 {
-        font-size: 100%;
-    }
+.link-row {
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 
 /* Container styles */
 
-.light {
-    background-color: #eeeeee;
-    border-color: #dddddd;
-}
-
-.dark {
-    background-color: #c5becc;
-    border-color: #4663ac;
-}
-
 .flex-container {
     display: flex;
     justify-content: flex-start;
-    border-width: large;
 }
 
 .flex-container.horizontal {
@@ -185,57 +193,4 @@ a.hidden {
 
 .flex-container.center {
     justify-content: center;
-}
-
-.ignore-others {
-    z-index: 999;
-    position: fixed;
-}
-
-
-/* Page container (full-screen sections) */
-.page-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    scroll-snap-type: y mandatory;
-}
-
-/* Each page (full-screen height) */
-.page {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    scroll-snap-align: start;
-}
-
-/* Pagination Bubbles */
-.pagination {
-    position: fixed;
-    bottom: 105px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-}
-
-.pagination span {
-    width: 10px;
-    height: 10px;
-    background: gray;
-    border-radius: 50%;
-    transition: background 0.3s;
-}
-
-.pagination .active {
-    background: white;
-}
-
-
-.preload {
-    position: absolute;
-    z-index: 0;
-    opacity: 0;
 }

@@ -1,0 +1,13 @@
+@import '../../shared/styles.css';
+
+.error-page {
+    padding: 0 8%;
+}
+
+img {
+    height: 300px;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 50px;
+    border-radius: var(--radius);
+}

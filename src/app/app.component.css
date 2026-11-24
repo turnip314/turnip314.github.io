@@ -1,166 +1,149 @@
 @import './shared/styles.css';
 
-.nav-link {
-  font-size: large;
-}
-
-/* topnav */
-
-@media(max-width:560px){
-  .nav-pills {
-      visibility: hidden;
-  }
-}
-
+/* Top navigation */
 .top-nav {
-  position:fixed;
-  width: 100%;
-  z-index: 99;
-  transform: translate(0px, 0px);
-  box-shadow:  0.125rem 0.25rem 0 rgba(0,0,0,0.11)
-}
-
-.dropdown-img {
-  align-self: center;
-  margin-top: 18px;
-  opacity: 50%;
-}
-
-.dropdown-img:hover {
-  background-color: rgba(255, 255, 255, 0.123);
-  cursor: pointer;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
 }
 
 .navbar {
-  max-height: 74px;
-  top: -100%;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.topnav-button {
-  margin-right: 5px;
-  font-size: 20px;
-  width: 100%;
-  height: 36px;
-  border: none;
-  background-color: transparent;
-  color: rgba(255, 255, 255, 0.945);
-}
-
-.topnav-button:hover {
-  background-color: rgba(255, 255, 255, 0.329);
-}
-
-.topnav-button:focus {
-  border: none;
-  outline: none;
-}
-
-/* sidenav settings */
-.mat-drawer-container {
-  display: contents;
-}
-
-.outer-page-container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  transform: translate(0, 70px);
-  color: #312450;
-}
-
-.sidenav {
-  background-color:#8b8b8b;
-  width: max-content;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.sidenav-content {
-  min-height: 100%;
-  display: contents;
-}
-
-.mat-drawer-inner-container {
-  height: 20px;
-}
-
-.sidenav-container {
-  overflow: hidden !important;
-  min-height: 100%;
-}
-
-.sidenav-button {
-  margin-left: 2px;
-  margin-right: 3px;
-  margin-top: 5px;
-  font-size: 24px;
-  width: 98%;
-  height: 36px;
-  border: none;
-  background-color: transparent;
-  color: white;
-}
-
-.sidenav-back-button {
-  height: 64px;
-}
-
-.sidenav-button:hover {
-  background-color: rgb(102, 151, 216);
-}
-
-.sidenav-button:focus {
-  border: none;
-  outline: none;
-}
-
-.sidenav-buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-
-/* Vertical alignment of buttons */
-
-.btn-group {
-  border: 1px solid white;
-  cursor: pointer; 
-  display: flex;
-  flex-direction: row;
-  padding-top: 10px;
-}
-
-.navbar {
-  background-color: #0A1E33;
-  box-shadow:  0rem 0.1rem 0 rgba(0,0,0,0.11)
+    height: var(--nav-height);
+    padding: 0 12px;
+    flex-wrap: nowrap;
+    background-color: var(--color-nav);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-brand {
-  color: pink;
+    padding: 0;
+    margin: 0;
+}
+
+.turnip-img {
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border-radius: 10px;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .turnip-img:hover {
-  background-color: rgba(255, 255, 255, 0.123);
-  cursor: pointer;
+    background-color: var(--surface-hover);
+    opacity: 1;
 }
 
-.nav-link {
-  color: white;
+.nav-pills {
+    flex-wrap: nowrap;
+    gap: 4px;
+}
+
+/* Below this width the drawer (hamburger menu) is the only navigation. */
+@media(max-width:720px) {
+    .nav-pills {
+        display: none;
+    }
+}
+
+.topnav-button {
+    height: 38px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 999px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.topnav-button:hover {
+    background-color: var(--surface-hover);
+    color: var(--text-strong);
+}
+
+.topnav-button.active {
+    background-color: rgba(255, 255, 255, 0.14);
+    color: var(--text-strong);
+}
+
+/* Page area below the navbar. The drawer container scrolls the routed page. */
+.outer-page-container {
+    position: fixed;
+    top: var(--nav-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.sidenav-container {
+    height: 100%;
+    background-color: var(--color-section);
+    color: var(--text);
+}
+
+.sidenav-content {
+    display: contents;
 }
 
 .outer-container {
-  background-color:#ffffff;
-  min-height: 100%;
+    min-height: 100%;
+    background-color: var(--color-section);
 }
 
 .page-container {
-  background-color: transparent;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Side navigation drawer */
+.sidenav {
+    width: 260px;
+    max-width: 80vw;
+    background-color: var(--color-nav);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.35);
+}
 
+.sidenav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 12px;
+}
+
+.sidenav-button {
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidenav-button:hover {
+    background-color: var(--surface-hover);
+    color: var(--text-strong);
+}
+
+.sidenav-button.active {
+    background-color: rgba(34, 100, 171, 0.5);
+    color: var(--text-strong);
+}
+
+.topnav-button:focus:not(:focus-visible),
+.sidenav-button:focus:not(:focus-visible) {
+    outline: none;
+}

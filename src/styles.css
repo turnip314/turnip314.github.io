@@ -1,14 +1,59 @@
+/* Global styles. Component-level shared styles live in app/shared/styles.css. */
 
-div.card-header {
- font-size: large;
+:root {
+    /* Colour theme */
+    --color-nav: #0A1E33;
+    --color-section: #143C67;
+    --color-section-alt: #184a7e;
+    --color-accent: #2264ab;
+    --color-accent-light: #7fb2ec;
+    --color-purple: #8c6be0;
+    --color-gallery: #5c5c5c;
+
+    --text-strong: #ffffff;
+    --text: rgba(255, 255, 255, 0.86);
+    --text-muted: rgba(255, 255, 255, 0.66);
+    --border-subtle: rgba(255, 255, 255, 0.12);
+    --surface: rgba(255, 255, 255, 0.04);
+    --surface-hover: rgba(255, 255, 255, 0.08);
+
+    --font-sans: Roboto, "Helvetica Neue", Arial, sans-serif;
+    --radius: 14px;
+    --nav-height: 64px;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-div.card {
-  margin-top: 10px
+html,
+body {
+    height: 100%;
 }
 
-.table {
-  margin-top: 10px
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-nav);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::selection {
+    background-color: rgba(140, 107, 224, 0.5);
+    color: #ffffff;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 2px;
+}
+
+/* The main scroll area is a Material drawer container. */
+.mat-drawer-content {
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+/* Darker, blurred backdrop for overlays (image viewer). */
+.cdk-overlay-backdrop.cdk-overlay-dark-backdrop {
+    background: rgba(5, 15, 28, 0.78);
+    backdrop-filter: blur(4px);
+}

@@ -12,25 +12,25 @@ import { ImageService } from '../shared/services/image.service';
 })
 export class GalleryComponent implements OnInit {
 
-  images: any;
+    images: any;
 
-  constructor(private overlay: Overlay, private _imageService: ImageService) { }
+    constructor(private overlay: Overlay, private _imageService: ImageService) { }
 
-  ngOnInit(): void {
-    this.images = this._imageService.getScenicImages();
-  }
+    ngOnInit(): void {
+        this.images = this._imageService.getScenicImages();
+    }
 
-  showOverlay(img: { image: string; title: string; }) {
-    const overlayRef = this.overlay.create({
-        positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-        hasBackdrop: true,
-    });
-    const overlay = overlayRef.attach(new ComponentPortal(ImageOverlayComponent));
-    overlay.instance.src = img.image;
-    overlay.instance.title = img.title;
-    overlayRef.backdropClick().subscribe(x => {
-      overlayRef.detach();
-    })
-}
+    showOverlay(img: { image: string; title: string; }) {
+        const overlayRef = this.overlay.create({
+            positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+            hasBackdrop: true,
+        });
+        const overlay = overlayRef.attach(new ComponentPortal(ImageOverlayComponent));
+        overlay.instance.src = img.image;
+        overlay.instance.title = img.title;
+        overlayRef.backdropClick().subscribe(x => {
+            overlayRef.detach();
+        })
+    }
 
 }

@@ -1,9 +1,11 @@
 <main class="main style4">
     <div class="medium-break"></div>
     <h2>Photo Gallery</h2>
+    <hr class='line-break-light'>
 
     <div class="gallery">
-        <figure  *ngFor='let image of images' (click)="showOverlay(image)">
+        <figure *ngFor='let image of images'
+                (click)="showOverlay(image)">
             <img [src]='image.image'
                  [alt]="image.title">
 
@@ -14,5 +16,3 @@
     </div>
     <div class="medium-break"></div>
 </main>
-
-<div class="medium-break"></div>

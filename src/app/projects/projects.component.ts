@@ -32,7 +32,7 @@ export class ProjectsComponent {
             links: [
                 {
                     name: "HTML",
-                    url: "/resources/seminar/slides.html"
+                    url: "/resources/Seminar/slides.html"
                 },
             ]
         },
@@ -60,11 +60,11 @@ export class ProjectsComponent {
             links: [
                 {
                     name: "HTML",
-                    url: "/assets/jupyter/fpsac_run.html"
+                    url: "/assets/jupyter/FPSAC_run.html"
                 },
                 {
                     name: "Notebook",
-                    url: "/assets/jupyter/fpsac_code.ipynb"
+                    url: "/assets/jupyter/FPSAC_code.ipynb"
                 }
             ]
         },

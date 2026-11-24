@@ -1,123 +1,34 @@
 @import '../shared/styles.css';
+@import '../shared/cards.css';
 
-.outer-container {
-    display: flex;
-    flex-direction: row;
-    padding-top: 15px;
-    padding-bottom: 10px;
-    padding-left: 2%;
-    padding-right: 2%;
-}
-
-.gallery {
-    width: 50%;
-    height: auto;
-    padding-top: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    min-height: max-content;
-}
-
-.aspect-ratio {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 52.125%; /* The height of the item will now be 52.25% of the width. */
-}
-
-/* Adjust the iframe so it's rendered in the outer-width and outer-height of it's parent */
-.aspect-ratio iframe,
-.aspect-ratio img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-}
-.project-video,
-.project-img {
-    width: 100%;
-}
-
-
-@media(max-width:960px){
-    .outer-container {
-        flex-direction: column;
-    }
-    .description,
-    .gallery {
-        width: 100%;
-    }
-}
-
-.left-right-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.right-button,
-.left-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 50%;
-}
-.right-button {
-    align-items: flex-end;
-}
-.right-button:hover,
-.left-button:hover {
-    background-color: rgba(245, 245, 245, 0.308);
-    cursor: pointer;
-}
-
-.grid{
+/* Project link tiles (PyPI, GitHub, docs) */
+.even-spacing {
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
-.grid-container {
-    display: grid;
-    grid-column-gap: 2%;
-    grid-template-columns: repeat(3, 1fr); 
-    justify-content: center !important;
-    align-items: center !important;
-
-    padding-bottom: 30px;
-
-    grid-row-gap: 100px;
-    
-  }
-
-@media(max-width:1440px){
-  .grid-container {
-      grid-template-columns: repeat(3, 1fr);
-  }
+.project-link {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-@media(max-width:960px){
-  .grid-container {
-      grid-template-columns: repeat(2, 1fr);
-  }
+.project-link:hover {
+    background-color: var(--surface-hover);
+    transform: translateY(-2px);
 }
 
-@media(max-width:720px){
-  .grid-container {
-      grid-template-columns: repeat(1, 1fr);
-  }
+.project-link img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    align-self: center;
 }
 
-.grid-item {
-  background-color: #ffffff02;
-  border-width: 4px;
-  display: flex !important;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center !important;
-  height: 100%;
-}
-
-.fit {
-    width: fit-content;
+.project-link p {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
 }

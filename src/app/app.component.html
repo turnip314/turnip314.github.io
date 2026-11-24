@@ -1,54 +1,70 @@
 <div class="flex-container vertical top-nav">
-  <nav class='navbar fixed-top'>
-    <a class='navbar-brand'><img class="turnip-img"
-           name="turnip-button"
-           src='./assets/images/dropdown.png'
-           width="48px"
-           (click)="drawer.toggle();"></a>
-    <ul class='nav nav-pills'>
-      <li><button class='button topnav-button'
-                [routerLink]="['/home']">Home</button></li>
-      <li><button class='button topnav-button'
-                [routerLink]="['/academics']">Academics</button></li>
-      <li><button class='button topnav-button'
-                [routerLink]="['/projects']">Projects</button></li>
-      <li><button class='button topnav-button'
-                [routerLink]="['/gallery']">Gallery</button></li>
-      <li><a href="./assets/pdfs/CV.pdf"><button class='button topnav-button'>CV</button></a></li>
-      <li><button class='button topnav-button'
-                [routerLink]="['/contact']">Contact</button></li>
-    </ul>
-  </nav>
+    <nav class='navbar fixed-top'>
+        <a class='navbar-brand'><img class="turnip-img"
+                 name="turnip-button"
+                 src='./assets/images/dropdown.png'
+                 alt="Menu"
+                 width="48px"
+                 (click)="drawer.toggle();"></a>
+        <ul class='nav nav-pills'>
+            <li><button class='button topnav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/home']">Home</button></li>
+            <li><button class='button topnav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/academics']">Academics</button></li>
+            <li><button class='button topnav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/teaching']">Teaching</button></li>
+            <li><button class='button topnav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/projects']">Projects</button></li>
+            <li><button class='button topnav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/gallery']">Gallery</button></li>
+            <li><a href="./assets/pdfs/CV.pdf"><button class='button topnav-button'>CV</button></a></li>
+            <li><button class='button topnav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/contact']">Contact</button></li>
+        </ul>
+    </nav>
 </div>
 
 <div class="outer-page-container">
-  <mat-drawer-container class="sidenav-container">
-    <mat-drawer #drawer
-                class="sidenav"
-                mode="over">
-      <div class="sidenav-buttons">
-        <div style="height: 20px;"></div>
-        <button class='button sidenav-button'
-                [routerLink]="['/home']">Home</button>
-        <button class='button sidenav-button'
-                [routerLink]="['/academics']">Academics</button>
-        <button class='button sidenav-button'
-                [routerLink]="['/projects']">Projects</button>
-        <button class='button sidenav-button'
-                [routerLink]="['/gallery']">Gallery</button>
-        <a href="./assets/pdfs/CV.pdf"><button class='button sidenav-button'>CV</button></a>
-        <button class='button sidenav-button'
-                [routerLink]="['/contact']">Contact</button>
-      </div>
-    </mat-drawer>
+    <mat-drawer-container class="sidenav-container">
+        <mat-drawer #drawer
+                    class="sidenav"
+                    mode="over">
+            <div class="sidenav-buttons">
+                <button class='button sidenav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/home']">Home</button>
+                <button class='button sidenav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/academics']">Academics</button>
+                <button class='button sidenav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/teaching']">Teaching</button>
+                <button class='button sidenav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/projects']">Projects</button>
+                <button class='button sidenav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/gallery']">Gallery</button>
+                <a href="./assets/pdfs/CV.pdf"><button class='button sidenav-button'>CV</button></a>
+                <button class='button sidenav-button'
+                        routerLinkActive="active"
+                        [routerLink]="['/contact']">Contact</button>
+            </div>
+        </mat-drawer>
 
-    <div class="sidenav-content"
-         (click)="onEmptyClick($event, drawer)">
-      <div class='outer-container'>
-        <div class='page-container'>
-          <router-outlet></router-outlet>
+        <div class="sidenav-content"
+             (click)="onEmptyClick($event, drawer)">
+            <div class='outer-container'>
+                <div class='page-container'>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </mat-drawer-container>
+    </mat-drawer-container>
 </div>

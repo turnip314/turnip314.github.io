@@ -27,6 +27,7 @@ import { ContactService } from './contact.service';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AcademicsComponent } from './academics/academics.component';
+import { TeachingComponent } from './teaching/teaching.component';
 
 import { TwentyFourComponent } from './miniapps/twentyfour/twentyfour.component';
 
@@ -50,6 +51,7 @@ import { GameService } from './pixi-canvas/engine/services/game.service';
         ContactComponent,
         LoadingComponent,
         AcademicsComponent,
+        TeachingComponent,
         GalleryComponent,
         ImageOverlayComponent,
         TwentyFourComponent,
@@ -73,6 +75,7 @@ import { GameService } from './pixi-canvas/engine/services/game.service';
             { path: 'pixi', component: PixiCanvasComponent, data: { app: 'hues' } },
             { path: 'projects', component: ProjectsComponent },
             { path: 'academics', component: AcademicsComponent },
+            { path: 'teaching', component: TeachingComponent },
             { path: 'gallery', component: GalleryComponent },
             { path: 'contact', component: ContactComponent },
             { path: 'apps/24', component: PixiCanvasComponent, data: { app: '24' } },

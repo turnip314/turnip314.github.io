@@ -2,3 +2,9 @@
     max-width: 80vw;
     max-height: 80vh;
 }
+
+img.image-display {
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+}
